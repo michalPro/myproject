@@ -1,7 +1,22 @@
 {% extends "layout.html" %}
 
-{% block title %}The current time{% endblock %}
-
 {% block content %}
-<p>It is now {{ current_date }}.</p>
+<h1>Contacts</h1>
+<h2>Elo</h2>
+
+<span class="label label-default">Default</span>
+<span class="label label-primary">Primary</span>
+<span class="label label-success">Success</span>
+<span class="label label-info">Info</span>
+<span class="label label-warning">Warning</span>
+<span class="label label-danger">Danger</span>
+<span class="label label-danger">Danger</span>
+
+<ul>
+  {% for contact in object_list %}
+    <li class="contact">{{ contact }}</li>
+  {% endfor %}
+</ul>
+
+
 {% endblock %}
