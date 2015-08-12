@@ -1,21 +1,24 @@
 from django.contrib import admin
-from .models import Publisher, Author, Book
+from .models import ArmorItem, Attack, Player
 
 
-class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email')
-    search_fields = ('first_name', 'last_name')
+class ArmorItemsAdmin(admin.ModelAdmin):
+    list_display = ('name', 'value', 'requiredlv', 'price')
+    search_fields = ('name', 'requiredlv', 'price')
+    ordering = ['requiredlv']
 
 
-class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'publisher', 'publication_date')
-    list_filter = ('publication_date',)
-    date_hierarchy = 'publication_date'
-    ordering = ('-publication_date',)
-    filter_horizontal = ('authors',)
-    raw_id_fields = ('publisher',)
+class AttacksAdmin(admin.ModelAdmin):
+    list_display = ('name', 'requiredlv', 'bonusattack', 'requiredmana')
+    ordering = ('-requiredlv',)
+    #raw_id_fields = ('publisher',)
 
 
-admin.site.register(Publisher)
-admin.site.register(Author, AuthorAdmin)
-admin.site.register(Book, BookAdmin)
+class PlayerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'strength', 'agility', 'health', 'mana', 'experience', 'requiredexp', 'level',
+                    'pointstoadd', 'actualarmorvalue', 'armorid')
+
+
+admin.site.register(ArmorItem, ArmorItemsAdmin)
+admin.site.register(Attack, AttacksAdmin)
+admin.site.register(Player, PlayerAdmin)
