@@ -1,8 +1,17 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h1>Menu</h1>
-<a href="/menu/create">
-    <button type="button" class="btn btn-default">Stwórz nowy</button>
-</a>
-<a href="/menu/load"><button type="button" class="btn btn-default">Wczytaj</button> </a>
+
+    <div class="logo">
+        Starcie Tytanów
+        <div class="mini_logo">Walcz na arenie o honor wojownika</div>
+    </div>
+    <div class="center">
+        <a href="/menu/create">
+            <button type="button" class="btn btn_attack">Stwórz nowego bohatera</button>
+        </a>
+        <a href="/menu/load">
+            <button type="button" class="btn btn_attack">Wczytaj istniejącego bohater</button>
+        </a>
+    </div>
+
 {% endblock %}

@@ -1,12 +1,8 @@
 {% extends 'layout.html' %}
 {% block content %}
-<p>{{p.name}}</p>
-<p>{{p.health}}</p>
-<p>{{p.strength}}</p>
-<p>{{p.agility}}</p>
-<p>{{p.level}}</p>
-<p>{{p.attack}}</p>
-<a href="arenalevel/">
-    <button type="button" class="btn btn-default">Walcz</button>
+
+{% include 'fight/partial_view.html' with enemy=True %}
+<a href="arenalevel">
+    <button>walcz</button>
 </a>
 {% endblock %}

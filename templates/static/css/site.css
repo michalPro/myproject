@@ -13,7 +13,9 @@
     color: #fff;
     background-color:rgba(0,0,0,0.6);
     padding: 25px;
+    height: 100%;
 }
+
 
 .player_name {
     padding: 5px 0px;
@@ -41,6 +43,35 @@
     margin: 15px 0px;
     padding-bottom: 7px;
     border-bottom: solid 1px #4FA9E0;
+}
+
+.add_player_title {
+    margin: 20px 0px;
+    font-size: 35px;
+    color: #4FA9E0;
+}
+
+.logo {
+    margin-top: 40px;
+    font-size: 55px;
+    color: #4FA9E0;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 900;
+}
+
+.mini_logo {
+    color: #fff;
+    font-size: 20px;
+    text-transform: none;
+    font-weight: 0;
+    text-decoration: underline;
+}
+
+.center {
+    text-align: center;
+    padding-top: 60px;
+    margin: 0 auto;
 }
 
 .column_left {
@@ -93,3 +124,7 @@
   height: 34px;
 }
 
+.form-control {
+    background-color:rgba(0,0,0,0.6);
+    color: #fff;
+}

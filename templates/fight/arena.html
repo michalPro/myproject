@@ -2,22 +2,14 @@
 {% block title %}Arena{% endblock %}
 {% block content %}
 
-
-<div class="bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                {% include 'fight/partial_view.html' with enemy=False attack=attack %}
-            </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-                {% include 'fight/partial_view.html' with enemy=True %}
-            </div>
-        </div>
-    </div>
+<div class="col-md-4">
+    {% include 'fight/partial_view.html' with enemy=False attack=attack %}
 </div>
+<div class="col-md-4">
 
+</div>
+<div class="col-md-4">
+    {% include 'fight/partial_view.html' with enemy=True %}
+</div>
 
 {% endblock %}

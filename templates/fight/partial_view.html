@@ -3,10 +3,16 @@
 
 <div class="bg_player">
     <div class="player_portrait">
-        <img src="{% static 'css/content/player_1.jpg' %}" height="100%", width="100%">
+        {%if p.classname|stringformat:"s"  == "Warrior"%}
+            <img src="{% static 'css/content/warrior.jpg' %}" height="100%", width="100%">
+        {%elif p.classname|stringformat:"s"  == "Thief"%}
+            <img src="{% static 'css/content/thief.jpg' %}" height="100%", width="100%">
+        {%elif p.classname|stringformat:"s"  == "Tankozord"%}
+            <img src="{% static 'css/content/tank.jpg' %}" height="100%", width="100%">
+        {% endif %}
     </div>
     <div class="player_name">
-        Aragor II
+        {{p.name}}
     </div>
     <div class="player_stats">
         <div class="column_left">
@@ -18,18 +24,18 @@
             <p>złoto:</p>
         </div>
         <div class="column_right">
+            <p>{{p.level}}</p>
+            <p>{{p.attack}}</p>
+            <p>{{p.strength}}</p>
+            <p>{{p.agility}}</p>
             <p>5</p>
-            <p>10</p>
-            <p>20</p>
-            <p>15</p>
-            <p>5</p>
-            <p>458</p>
+            <p>{{p.gold}}</p>
         </div>
         <div class="clear"></div>
     </div>
     <div class="progress">
         <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-            80%
+            {{p.health}}
         </div>
     </div>
     <div class="progress">
