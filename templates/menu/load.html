@@ -2,7 +2,7 @@
 {% block content %}
 
     <div class="add_player_title">
-        Wybierz interesującego Cię bohatera:
+        Wybierz interesujacego Cie bohatera:
     </div>
 
     <hr/>
@@ -11,7 +11,7 @@
             <p><h4>Wojownik:</h4></p>
             {% for p in players %}
                 {% if p.classname|stringformat:"s"  == "Warrior" %}
-                <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p}}'">
+                <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p.id}}'">
                     {{p}}
                 </button>
                 {% endif %}
@@ -21,11 +21,11 @@
 
 
     <div class="col-md-4">
-        <div class="btn-group-vertical" role="group" aria-label="Łotrzyk">
-            <p><h4>Łotrzyk:</h4></p>
+        <div class="btn-group-vertical" role="group" aria-label="">
+            <p><h4>Lotrzyk:</h4></p>
             {% for p in players %}
                 {% if p.classname|stringformat:"s"  == "Thief" %}
-                <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p}}'">
+                <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p.id}}'">
                     {{p}}
                 </button>
                 {% endif %}
@@ -38,7 +38,7 @@
             <p><h4>Tank:</h4></p>
             {% for p in players %}
                 {% if p.classname|stringformat:"s"  == "Tankozord" %}
-                <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p}}'">
+                <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p.id}}'">
                     {{p}}
                 </button>
                 {% endif %}
@@ -46,5 +46,5 @@
         </div>
     </div>
     <div class="clear"></div>
-    <p style="margin-top: 20px"><a href="/menu/menu">Wróc do menu</a></p>
+    <p style="margin-top: 20px"><a href="/menu/menu">Wroc do menu</a></p>
 {% endblock %}

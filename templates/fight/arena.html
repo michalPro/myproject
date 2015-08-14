@@ -1,15 +1,19 @@
-{% extends "layout.html" %}
-{% block title %}Arena{% endblock %}
+{% extends 'layout.html' %}
 {% block content %}
 
-<div class="col-md-4">
-    {% include 'fight/partial_view.html' with enemy=False attack=attack %}
-</div>
-<div class="col-md-4">
 
-</div>
-<div class="col-md-4">
-    {% include 'fight/partial_view.html' with enemy=True p=e %}
-</div>
+<h1>Wybierz</h1>
+{{p}}
+<p>{{p.name}}</p>
 
+
+<a href="arenalevel/{{ee}}">
+    <button type="button" class="btn btn-default">{{ee}}</button>
+</a>
+<a href="arenalevel/{{me}}">
+    <button type="button" class="btn btn-default">{{me}}</button>
+</a>
+<a href="arenalevel/{{he}}">
+    <button type="button" class="btn btn-default">{{he}}</button>
+</a>
 {% endblock %}

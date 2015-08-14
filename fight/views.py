@@ -4,16 +4,16 @@ from project.models import Player, ArmorItem, Attack
 
 
 def index(request, p):
-    return render(request, 'fight/arenalevel.html', {
-        'p': Player.objects.get(name=p),
+    return render(request, 'fight/arena.html', {
+        'p': Player.objects.get(pk=p),
         'ee': EasyEnemy(p),
         'me': MediumEnemy(p),
         'he': HardEnemy(p),
     })
 
 
-def arena(request, p, e):
-    gamer = Player.objects.get(name=p)
+def arenalevel(request, p, e):
+    gamer = Player.objects.get(pk=p)
     if e == "Easy Enemy":
         e = EasyEnemy(p)
     elif e == "Medium Enemy":
@@ -23,7 +23,7 @@ def arena(request, p, e):
 
     ph = gamer.health * 100 / gamer.maxhealth
     pm = gamer.mana * 100 / gamer.maxmana
-    return render(request, 'fight/arena.html', {
+    return render(request, 'fight/arenalevel.html', {
         'p': gamer,
         'e': e,
         'health': ph,

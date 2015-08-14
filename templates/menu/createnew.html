@@ -2,13 +2,13 @@
 {% block content %}
 
 	<div class="add_player_title">
-		Stwórz nowego bohatera:
+		Stworz nowego bohatera:
 	</div>
 	<hr/>
 	<form method="post">
 	  <div class="form-group">
 		  {% csrf_token %}
-		<label>Podaj nazwę:</label>
+		<label>Podaj nazwe:</label>
 		<input type="text" class="form-control" name="name" placeholder="e.g. Peace Maker">
 	  </div>
 		 <div class="radio">
@@ -22,6 +22,6 @@
 		</div>
 		<button type="submit" class="btn btn_attack">Stwórz bohatera</button>
 	</form>
-		<p><a href="/menu/menu">Wróc do menu</a></p>
+		<p><a href="/menu/menu">Wroc do menu</a></p>
 
 {% endblock %}

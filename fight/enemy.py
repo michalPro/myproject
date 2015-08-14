@@ -28,7 +28,7 @@ class EasyEnemy:
     def __init__(self, p):
         self.classname = get_class()
         self.name = "Easy Enemy"
-        gamer = Player.objects.get(name=p)
+        gamer = Player.objects.get(pk=p)
         suma = gamer.strength + gamer.agility - 30
         self.level = gamer.level
         ran = randint(1, suma-1)
@@ -50,7 +50,7 @@ class MediumEnemy:
     def __init__(self, p):
         self.name = "Medium Enemy"
         self.classname = get_class()
-        gamer = Player.objects.get(name=p)
+        gamer = Player.objects.get(pk=p)
         suma = gamer.strength + gamer.agility - 20
         self.level = gamer.level
         ran = randint(1, suma-1)
@@ -72,7 +72,7 @@ class HardEnemy:
     def __init__(self, p):
         self.classname = get_class()
         self.name = "Hard Enemy"
-        gamer = Player.objects.get(name=p)
+        gamer = Player.objects.get(pk=p)
         suma = gamer.strength + gamer.agility - 10
         self.level = gamer.level
         ran = randint(1, suma-1)

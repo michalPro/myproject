@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^arena/$', fight),
     url(r'^partial/$', partial_view),
     url(r'^menu/', include('project.urls', namespace='menu')),
-    url(r'^player/(?P<p>[\s0-9A-Za-z]+)/', include('player.urls', namespace='player')),
-    url(r'^player/(?P<p>[\s0-9A-Za-z]+)/arenalevel/', include('fight.urls', namespace='fight')),
+    url(r'^player/(?P<p>[0-9]+)/', include('player.urls', namespace='player')),
+    url(r'^player/(?P<p>[0-9]+)/arena/', include('fight.urls', namespace='fight')),
 ]
 
