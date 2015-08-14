@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1>Wybierz</h1>
+<a href="arena/{{p}}/{{ee}}">
+    <button type="button" class="btn btn-default">{{ee}}</button>
+</a>
+<a href="arena?e={{ee}}">
+    <button type="button" class="btn btn-default">{{me}}</button>
+</a>
+<a href="arena?e={{ee}}">
+    <button type="button" class="btn btn-default">{{he}}</button>
+</a>
+{% endblock %}

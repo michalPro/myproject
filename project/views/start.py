@@ -2,7 +2,6 @@
 from django.shortcuts import render, render_to_response, RequestContext, redirect
 from project.models import ArmorItem, Attack, Player, ClassName
 from django.shortcuts import HttpResponseRedirect
-from project.formm import CreateForm
 
 
 def start(request):
@@ -16,25 +15,27 @@ def createnew(request):
         aid = ArmorItem.objects.get(name="Default")
         classname = ClassName.objects.get(name=choice)
         if choice == "Warrior":
-            p = Player(name=name, strength=35, agility=30, health=250, mana=50, experience=0,
+            p = Player(name=name, strength=35, agility=30, maxhealth=250, maxmana=50, experience=0,
                         requiredexp=100, level=1, gold=20, classname=classname, attack=20,
-                        armorid=aid, isarmordamaged=False)
+                        armorid=aid, isarmordamaged=False, health=250, mana=50)
+            p.attack = p.strength * 0.9
             p.save()
-            return HttpResponseRedirect('/menu/player/%s/' % p)
+            return HttpResponseRedirect('/player/%s/' % p)
         elif choice == "Thief":
-            p = Player(name=name, strength=30, agility=37, health=230, mana=50, experience=0,
+            p = Player(name=name, strength=30, agility=37, maxhealth=230, maxmana=50, experience=0,
                         requiredexp=100, level=1, gold=20, classname=classname, attack=20,
-                        armorid=aid, isarmordamaged=False)
+                        armorid=aid, isarmordamaged=False, health=230, mana=50)
+            p.attack = p.strength * 0.9
             p.save()
-            return HttpResponseRedirect('/menu/player/%s/' % p)
+            return HttpResponseRedirect('/player/%s/' % p)
         else: #choice == "Tankozord"
-            p = Player(name=name, strength=35, agility=25, health=300, mana=50, experience=0,
+            p = Player(name=name, strength=35, agility=25, maxhealth=300, maxmana=50, experience=0,
                         requiredexp=100, level=1, gold=20, classname=classname, attack=20,
-                        armorid=aid, isarmordamaged=False)
+                        armorid=aid, isarmordamaged=False, health=300, mana=50)
+            p.attack = p.strength * 0.9
             p.save()
-            return HttpResponseRedirect('/menu/player/%s/' % p)
+            return HttpResponseRedirect('/player/%s/' % p)
     else:
-        #form = CreateForm
         return render(request, 'menu/createnew.html')
 
 
@@ -45,4 +46,5 @@ def load(request):
 
 def player(request, p):
     gamer = Player.objects.get(name=p)
-    return render(request, 'menu/player.html', {'p': gamer})
+    return render(request, 'player/index.html', {'p': gamer})
+
