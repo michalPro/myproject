@@ -2,8 +2,31 @@ from project.models import Player
 from random import randint, random
 
 
+def get_class():
+    whichclass = random()
+    if whichclass < 0.33:
+        return "Warrior"
+    elif 0.33 <= whichclass < 0.66:
+        return "Thief"
+    else:
+        return "Tankozord"
+
+
+def get_maxhealth(gamer):
+    if random() > 0.5:
+            if random() > 0.5:
+                return gamer.health + 20
+            else:
+                return gamer.health + 10
+    else:
+            if random() > 0.5:
+                return gamer.health + 10
+            else:
+                return gamer.health + 20
+
 class EasyEnemy:
     def __init__(self, p):
+        self.classname = get_class()
         self.name = "Easy Enemy"
         gamer = Player.objects.get(name=p)
         suma = gamer.strength + gamer.agility - 30
@@ -12,16 +35,7 @@ class EasyEnemy:
         self.strength = 10 + ran
         suma -= ran
         self.agility = suma + 10
-        if random() > 0.5:
-            if random() > 0.5:
-                self.maxhealth = gamer.health + 20
-            else:
-                self.maxhealth = gamer.health + 10
-        else:
-            if random() > 0.5:
-                self.maxhealth = gamer.health + 10
-            else:
-                self.maxhealth = gamer.health + 20
+        self.maxhealth = get_maxhealth(gamer)
         self.maxmana = 50
         self.mana = self.maxmana
         self.armor = self.level * 10
@@ -35,6 +49,7 @@ class EasyEnemy:
 class MediumEnemy:
     def __init__(self, p):
         self.name = "Medium Enemy"
+        self.classname = get_class()
         gamer = Player.objects.get(name=p)
         suma = gamer.strength + gamer.agility - 20
         self.level = gamer.level
@@ -42,16 +57,7 @@ class MediumEnemy:
         self.strength = 10 + ran
         suma -= ran
         self.agility = suma + 10
-        if random() > 0.5:
-            if random() > 0.5:
-                self.maxhealth = gamer.health + 20
-            else:
-                self.maxhealth = gamer.health + 10
-        else:
-            if random() > 0.5:
-                self.maxhealth = gamer.health + 10
-            else:
-                self.maxhealth = gamer.health + 20
+        self.maxhealth = get_maxhealth(gamer)
         self.maxmana = 50
         self.mana = self.maxmana
         self.health = self.maxhealth
@@ -64,6 +70,7 @@ class MediumEnemy:
 
 class HardEnemy:
     def __init__(self, p):
+        self.classname = get_class()
         self.name = "Hard Enemy"
         gamer = Player.objects.get(name=p)
         suma = gamer.strength + gamer.agility - 10
@@ -72,16 +79,7 @@ class HardEnemy:
         self.strength = 10 + ran
         suma -= ran
         self.agility = suma + 10
-        if random() > 0.5:
-            if random() > 0.5:
-                self.maxhealth = gamer.health + 20
-            else:
-                self.maxhealth = gamer.health + 10
-        else:
-            if random() > 0.5:
-                self.maxhealth = gamer.health + 10
-            else:
-                self.maxhealth = gamer.health + 20
+        self.maxhealth = get_maxhealth(gamer)
         self.maxmana = 50
         self.mana = self.maxmana
         self.health = self.maxhealth

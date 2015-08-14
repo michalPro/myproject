@@ -1,13 +1,22 @@
 {% extends 'layout.html' %}
 {% block content %}
+
+
 <h1>Wybierz</h1>
+{{p}}
+<p>{{p.name}}</p>
+
+
+
+
+
 <a href="arena/{{p}}/{{ee}}">
     <button type="button" class="btn btn-default">{{ee}}</button>
 </a>
-<a href="arena?e={{ee}}">
+<a href="arena/{{p}}/{{em}}"">
     <button type="button" class="btn btn-default">{{me}}</button>
 </a>
-<a href="arena?e={{ee}}">
+<a href="arena/{{p}}/{{eh}}"">
     <button type="button" class="btn btn-default">{{he}}</button>
 </a>
 {% endblock %}
