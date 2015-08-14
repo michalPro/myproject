@@ -20,9 +20,14 @@ def arena(request, p, e):
         e = MediumEnemy(p)
     else:
         e = HardEnemy(p)
+
+    ph = gamer.health * 100 / gamer.maxhealth
+    pm = gamer.mana * 100 / gamer.maxmana
     return render(request, 'fight/arena.html', {
         'p': gamer,
         'e': e,
+        'health': ph,
+        'mana': pm,
         'armor': ArmorItem.objects.all(),
         'attack': Attack.objects.all(),
     })
