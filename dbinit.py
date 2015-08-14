@@ -2,7 +2,8 @@ import os
 
 
 def populate():
-    add_armor('Leather Armor', 20, 1, 15)
+    add_armor('Default', 5, 1, 0)
+    add_armor('Leather Armor', 20, 3, 15)
     add_armor('Plate Armor', 45, 5, 60)
     add_armor('Chain Armor', 105, 12, 340)
     add_armor('Scale Armor', 200, 20, 1000)
@@ -12,11 +13,17 @@ def populate():
     add_attack('Double Attack', 8, 0.9, 15)
     add_attack('Powerful Attack', 15, 2.0, 40)
 
+    add_class('Warrior')
+    add_class('Thief')
+    add_class('Tankozord')
+
     # Print out what we have added to the user.
     for c in ArmorItem.objects.all():
         print c
     for t in Attack.objects.all():
         print t
+    for c in ClassName.objects.all():
+        print c
 
 
 def add_armor(name, value, requiredlv, price):
@@ -29,9 +36,14 @@ def add_attack(name, requiredlv, bonusattack, requiredmana):
                                       requiredmana=requiredmana)
     return at
 
+
+def add_class(name):
+    ac = ClassName.objects.get_or_create(name=name)
+    return ac
+
 # Start execution here!
 if __name__ == '__main__':
     print "Adding records to database.."
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
-    from project.models import ArmorItem, Attack
+    from project.models import ArmorItem, Attack, ClassName
     populate()

@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1>Stworz</h1>
+
+<form method="post">
+  <div class="form-group">
+	  {% csrf_token %}
+    <label>Nazwa</label>
+    <input type="text" class="form-control" name="name" placeholder="e.g. Peace Maker">
+  </div>
+	 <div class="radio">
+  <label><input type="radio" name="choice"  value="Warrior">Warrior</label>
+	</div>
+	<div class="radio">
+	  <label><input type="radio" name="choice" value="Thief">Thief</label>
+	</div>
+	<div class="radio">
+	  <label><input type="radio" name="choice" value="Tankozord">Tankozord</label>
+	</div>
+	<button type="submit" class="btn btn-default">Stworz</button>
+</form>
+
+
+<p><a href="/menu/menu">Wroc</a></p>
+{% endblock %}

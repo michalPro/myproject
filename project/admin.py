@@ -16,7 +16,7 @@ class AttacksAdmin(admin.ModelAdmin):
 
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'strength', 'agility', 'health', 'mana', 'experience', 'requiredexp', 'level',
-                    'pointstoadd', 'actualarmorvalue', 'armorid')
+                    'classname', 'isarmordamaged', 'armorid')
 
 
 admin.site.register(ArmorItem, ArmorItemsAdmin)
