@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from project.views.views_fight import fight
+from project.views.views_fight import fight, partial_view
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^arena/$', fight),
+    url(r'^partial/$', partial_view),
     url(r'^menu/', include('project.urls', namespace='menu')),
 ]
 

@@ -1,0 +1,64 @@
+{% load staticfiles %}
+
+
+<div class="bg_player">
+    <div class="player_portrait">
+        <img src="{% static 'css/content/player_1.jpg' %}" height="100%", width="100%">
+    </div>
+    <div class="player_name">
+        Aragor II
+    </div>
+    <div class="player_stats">
+        <div class="column_left">
+            <p>poziom:</p>
+            <p>atak:</p>
+            <p>siła:</p>
+            <p>zręczność:</p>
+            <p>pancerz:</p>
+            <p>złoto:</p>
+        </div>
+        <div class="column_right">
+            <p>5</p>
+            <p>10</p>
+            <p>20</p>
+            <p>15</p>
+            <p>5</p>
+            <p>458</p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="progress">
+        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+            80%
+        </div>
+    </div>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+            60%
+        </div>
+    </div>
+    {% with exp=400 required=1400 %}
+    <div class="progress">
+        <div class="progress-bar progress_bar_level" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+            {{exp}}/{{required}}
+        </div>
+    </div>
+    {% endwith %}
+    {%if not enemy %}
+        <div class="player_special_attack">
+            <button type="button" class="btn btn_attack">Zaatakuj</button>
+            <div class="btn-group">
+                <button type="button" class="btn btn_attack">Specjalny atak</button>
+                <button type="button" class="btn btn_attack dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    {% for item in attack %}
+                        <li><a href="#">{{ item }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+</div>

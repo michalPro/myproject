@@ -8,3 +8,88 @@
     background-attachment: fixed;
     background-position: center;
 }
+
+.bg_player {
+    color: #fff;
+    background-color:rgba(0,0,0,0.6);
+    padding: 25px;
+}
+
+.player_name {
+    padding: 5px 0px;
+    color: #4FA9E0;
+    font-size: 20px;
+    border-bottom: solid 1px #4FA9E0;
+}
+
+.player_portrait {
+    border: solid 1px #000;
+    height: 150px;
+    width: 150px;
+    -webkit-box-shadow: 0px 0px 22px 12px rgba(0,0,0,0.63);
+    -moz-box-shadow: 0px 0px 22px 12px rgba(0,0,0,0.63);
+    box-shadow: 0px 0px 22px 12px rgba(0,0,0,0.63);
+}
+
+.player_special_attack {
+    padding: 10px 0px;
+    border-top: solid 1px #4FA9E0;
+    border-bottom: solid 1px #4FA9E0;
+}
+
+.player_stats {
+    margin: 15px 0px;
+    padding-bottom: 7px;
+    border-bottom: solid 1px #4FA9E0;
+}
+
+.column_left {
+    padding-left: 5px;
+    float: left;
+}
+
+.column_right {
+    padding-right: 5px;
+    float: right;
+}
+
+.clear {
+    clear:both;
+}
+
+.progress_bar_level {
+    background-color: rgba(116, 79, 217, 1);
+}
+
+.btn_attack {
+    background-color:rgba(0,0,0,0.6);
+}
+
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: #4FA9E0;
+  text-decoration: none;
+}
+
+.dropdown-menu {
+    background-color:rgba(0,0,0,0.6);
+}
+
+.dropdown-menu > li > a {
+    color: #fff;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: #fff;
+  text-decoration: none;
+  background-color: #0D4664;
+}
+
+.btn-group > .btn + .dropdown-toggle {
+  padding-right: 8px;
+  padding-left: 8px;
+  height: 34px;
+}
+
