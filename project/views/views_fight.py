@@ -1,16 +1,16 @@
 from django.shortcuts import render
 from project.models import ArmorItem, Player, Attack
+from django.shortcuts import HttpResponse
 
 
 # def get_enemy(request):
 
 
 def fight(request):
-    return render(request, 'fight/arena.html', {
-        'player': Player.objects.all(),
-        'armor': ArmorItem.objects.all(),
-        'attack': Attack.objects.all(),
-    })
+    player = request.GET['player']
+    enemy = request.GET['enemy']
+
+    return HttpResponse(request.GET['enemy'])
 
 
 def partial_view(request):

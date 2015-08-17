@@ -20,7 +20,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^arena/$', fight),
+    url(r'^fight/$', fight),
     url(r'^partial/$', partial_view),
     url(r'^menu/', include('project.urls', namespace='menu')),
     url(r'^player/(?P<p>[0-9]+)/', include('player.urls', namespace='player')),
