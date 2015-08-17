@@ -44,7 +44,6 @@
     type: 'get',
     data: {'player': p, 'enemy': e},
     success: function(data) {
-        alert(data)
         $('#ref_enemy').html(data);
     },
     failure: function(data) {
@@ -52,8 +51,7 @@
     }
 });
 }
-</script>
-<script>
+
 
     function Response() {
 
@@ -65,7 +63,6 @@
     type: 'get',
     data: {'player': p, 'enemy': e},
     success: function(data) {
-        alert(data)
         $('#ref_enemy').html(data);
     },
     failure: function(data) {
@@ -75,14 +72,7 @@
 }
 </script>
 
-<script>
-$(document).ready(function() {
-            var player_mana  = {{mana}}
-            alert(player_mana)
-            $("#enemy").css("width", player_mana + "%");
-            $("#enemy").attr("aria-valuenow", player_mana + "%");
-        });
-</script>
+
 
 
 {% endblock %}

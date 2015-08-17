@@ -7,9 +7,8 @@ def player_attack(request):
 
     player = Player.objects.get(name=request.GET['player'])
     enemy = Enemy.objects.get(name=request.GET['enemy'])
-    enemy.name = "no easy"
 
-    enemy.mana -= 20
+    enemy.mana -= 40
     ph = enemy.health * 100 / enemy.maxhealth
     pm = enemy.mana * 100 / enemy.maxmana
 
