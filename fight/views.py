@@ -1,25 +1,28 @@
 from django.shortcuts import render
-from fight.enemy import EasyEnemy, HardEnemy, MediumEnemy
-from project.models import Player, ArmorItem, Attack
+from fight.enemy import easyEnemy, hardEnemy, mediumEnemy
+from project.models import Player, ArmorItem, Attack, Enemy
 
 
 def index(request, p):
+    easyEnemy(p)
+    mediumEnemy(p)
+    hardEnemy(p)
     return render(request, 'fight/arena.html', {
         'p': Player.objects.get(pk=p),
-        'ee': EasyEnemy(p),
-        'me': MediumEnemy(p),
-        'he': HardEnemy(p),
+        'ee': Enemy.objects.get(name='Easy Enemy'),
+        'me': Enemy.objects.get(name='Medium Enemy'),
+        'he': Enemy.objects.get(name='Hard Enemy'),
     })
 
 
 def arenalevel(request, p, e):
     gamer = Player.objects.get(pk=p)
     if e == "Easy Enemy":
-        e = EasyEnemy(p)
+        e = Enemy.objects.get(name='Easy Enemy')
     elif e == "Medium Enemy":
-        e = MediumEnemy(p)
+        e = Enemy.objects.get(name='Medium Enemy')
     else:
-        e = HardEnemy(p)
+        e = Enemy.objects.get(name='Hard Enemy')
 
     ph = gamer.health * 100 / gamer.maxhealth
     pm = gamer.mana * 100 / gamer.maxmana

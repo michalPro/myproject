@@ -39,6 +39,23 @@ class Player(models.Model):
         return self.name
 
 
+class Enemy(models.Model):
+    name = models.CharField(max_length=15)
+    level = models.IntegerField()
+    strength = models.IntegerField()
+    agility = models.IntegerField()
+    maxhealth = models.IntegerField()
+    health = models.IntegerField()
+    attack = models.IntegerField()
+    maxmana = models.IntegerField()
+    mana = models.IntegerField()
+    classname = models.ForeignKey(ClassName)
+    armor = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+
 class Attack(models.Model):
     name = models.CharField(max_length=50)
     requiredlv = models.IntegerField()

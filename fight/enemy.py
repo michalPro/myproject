@@ -1,15 +1,15 @@
-from project.models import Player
+from project.models import Player, ClassName, Enemy
 from random import randint, random
 
 
 def get_class():
     whichclass = random()
     if whichclass < 0.33:
-        return "Warrior"
+        return ClassName.objects.get(name='Warrior')
     elif 0.33 <= whichclass < 0.66:
-        return "Thief"
+        return ClassName.objects.get(name='Thief')
     else:
-        return "Tankozord"
+        return ClassName.objects.get(name='Tankozord')
 
 
 def get_maxhealth(gamer):
@@ -24,67 +24,59 @@ def get_maxhealth(gamer):
             else:
                 return gamer.health + 20
 
-class EasyEnemy:
-    def __init__(self, p):
-        self.classname = get_class()
-        self.name = "Easy Enemy"
-        gamer = Player.objects.get(pk=p)
-        suma = gamer.strength + gamer.agility - 30
-        self.level = gamer.level
-        ran = randint(1, suma-1)
-        self.strength = 10 + ran
-        suma -= ran
-        self.agility = suma + 10
-        self.maxhealth = get_maxhealth(gamer)
-        self.maxmana = 50
-        self.mana = self.maxmana
-        self.armor = self.level * 10
-        self.health = self.maxhealth
-        self.attack = self.strength * 0.9
 
-    def __unicode__(self):
-        return self.name
+def easyEnemy(p):
+    e = Enemy.objects.get(name='Easy Enemy')
+    e.classname = get_class()
+    gamer = Player.objects.get(pk=p)
+    suma = gamer.strength + gamer.agility - 30
+    e.level = gamer.level
+    ran = randint(1, suma-1)
+    e.strength = 10 + ran
+    suma -= ran
+    e.agility = suma + 10
+    e.maxhealth = get_maxhealth(gamer)
+    e.maxmana = 50
+    e.mana = e.maxmana
+    e.armor = e.level * 10
+    e.health = e.maxhealth
+    e.attack = e.strength * 0.9
+    e.save()
 
 
-class MediumEnemy:
-    def __init__(self, p):
-        self.name = "Medium Enemy"
-        self.classname = get_class()
-        gamer = Player.objects.get(pk=p)
-        suma = gamer.strength + gamer.agility - 20
-        self.level = gamer.level
-        ran = randint(1, suma-1)
-        self.strength = 10 + ran
-        suma -= ran
-        self.agility = suma + 10
-        self.maxhealth = get_maxhealth(gamer)
-        self.maxmana = 50
-        self.mana = self.maxmana
-        self.health = self.maxhealth
-        self.armor = self.level * 10
-        self.attack = self.strength * 0.9
-
-    def __unicode__(self):
-        return self.name
+def mediumEnemy(p):
+    e = Enemy.objects.get(name='Medium Enemy')
+    e.classname = get_class()
+    gamer = Player.objects.get(pk=p)
+    suma = gamer.strength + gamer.agility - 20
+    e.level = gamer.level
+    ran = randint(1, suma-1)
+    e.strength = 10 + ran
+    suma -= ran
+    e.agility = suma + 10
+    e.maxhealth = get_maxhealth(gamer)
+    e.maxmana = 50
+    e.mana = e.maxmana
+    e.health = e.maxhealth
+    e.armor = e.level * 10
+    e.attack = e.strength * 0.9
+    e.save()
 
 
-class HardEnemy:
-    def __init__(self, p):
-        self.classname = get_class()
-        self.name = "Hard Enemy"
-        gamer = Player.objects.get(pk=p)
-        suma = gamer.strength + gamer.agility - 10
-        self.level = gamer.level
-        ran = randint(1, suma-1)
-        self.strength = 10 + ran
-        suma -= ran
-        self.agility = suma + 10
-        self.maxhealth = get_maxhealth(gamer)
-        self.maxmana = 50
-        self.mana = self.maxmana
-        self.health = self.maxhealth
-        self.armor = self.level * 10
-        self.attack = self.strength * 0.9
-
-    def __unicode__(self):
-        return self.name
+def hardEnemy(p):
+    e = Enemy.objects.get(name='Hard Enemy')
+    e.lassname = get_class()
+    gamer = Player.objects.get(pk=p)
+    suma = gamer.strength + gamer.agility - 10
+    e.level = gamer.level
+    ran = randint(1, suma-1)
+    e.strength = 10 + ran
+    suma -= ran
+    e.agility = suma + 10
+    e.maxhealth = get_maxhealth(gamer)
+    e.maxmana = 50
+    e.mana = e.maxmana
+    e.health = e.maxhealth
+    e.armor = e.level * 10
+    e.attack = e.strength * 0.9
+    e.save()
