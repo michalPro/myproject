@@ -2,51 +2,86 @@
 {% block title %}Arena{% endblock %}
 {% block content %}
 
-<div class="col-md-4">
-    <div class="bg_player">
-        {% include 'fight/partial_view.html' with enemy=False attack=attack %}
-        <div class="player_special_attack">
-                <button type="button" class="btn btn_attack" onclick="Attack()">Zaatakuj</button>
-                <div class="btn-group">
-                    <button type="button" class="btn btn_attack">Specjalny atak</button>
-                    <button type="button" class="btn btn_attack dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        {% for item in attack %}
-                            <li><a href="#">{{ item }}</a></li>
-                        {% endfor %}
-                    </ul>
+
+    <div class="col-md-4">
+        <div class="bg_player">
+            {% include 'fight/partial_view_player.html'%}
+            <div class="player_special_attack">
+                    <button type="button" class="btn btn_attack" onclick="Attack()">Zaatakuj</button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn_attack">Specjalny atak</button>
+                        <button type="button" class="btn btn_attack dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            {% for item in attack %}
+                                <li><a href="#">{{ item }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-<div class="col-md-4">
+    <div class="col-md-4">
 
-</div>
-<div class="col-md-4">
-    <div class="bg_player">
-        {% include 'fight/partial_view.html' with enemy=True p=e %}
+    </div>
+    <div class="col-md-4">
+        <div class="bg_player" id="ref_enemy">
+            {% include 'fight/partial_view_enemy.html'%}
+        </div>
     </div>
 </div>
 
 <script>
     function Attack() {
+
     var p = "{{p.name}}"
     var e = "{{e.name}}"
+
     $.ajax({
-    url: '/fight',
+    url: '/attack',
     type: 'get',
     data: {'player': p, 'enemy': e},
     success: function(data) {
-        alert(data);
+        alert(data)
+        $('#ref_enemy').html(data);
     },
     failure: function(data) {
         alert('Got an error dude');
     }
 });
 }
+</script>
+<script>
+
+    function Response() {
+
+    var p = "{{p.name}}"
+    var e = "{{e.name}}"
+
+    $.ajax({
+    url: '/response',
+    type: 'get',
+    data: {'player': p, 'enemy': e},
+    success: function(data) {
+        alert(data)
+        $('#ref_enemy').html(data);
+    },
+    failure: function(data) {
+        alert('Got an error dude');
+    }
+});
+}
+</script>
+
+<script>
+$(document).ready(function() {
+            var player_mana  = {{mana}}
+            alert(player_mana)
+            $("#enemy").css("width", player_mana + "%");
+            $("#enemy").attr("aria-valuenow", player_mana + "%");
+        });
 </script>
 
 

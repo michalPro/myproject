@@ -1,22 +1,43 @@
 from django.shortcuts import render
-from project.models import ArmorItem, Player, Attack
+from project.models import ArmorItem, Player, Attack, Enemy
 from django.shortcuts import HttpResponse
 
 
-# def get_enemy(request):
+def player_attack(request):
+
+    player = Player.objects.get(name=request.GET['player'])
+    enemy = Enemy.objects.get(name=request.GET['enemy'])
+    enemy.name = "no easy"
+
+    enemy.mana -= 20
+    ph = enemy.health * 100 / enemy.maxhealth
+    pm = enemy.mana * 100 / enemy.maxmana
+
+    return render(request, 'fight/partial_view_enemy.html', {
+        'e': enemy,
+        'health': ph,
+        'mana': pm,
+        'armor': ArmorItem.objects.all(),
+        'attack': Attack.objects.all(),
+    })
 
 
-def fight(request):
-    player = request.GET['player']
-    enemy = request.GET['enemy']
+def enemy_attack(request):
+    return render(request, 'fight/partial_view_enemy.html', {
+        'e': enemy,
+        'health': ph,
+        'mana': pm,
+        'armor': ArmorItem.objects.all(),
+        'attack': Attack.objects.all(),
+    })
 
-    return HttpResponse(request.GET['enemy'])
 
 
-def partial_view(request):
-    return render(request, 'fight/partial_view.html',)
+def partial_view_player(request):
+    return render(request, 'fight/partial_view_player.html',)
 
-# def attack_result(request):
 
-# def special_attack_result(request):
+def partial_view_enemy(request):
+    return render(request, 'fight/partial_view_enemy.html',)
+
 

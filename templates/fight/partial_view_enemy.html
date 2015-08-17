@@ -1,0 +1,42 @@
+{% load staticfiles %}
+
+    <div class="player_portrait">
+        {%if e.classname|stringformat:"s"  == "Warrior"%}
+            <img src="{% static 'css/content/warrior.jpg' %}" height="100%", width="100%">
+        {%elif e.classname|stringformat:"s"  == "Thief"%}
+            <img src="{% static 'css/content/thief.jpg' %}" height="100%", width="100%">
+        {%elif e.classname|stringformat:"s"  == "Tankozord"%}
+            <img src="{% static 'css/content/tank.jpg' %}" height="100%", width="100%">
+        {% endif %}
+    </div>
+    <div class="player_name">
+        {{e.name}}
+    </div>
+    <div class="player_stats">
+        <div class="column_left">
+            <p>poziom:</p>
+            <p>atak:</p>
+            <p>sila:</p>
+            <p>zrecznosc:</p>
+            <p>pancerz:</p>
+        </div>
+        <div class="column_right">
+            <p>{{e.level}}</p>
+            <p>{{e.attack}}</p>
+            <p>{{e.strength}}</p>
+            <p>{{e.agility}}</p>
+            <p>{{e.armor}}</p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="progress">
+        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+            {{e.health}}/{{e.maxhealth}}
+        </div>
+    </div>
+    <div class="progress" id="enemy-mana">
+        <div class="progress-bar"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+            {{e.mana}}/{{e.maxmana}}
+        </div>
+    </div>
+
