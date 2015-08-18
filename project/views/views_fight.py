@@ -10,6 +10,9 @@ def player_attack(request):
     player = Player.objects.get(name=request.GET['player'])
     enemy = Enemy.objects.get(name=request.GET['enemy'])
 
+    if request.GET['special'] != "normal":
+        special = Attack.objects.get(name=request.GET['special'])
+
     ph = enemy.health * 100 / enemy.maxhealth
     pm = enemy.mana * 100 / enemy.maxmana
 
