@@ -31,7 +31,6 @@ def player_attack(request):
             'e': enemy,
             'health': ph,
             'mana': pm,
-            'armor': ArmorItem.objects.all(),
             'attack': Attack.objects.all(),
         })
 
