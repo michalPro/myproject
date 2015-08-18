@@ -87,6 +87,24 @@
     clear:both;
 }
 
+.console_log {
+    padding: 15px;
+    background-color: rgba(21, 64, 87, 0.16);
+    overflow-y:scroll;
+    height: 41%
+}
+
+.console_log_title {
+    font-size: 17px;
+    border-bottom: dashed 1px #fff;
+    padding-bottom: 7px;
+}
+
+.console_log_info {
+    padding-top: 13px;
+}
+
+
 .progress_bar_level {
     background-color: rgba(116, 79, 217, 1);
 }

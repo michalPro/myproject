@@ -5,26 +5,28 @@
 
     <div class="col-md-4">
         <div class="bg_player">
-            {% include 'fight/partial_view_player.html'%}
-            <div class="player_special_attack">
-                    <button type="button" class="btn btn_attack" onclick="Attack()">Zaatakuj</button>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn_attack">Specjalny atak</button>
-                        <button type="button" class="btn btn_attack dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            {% for item in attack %}
-                                <li><a href="#">{{ item }}</a></li>
-                            {% endfor %}
-                        </ul>
+            <div id="ref_player">
+                {% include 'fight/partial_view_player.html'%}
+            </div>
+                <div class="player_special_attack">
+                        <button type="button" class="btn btn_attack" onclick="Attack()">Zaatakuj</button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn_attack">Specjalny atak</button>
+                            <button type="button" class="btn btn_attack dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                {% for item in attack %}
+                                    <li><a href="#">{{ item }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
-    <div class="col-md-4">
-
+    <div class="col-md-4" id="ref_consol">
+        {% include 'fight/partial_view_console_log.html' with player=p enemy=e%}
     </div>
     <div class="col-md-4">
         <div class="bg_player" id="ref_enemy">
@@ -40,35 +42,16 @@
     var e = "{{e.name}}"
 
     $.ajax({
-    url: '/attack',
-    type: 'get',
-    data: {'player': p, 'enemy': e},
-    success: function(data) {
-        $('#ref_enemy').html(data);
-    },
-    failure: function(data) {
-        alert('Got an error dude');
-    }
-});
-}
-
-
-    function Response() {
-
-    var p = "{{p.name}}"
-    var e = "{{e.name}}"
-
-    $.ajax({
-    url: '/response',
-    type: 'get',
-    data: {'player': p, 'enemy': e},
-    success: function(data) {
-        $('#ref_enemy').html(data);
-    },
-    failure: function(data) {
-        alert('Got an error dude');
-    }
-});
+        url: '/attack',
+        type: 'get',
+        data: {'player': p, 'enemy': e},
+        success: function(data) {
+            $('#ref_enemy').html(data);
+        },
+        failure: function(data) {
+            alert('Got an error dude');
+        }
+    });
 }
 </script>
 

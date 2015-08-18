@@ -30,20 +30,44 @@
         <div class="clear"></div>
     </div>
     <div class="progress">
-        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+        <div id="enemy-health" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
             {{e.health}}/{{e.maxhealth}}
         </div>
     </div>
     <div class="progress">
-        <div id="enemy" class="progress-bar"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+        <div id="enemy-mana" class="progress-bar"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
             {{e.mana}}/{{e.maxmana}}
         </div>
     </div>
 
 <script>
+
 $(document).ready(function() {
-            var enemy_mana  = {{mana}}
-            $("#enemy").css("width", enemy_mana + "%");
-            $("#enemy").attr("aria-valuenow", enemy_mana + "%");
-        });
+    var enemy_mana  = {{mana}};
+    var enemy_health  = {{health}};
+
+    $("#enemy-mana").css("width", enemy_mana + "%");
+    $("#enemy-mana").attr("aria-valuenow", enemy_mana + "%");
+
+    $("#enemy-health").attr("aria-valuenow", enemy_health + "%");
+    $("#enemy-health").css("width", function(){ return ($(this).attr('aria-valuenow'),enemy_health+'%')});
+
+    var p = "{{p.name}}"
+    var e = "{{e.name}}";
+
+    $.ajax({
+        url: '/console',
+        type: 'get',
+        data: {'player': p, 'enemy': e},
+        success: function(data) {
+            $('#ref_consol').html(data);
+        },
+        failure: function(data) {
+            alert('Got an error dude');
+        }
+    });
+});
+
+
+
 </script>

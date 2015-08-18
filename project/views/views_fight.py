@@ -9,9 +9,7 @@ def player_attack(request):
 
     player = Player.objects.get(name=request.GET['player'])
     enemy = Enemy.objects.get(name=request.GET['enemy'])
-    enemy.name = "no easy"
 
-    enemy.mana -= 20
     ph = enemy.health * 100 / enemy.maxhealth
     pm = enemy.mana * 100 / enemy.maxmana
 
@@ -31,28 +29,42 @@ def player_attack(request):
             'e': enemy,
             'health': ph,
             'mana': pm,
-            'attack': Attack.objects.all(),
         })
 
     enemy.save()
     return render(request, 'fight/partial_view_enemy.html', {
         'e': enemy,
+        'p': player,
         'health': ph,
         'mana': pm,
         'armor': ArmorItem.objects.all(),
         'attack': Attack.objects.all(),
+    })
+
+
+def console(request):
+    return render(request, 'fight/partial_view_console_log.html', {
+        'enemy': Enemy.objects.get(name=request.GET['enemy']),
+        'player': Player.objects.get(name=request.GET['player']),
     })
 
 
 def enemy_attack(request):
-    return render(request, 'fight/partial_view_enemy.html', {
+    player = Player.objects.get(name=request.GET['player'])
+    enemy = Enemy.objects.get(name=request.GET['enemy'])
+
+    ph = player.health * 100 / player.maxhealth
+    pm = player.mana * 100 / player.maxmana
+
+    player.save()
+
+    return render(request, 'fight/partial_view_player.html', {
         'e': enemy,
+        'p': player,
         'health': ph,
         'mana': pm,
         'armor': ArmorItem.objects.all(),
-        'attack': Attack.objects.all(),
     })
-
 
 
 def partial_view_player(request):
@@ -63,3 +75,5 @@ def partial_view_enemy(request):
     return render(request, 'fight/partial_view_enemy.html',)
 
 
+def partial_view_console_log(request):
+    return render(request, 'fight/partial_view_console_log.html',)

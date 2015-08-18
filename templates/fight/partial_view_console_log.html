@@ -1,0 +1,61 @@
+{% load staticfiles %}
+
+{{z}}
+    <div class="console_log">
+        <div class="console_log_title">
+            <div style="text-align: center;">
+                {{player}} atakuje {{enemy}}
+            </div>
+        </div>
+        <div class="console_log_info">
+            <div class="column_left">
+                <p>Zadane obrażenia:</p>
+            </div>
+            <div class="column_right">
+                <p>{{player.attack}}</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div style="margin: 27px; text-align: center;">
+        <img src="{% static 'css/content/sword.png' %}" height="10%", width="30%">
+    </div>
+
+    <div class="console_log">
+        <div class="console_log_title">
+            <div style="text-align: center;">
+                {{enemy}} atakuje {{player}}
+            </div>
+        </div>
+        <div class="console_log_info">
+            <div class="column_left">
+                <p>Zadane obrażenia:</p>
+            </div>
+            <div class="column_right">
+                <p>{{enemy.attack}}</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+<script>
+$(document).ready(function() {
+
+    var p = "{{player.name}}"
+    var e = "{{enemy.name}}";
+    alert(e);
+    $.ajax({
+        url: '/response',
+        type: 'get',
+        data: {'player': p, 'enemy': e},
+        success: function(data) {
+            alert("dddd");
+            $('#ref_player').html(data);
+        },
+        failure: function(data) {
+            alert('Got an error dude');
+        }
+    });
+});
+</script>
