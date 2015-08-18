@@ -38,7 +38,7 @@ def easyEnemy(p):
     e.maxhealth = get_maxhealth(gamer)
     e.maxmana = 50
     e.mana = e.maxmana
-    e.armor = e.level * 10
+    e.armor = e.level * 5
     e.health = e.maxhealth
     e.attack = e.strength * 0.9
     e.save()
@@ -77,6 +77,6 @@ def hardEnemy(p):
     e.maxmana = 50
     e.mana = e.maxmana
     e.health = e.maxhealth
-    e.armor = e.level * 10
+    e.armor = e.level * 15
     e.attack = e.strength * 0.9
     e.save()
