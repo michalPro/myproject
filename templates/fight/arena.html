@@ -1,16 +1,16 @@
 {% extends 'layout.html' %}
 {% block content %}
-
-
-<h1>Wybierz</h1>
-
-<a href="arenalevel/{{ee}}">
-    <button type="button" class="btn btn-default">{{ee}}</button>
-</a>
-<a href="arenalevel/{{me}}">
-    <button type="button" class="btn btn-default">{{me}}</button>
-</a>
-<a href="arenalevel/{{he}}">
-    <button type="button" class="btn btn-default">{{he}}</button>
-</a>
+    <div class="add_player_title">
+        Wybierz przeciwnika:
+    </div>
+    <hr/>
+    <a href="arenalevel/{{ee}}">
+        <button type="button" class="btn btn_attack">{{ee}}</button>
+    </a>
+    <a href="arenalevel/{{me}}">
+        <button type="button" class="btn btn_attack">{{me}}</button>
+    </a>
+    <a href="arenalevel/{{he}}">
+        <button type="button" class="btn btn_attack">{{he}}</button>
+    </a>
 {% endblock %}

@@ -6,9 +6,12 @@ import math
 
 
 def player_attack(request):
+
     player = Player.objects.get(name=request.GET['player'])
     enemy = Enemy.objects.get(name=request.GET['enemy'])
+    enemy.name = "no easy"
 
+    enemy.mana -= 20
     ph = enemy.health * 100 / enemy.maxhealth
     pm = enemy.mana * 100 / enemy.maxmana
 
@@ -34,12 +37,12 @@ def player_attack(request):
 
     enemy.save()
     return render(request, 'fight/partial_view_enemy.html', {
-            'e': enemy,
-            'health': ph,
-            'mana': pm,
-            'armor': ArmorItem.objects.all(),
-            'attack': Attack.objects.all(),
-        })
+        'e': enemy,
+        'health': ph,
+        'mana': pm,
+        'armor': ArmorItem.objects.all(),
+        'attack': Attack.objects.all(),
+    })
 
 
 def enemy_attack(request):
@@ -50,6 +53,7 @@ def enemy_attack(request):
         'armor': ArmorItem.objects.all(),
         'attack': Attack.objects.all(),
     })
+
 
 
 def partial_view_player(request):

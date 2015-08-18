@@ -35,6 +35,7 @@
 
 <script>
     function Attack() {
+
     var p = "{{p.name}}"
     var e = "{{e.name}}"
 
@@ -43,17 +44,17 @@
     type: 'get',
     data: {'player': p, 'enemy': e},
     success: function(data) {
-        alert(data)
         $('#ref_enemy').html(data);
     },
     failure: function(data) {
         alert('Got an error dude');
     }
 });
-
 }
 
+
     function Response() {
+
     var p = "{{p.name}}"
     var e = "{{e.name}}"
 
@@ -62,7 +63,6 @@
     type: 'get',
     data: {'player': p, 'enemy': e},
     success: function(data) {
-        alert(data)
         $('#ref_enemy').html(data);
     },
     failure: function(data) {
@@ -70,14 +70,9 @@
     }
 });
 }
-
-$(document).ready(function() {
-            var player_mana  = {{mana}}
-            alert(player_mana)
-            $("#enemy").css("width", player_mana + "%");
-            $("#enemy").attr("aria-valuenow", player_mana + "%");
-        });
 </script>
+
+
 
 
 {% endblock %}
