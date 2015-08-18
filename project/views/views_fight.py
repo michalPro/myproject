@@ -5,44 +5,39 @@ from random import random
 import math
 
 
+def attack(enemy, player, max_agi, special):
+    myrand = random()
+
+    if special.requiredmana < player.mana and player.level >=special.requiredlv:
+        if myrand >= (enemy.agility/max_agi):
+            if enemy.health > 0:
+                attack_amount = (float(player.attack) * special.bonusattack) * (1.0 - ((float(enemy.armor) / float(enemy.level)) / 100.0))
+                if enemy.health < attack_amount:
+                    enemy.health = 0
+                else:
+                    health_left = float(enemy.health) - attack_amount
+                    enemy.health = int(round(health_left, 0))
+                    player.mana -= special.requiredmana
+                return enemy, player
+        else:
+            return enemy, player
+    else:
+        #no mana or lv
+        return
+
+
 def player_attack(request):
 
     player = Player.objects.get(name=request.GET['player'])
     enemy = Enemy.objects.get(name=request.GET['enemy'])
 
-    if request.GET['special'] != "normal":
-        special = Attack.objects.get(name=request.GET['special'])
-
-    ph = enemy.health * 100 / enemy.maxhealth
-    pm = enemy.mana * 100 / enemy.maxmana
-
     max_agi = enemy.agility + player.agility
-    myrand = random()
 
-    if myrand >= (enemy.agility/max_agi):
-        if enemy.health > 0:
-            attack_amount = float(player.attack) * (1.0 - ((float(enemy.armor) / float(enemy.level)) / 100.0))
-            if enemy.health < attack_amount:
-                enemy.health = 0
-            else:
-                health_left = float(enemy.health) - attack_amount
-                enemy.health = int(round(health_left, 0))
-    else:
-        return render(request, 'fight/partial_view_enemy.html', {
-            'e': enemy,
-            'health': ph,
-            'mana': pm,
-        })
-
+    special = Attack.objects.get(name=request.GET['special'])
+    enemy, player = attack(enemy, player, max_agi, special)
     enemy.save()
-    return render(request, 'fight/partial_view_enemy.html', {
-        'e': enemy,
-        'p': player,
-        'health': ph,
-        'mana': pm,
-        'armor': ArmorItem.objects.all(),
-        'attack': Attack.objects.all(),
-    })
+    player.save()
+    #return
 
 
 def console(request):
