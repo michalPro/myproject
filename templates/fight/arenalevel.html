@@ -70,6 +70,7 @@
         data: {'player': p, 'enemy': e, "special": s},
         success: function(data) {
             $('#ref_enemy').html(data);
+            $('#ref_player').html(data);
         },
         failure: function(data) {
             alert('Got an error dude');

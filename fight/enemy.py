@@ -40,7 +40,7 @@ def easyEnemy(p):
     e.mana = e.maxmana
     e.armor = e.level * 5
     e.health = e.maxhealth
-    e.attack = e.strength * 0.9
+    e.attack = round(e.strength * 0.9, 0)
     e.save()
 
 
@@ -59,7 +59,7 @@ def mediumEnemy(p):
     e.mana = e.maxmana
     e.health = e.maxhealth
     e.armor = e.level * 10
-    e.attack = e.strength * 0.9
+    e.attack = round(e.strength * 0.9, 0)
     e.save()
 
 
@@ -78,5 +78,5 @@ def hardEnemy(p):
     e.mana = e.maxmana
     e.health = e.maxhealth
     e.armor = e.level * 15
-    e.attack = e.strength * 0.9
+    e.attack = round(e.strength * 0.9, 0)
     e.save()

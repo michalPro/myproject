@@ -64,3 +64,8 @@ class Attack(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class AttackLog(models.Model):
+    enemydamage = models.IntegerField()
+    playerdamage = models.IntegerField()
