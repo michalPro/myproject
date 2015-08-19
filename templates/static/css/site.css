@@ -16,7 +16,6 @@
     height: 100%;
 }
 
-
 .player_name {
     padding: 5px 0px;
     color: #4FA9E0;
@@ -89,7 +88,7 @@
 
 .console_log {
     padding: 15px;
-    background-color: rgba(21, 64, 87, 0.16);
+    background-color: rgba(150, 150, 150, 0.16);
     overflow-y:scroll;
     height: 41%
 }
@@ -116,7 +115,7 @@
 .btn_special_attack {
     text-align: left;
     width: 100%;
-    padding: 2px;
+    padding: 1px;
     background-color:rgba(0,0,0,0.6);
 }
 

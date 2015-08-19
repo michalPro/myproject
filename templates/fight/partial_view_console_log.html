@@ -11,7 +11,7 @@
                 <p>Zadane obrażenia:</p>
             </div>
             <div class="column_right">
-                <p>{{player.attack}}</p>
+
             </div>
             <div class="clear"></div>
         </div>
@@ -32,28 +32,8 @@
                 <p>Zadane obrażenia:</p>
             </div>
             <div class="column_right">
-                <p>{{enemy.attack}}</p>
+
             </div>
             <div class="clear"></div>
         </div>
     </div>
-
-<script>
-$(document).ready(function() {
-
-    var p = "{{player.name}}"
-    var e = "{{enemy.name}}";
-
-    $.ajax({
-        url: '/response',
-        type: 'get',
-        data: {'player': p, 'enemy': e},
-        success: function(data) {
-            $('#ref_player').html(data);
-        },
-        failure: function(data) {
-            alert('Got an error dude');
-        }
-    });
-});
-</script>

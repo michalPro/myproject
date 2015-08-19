@@ -4,14 +4,13 @@
 
 
     <div class="col-md-4">
-        <div class="bg_player">
+        <div class="bg_player" style="padding: 15px;">
             <div id="ref_player">
                 {% include 'fight/partial_view_player.html'%}
             </div>
                 <div class="player_special_attack">
-                        <button type="button" class="btn btn_attack" onclick="Attack()">Zaatakuj</button>
                         <div class="btn-group">
-                            <button type="button" class="btn btn_attack">Specjalny atak</button>
+                            <button type="button" class="btn btn_attack">Zaatakuj przeciwnika</button>
                             <button type="button" class="btn btn_attack dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
@@ -19,8 +18,8 @@
                             <ul class="dropdown-menu">
                                 {% for item in attack %}
                                 <li>
-                                    <button type="button" class="btn btn_special_attack" onclick="SpecialAttack('{{item}}')">
-                                        {{item}}
+                                    <button type="button" class="btn btn_special_attack" onclick="Attack('{{item}}')">
+                                        {{item.name}}: Poziom-{{item.requiredlv}} Mana-{{item.requiredmana}}
                                     </button>
                                 </li>
                                 {% endfor %}
@@ -33,18 +32,18 @@
         {% include 'fight/partial_view_console_log.html' with player=p enemy=e%}
     </div>
     <div class="col-md-4">
-        <div class="bg_player" id="ref_enemy">
+        <div class="bg_player" id="ref_enemy" style="padding: 15px;">
             {% include 'fight/partial_view_enemy.html'%}
         </div>
     </div>
 </div>
 
 <script>
-    function Attack() {
+    function Attack(attack) {
 
     var p = "{{p.name}}";
     var e = "{{e.name}}";
-    var s = "normal"
+    var s = attack;
 
     $.ajax({
         url: '/attack',
@@ -58,32 +57,5 @@
         }
     });
 }
-    function SpecialAttack(special) {
-
-    var p = "{{p.name}}";
-    var e = "{{e.name}}";
-    var s = special;
-
-    $.ajax({
-        url: '/attack',
-        type: 'get',
-        data: {'player': p, 'enemy': e, "special": s},
-        success: function(data) {
-            $('#ref_enemy').html(data);
-            $('#ref_player').html(data);
-        },
-        failure: function(data) {
-            alert('Got an error dude');
-        }
-    });
-}
-
-
-
 </script>
-
-
-
-
 {% endblock %}
-

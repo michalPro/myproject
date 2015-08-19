@@ -41,7 +41,6 @@
     </div>
 
 <script>
-
 $(document).ready(function() {
     var enemy_mana  = {{mana}};
     var enemy_health  = {{health}};
@@ -56,18 +55,22 @@ $(document).ready(function() {
     var e = "{{e.name}}";
 
     $.ajax({
-        url: '/console',
+        url: '/response',
         type: 'get',
         data: {'player': p, 'enemy': e},
         success: function(data) {
-            $('#ref_consol').html(data);
+            alert("nieeee ide")
+            $('#ref_player').html(data);
         },
         failure: function(data) {
             alert('Got an error dude');
         }
     });
 });
-
-
-
 </script>
+
+
+
+
+
+

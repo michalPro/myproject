@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from fight.enemy import easyEnemy, hardEnemy, mediumEnemy
-from project.models import Player, ArmorItem, Attack, Enemy
+from project.models import Player, ArmorItem, Attack, Enemy, AttackLog
 
 
 def index(request, p):
@@ -24,13 +24,12 @@ def arenalevel(request, p, e):
     else:
         e = Enemy.objects.get(name='Hard Enemy')
 
-    ph = gamer.health * 100 / gamer.maxhealth
-    pm = gamer.mana * 100 / gamer.maxmana
     return render(request, 'fight/arenalevel.html', {
         'p': gamer,
         'e': e,
-        'health': ph,
-        'mana': pm,
+        'health': gamer.health * 100 / gamer.maxhealth,
+        'mana': gamer.mana * 100 / gamer.maxmana,
         'armor': ArmorItem.objects.all(),
         'attack': Attack.objects.all(),
+        'AttackLog': AttackLog.objects.all(),
     })
