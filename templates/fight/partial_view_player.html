@@ -58,12 +58,11 @@ $(document).ready(function() {
     $("#player-health").attr("aria-valuenow", player_health + "%");
     $("#player-health").css("width", function(){ return ($(this).attr('aria-valuenow'),player_health+'%')});
 
-    var p = "{{player.name}}"
-    var e = "{{enemy.name}}";
+    var p = "{{p.name}}"
+    var e = "{{e.name}}";
 
-    alert("go to console")
     $.ajax({
-        url: '/console',
+        url: '/console_log',
         type: 'get',
         data: {'player': p, 'enemy': e},
         success: function(data) {

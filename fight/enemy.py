@@ -15,14 +15,14 @@ def get_class():
 def get_maxhealth(gamer):
     if random() > 0.5:
             if random() > 0.5:
-                return gamer.health + 20
+                return gamer.maxhealth + 20
             else:
-                return gamer.health + 10
+                return gamer.maxhealth + 10
     else:
             if random() > 0.5:
-                return gamer.health + 10
+                return gamer.maxhealth + 10
             else:
-                return gamer.health + 20
+                return gamer.maxhealth + 20
 
 
 def easyEnemy(p):

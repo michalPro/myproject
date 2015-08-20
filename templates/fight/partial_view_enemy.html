@@ -59,7 +59,6 @@ $(document).ready(function() {
         type: 'get',
         data: {'player': p, 'enemy': e},
         success: function(data) {
-            alert("nieeee ide")
             $('#ref_player').html(data);
         },
         failure: function(data) {

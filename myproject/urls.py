@@ -16,17 +16,18 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from project.views.views_fight import player_attack, enemy_attack, \
-    partial_view_enemy, partial_view_player, partial_view_console_log, console
+    partial_view_enemy, partial_view_player, partial_view_console_log, console_log, victory
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^attack/$', player_attack),
-    url(r'^console/$', console),
+    url(r'^console_log/$', console_log),
     url(r'^response/$', enemy_attack),
     url(r'^enemy/$', partial_view_enemy),
     url(r'^console/$', partial_view_console_log),
     url(r'^player/$', partial_view_player),
+    url(r'^victory/$', victory),
     url(r'^menu/', include('project.urls', namespace='menu')),
     url(r'^player/(?P<p>[0-9]+)/', include('player.urls', namespace='player')),
     url(r'^player/(?P<p>[0-9]+)/arena/', include('fight.urls', namespace='fight')),

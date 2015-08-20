@@ -9,21 +9,17 @@
                 {% include 'fight/partial_view_player.html'%}
             </div>
                 <div class="player_special_attack">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn_attack">Zaatakuj przeciwnika</button>
-                            <button type="button" class="btn btn_attack dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                {% for item in attack %}
-                                <li>
-                                    <button type="button" class="btn btn_special_attack" onclick="Attack('{{item}}')">
-                                        {{item.name}}: Poziom-{{item.requiredlv}} Mana-{{item.requiredmana}}
-                                    </button>
-                                </li>
-                                {% endfor %}
-                            </ul>
+                        <div class="btn-group-vertical" role="group" aria-label="" style="width: 100%;">
+                            {% for item in attack %}
+                                <button type="button" class="btn btn_special_attack" onclick="Attack('{{item}}')">
+                                    <div class="column_left">
+                                        {{item.name}}:
+                                    </div>
+                                    <div class="column_right">
+                                        Poziom:{{item.requiredlv}} Mana:{{item.requiredmana}}
+                                    </div>
+                                </button>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
