@@ -58,7 +58,7 @@ $(document).ready(function() {
     $("#player-health").attr("aria-valuenow", player_health + "%");
     $("#player-health").css("width", function(){ return ($(this).attr('aria-valuenow'),player_health+'%')});
 
-    var p = "{{p.name}}"
+    var p = "{{p.name}}";
     var e = "{{e.name}}";
 
     $.ajax({

@@ -12,7 +12,11 @@
             </div>
             <div class="column_right">
                 {% for item in log %}
-                    <p>{{item.playerdamage}}</p>
+                    {% if item.playerdamage == 0%}
+                        <p>Chybił</p>
+                    {% else%}
+                        <p>{{item.playerdamage}}</p>
+                    {% endif%}
                 {% endfor %}
             </div>
             <div class="clear"></div>
@@ -35,7 +39,11 @@
             </div>
             <div class="column_right">
                 {% for item in log %}
-                    <p>{{item.enemydamage}}</p>
+                    {% if item.enemydamage == 0%}
+                        <p>Chybił</p>
+                    {% else%}
+                        <p>{{item.enemydamage}}</p>
+                    {% endif%}
                 {% endfor %}
             </div>
             <div class="clear"></div>

@@ -34,4 +34,5 @@ def arenalevel(request, p, e):
         'mana': gamer.mana * 100 / gamer.maxmana,
         'armor': ArmorItem.objects.all(),
         'attack': Attack.objects.all(),
+        'log': AttackLog.objects.all(),
     })

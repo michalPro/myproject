@@ -11,7 +11,8 @@
                 <div class="player_special_attack">
                         <div class="btn-group-vertical" role="group" aria-label="" style="width: 100%;">
                             {% for item in attack %}
-                                <button type="button" class="btn btn_special_attack" onclick="Attack('{{item}}')">
+                                <button type="button" class="btn btn_special_attack"
+                                        onclick="Attack({{item.requiredlv}}, {{item.requiredmana}}, '{{item.name}}')">
                                     <div class="column_left">
                                         {{item.name}}:
                                     </div>
@@ -35,23 +36,33 @@
 </div>
 
 <script>
-    function Attack(attack) {
+    function Attack(lvl, mana, name) {
 
     var p = "{{p.name}}";
     var e = "{{e.name}}";
-    var s = attack;
+    var s = name;
+    var requiredlv = lvl;
+    var requiredmana = mana;
+    var p_level = {{p.level}};
+    var p_mana = {{p.mana}};
 
-    $.ajax({
-        url: '/attack',
-        type: 'get',
-        data: {'player': p, 'enemy': e, "special": s},
-        success: function(data) {
-            $('#ref_enemy').html(data);
-        },
-        failure: function(data) {
-            alert('Got an error dude');
-        }
-    });
+
+    if(p_level >= requiredlv && requiredmana <= p_mana) {
+        $.ajax({
+                url: '/attack',
+                type: 'get',
+                data: {'player': p, 'enemy': e, "special": s},
+                success: function(data) {
+                    $('#ref_enemy').html(data);
+                },
+                failure: function(data) {
+                    alert('Got an error dude');
+                }
+        });
+    }
+    else {
+        alert("Za mało many, lub nie masz dosc wysokiego poziomu")
+    }
 }
 </script>
 {% endblock %}

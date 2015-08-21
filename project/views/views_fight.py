@@ -10,8 +10,7 @@ def player_attack(request):
     special = Attack.objects.get(name=request.GET['special'])
     attack_log = AttackLog(playerdamage=0, enemydamage=0)
 
-    max_agi = enemy.agility + player.agility
-    enemy, player = p_attack(enemy, player, max_agi, special, attack_log)
+    enemy, player = p_attack(enemy, player, special, attack_log)
 
     enemy.save()
     player.save()
@@ -22,9 +21,9 @@ def player_attack(request):
         player.mana = player.maxmana
 
         #return redirect('fight/victory.html')
-        #return render(request, 'fight/victory.html', {
-        #    'p': player,
-        #})
+        return render(request, 'fight/victory.html', {
+            'p': player,
+        })
     else:
         return render(request, 'fight/partial_view_enemy.html', {
             'e': enemy,
@@ -48,16 +47,14 @@ def enemy_attack(request):
     player = Player.objects.get(name=request.GET['player'])
     enemy = Enemy.objects.get(name=request.GET['enemy'])
     special = Attack.objects.all()
-    max_agi = enemy.agility + player.agility
     attack_log = AttackLog.objects.all()
     attack_log = attack_log.get(pk=len(attack_log))
 
-    enemy, player = e_attack(player, enemy, special, max_agi, attack_log)
+    enemy, player = e_attack(player, enemy, special, attack_log)
 
     enemy.save()
     player.save()
 
-    player.strength = attack_log.enemydamage
     return render(request, 'fight/partial_view_player.html', {
         'e': enemy,
         'p': player,
