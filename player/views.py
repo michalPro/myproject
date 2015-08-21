@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from project.models import Player, ArmorItem, ClassName, Attack
+from project.models import Player
 
 
 def index(request, p):

@@ -17,6 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from project.views.views_fight import player_attack, enemy_attack, \
     partial_view_enemy, partial_view_player, partial_view_console_log, console_log, victory
+from project.views.shop import shop, buy
 admin.autodiscover()
 
 urlpatterns = [
@@ -30,6 +31,8 @@ urlpatterns = [
     url(r'^victory/$', victory),
     url(r'^menu/', include('project.urls', namespace='menu')),
     url(r'^player/(?P<p>[0-9]+)/', include('player.urls', namespace='player')),
+    url(r'^player/(?P<p>[0-9]+)/shop/$', shop),
+    url(r'^player/(?P<p>[0-9]+)/shop/buy/(?P<i>[\sA-Za-z]+)$', buy),
     url(r'^player/(?P<p>[0-9]+)/arena/', include('fight.urls', namespace='fight')),
 ]
 

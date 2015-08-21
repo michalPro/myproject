@@ -1,6 +1,7 @@
 from random import random, randint
 from project.models import AttackLog
 
+
 def get_dodge(attacker, enemy):
 
     my_rand = randint(0, 100)

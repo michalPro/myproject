@@ -25,6 +25,7 @@ def player_attack(request):
             player.experience = exp_left
         else:
             player.experience += received_exp
+        player.gold += received_exp/2
 
         player.health = player.maxhealth
         player.mana = player.maxmana
