@@ -23,12 +23,15 @@ def player_attack(request):
             exp_left = player.requiredexp - player.experience
             player.requiredexp = 400 * player.level
             player.experience = exp_left
+            player.strength += 6
+            player.agility += 5
+            player.maxhealth += 50
+            player.maxmana += 7
+            player.attack = 0.9 * player.strength
         else:
             player.experience += received_exp
         player.gold += received_exp/2
 
-        player.health = player.maxhealth
-        player.mana = player.maxmana
         player.save()
 
         return render(request, 'fight/victory.html', {
