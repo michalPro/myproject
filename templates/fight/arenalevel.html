@@ -8,7 +8,7 @@
             <div id="ref_player">
                 {% include 'fight/partial_view_player.html'%}
             </div>
-                <div class="player_special_attack">
+                <div class="player_special_attack" id="special">
                         <div class="btn-group-vertical" role="group" aria-label="" style="width: 100%;">
                             {% for item in attack %}
                                 <button type="button" class="btn btn_special_attack"
@@ -64,5 +64,6 @@
         alert("Za mało many, lub nie masz dosc wysokiego poziomu")
     }
 }
+
 </script>
 {% endblock %}

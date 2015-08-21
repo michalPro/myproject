@@ -1,12 +1,18 @@
-<div class="center win">Przeciwnik zostal pokonany
+<div class="center win">{{defeated.name}} zostal pokonany
     <hr/>
     <div style="margin-top: 20px">
-    <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p.id}}'">
-        Powrót do statystyk
-    </button>
-        </div>
+        <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p.id}}'">
+            Powrót do statystyk
+        </button>
+    </div>
 </div>
 
-
+<script>
+$(document).ready(function() {
+    var element = document.getElementById("special");
+    element.outerHTML = "";
+    delete element;
+});
+</script>
 
 

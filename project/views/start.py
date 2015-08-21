@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, render_to_response, RequestContext, redirect
 from project.models import ArmorItem, Attack, Player, ClassName
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect, HttpResponse
 
 
 def start(request):
@@ -42,9 +42,4 @@ def createnew(request):
 def load(request):
     plist = Player.objects.all()
     return render(request, 'menu/load.html', {'players': plist})
-
-
-def player(request, p):
-    gamer = Player.objects.get(name=p)
-    return render(request, 'player/index.html', {'p': gamer})
 

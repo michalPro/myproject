@@ -31,9 +31,9 @@ def player_attack(request):
         player.mana = player.maxmana
         player.save()
 
-        #return redirect('fight/victory.html')
         return render(request, 'fight/victory.html', {
             'p': player,
+            'defeated': enemy,
         })
     else:
         return render(request, 'fight/partial_view_enemy.html', {
@@ -66,11 +66,21 @@ def enemy_attack(request):
     enemy.save()
     player.save()
 
+    if player.health <= 0:
+        player.health = player.maxhealth
+        player.mana = player.maxmana
+        player.save()
+
+        return render(request, 'fight/victory.html', {
+            'p': player,
+            'defeated': player,
+        })
     return render(request, 'fight/partial_view_player.html', {
         'e': enemy,
         'p': player,
         'health': player.health * 100 / player.maxhealth,
         'mana': player.mana * 100 / player.maxmana,
+        'armor': ArmorItem.objects.get(name=player.armorid).value,
     })
 
 

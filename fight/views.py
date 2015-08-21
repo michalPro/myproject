@@ -27,12 +27,14 @@ def arenalevel(request, p, e):
     attack_log = AttackLog.objects.all()
     attack_log.delete()
 
+
+
     return render(request, 'fight/arenalevel.html', {
         'p': gamer,
         'e': e,
         'health': gamer.health * 100 / gamer.maxhealth,
         'mana': gamer.mana * 100 / gamer.maxmana,
-        'armor': ArmorItem.objects.all(),
+        'armor': ArmorItem.objects.get(name=gamer.armorid).value,
         'attack': Attack.objects.all(),
         'log': AttackLog.objects.all(),
     })
