@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from project.models import ArmorItem, Player, Attack, Enemy, AttackLog
-from project.service.service_attack import p_attack, e_attack
+from project.service.service_attack import p_attack, e_attack, receive_exp
 from django.shortcuts import redirect
+
 
 def player_attack(request):
 
@@ -16,9 +17,18 @@ def player_attack(request):
     player.save()
 
     if enemy.health <= 0:
-        player.experience = round(player.health / 10)
+        received_exp = receive_exp(enemy, player)
+        if received_exp+player.experience > player.requiredexp:
+            player.level += 1
+            exp_left = player.requiredexp - player.experience
+            player.requiredexp = 400 * player.level
+            player.experience = exp_left
+        else:
+            player.experience += received_exp
+
         player.health = player.maxhealth
         player.mana = player.maxmana
+        player.save()
 
         #return redirect('fight/victory.html')
         return render(request, 'fight/victory.html', {

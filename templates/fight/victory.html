@@ -1,7 +1,12 @@
-{% extends "layout.html" %}
-{% block title %}Victory{% endblock %}
-{% block content %}
+<div class="center win">Przeciwnik zostal pokonany
+    <hr/>
+    <div style="margin-top: 20px">
+    <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p.id}}'">
+        Powrót do statystyk
+    </button>
+        </div>
+</div>
 
-Wygrales
 
-{% endblock %}
+
+

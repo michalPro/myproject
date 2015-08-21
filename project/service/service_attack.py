@@ -39,16 +39,6 @@ def p_attack(enemy, player, special, attack_log):
                 health_left = float(enemy.health) - attack_amount
                 enemy.health = int(round(health_left, 0))
                 player.mana -= special.requiredmana
-        else:
-            received_exp = receive_exp(enemy, player)
-            if received_exp+player.experience > player.requiredexp:
-                player.level += 1
-                exp_left = player.requiredexp - player.experience
-                player.requiredexp = 400 * player.level
-                player.experience = exp_left
-            else:
-                player.experience += received_exp
-
     else:
         attack_log.playerdamage = 0
     attack_log.save()
