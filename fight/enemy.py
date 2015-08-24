@@ -12,31 +12,20 @@ def get_class():
         return ClassName.objects.get(name='Tankozord')
 
 
-def get_maxhealth(gamer):
-    if random() > 0.5:
-            if random() > 0.5:
-                return gamer.maxhealth + 20
-            else:
-                return gamer.maxhealth + 10
-    else:
-            if random() > 0.5:
-                return gamer.maxhealth + 10
-            else:
-                return gamer.maxhealth + 20
-
-
 def easyEnemy(p):
     e = Enemy.objects.get(name='Easy Enemy')
     e.classname = get_class()
     gamer = Player.objects.get(pk=p)
-    suma = gamer.strength + gamer.agility - 30
+    suma = gamer.strength + gamer.agility - 20
+    min_value = float(suma) * 0.2
+    suma = round(float(suma) * 0.4, 0)
     e.level = gamer.level
     ran = randint(1, suma-1)
-    e.strength = 10 + ran
+    e.strength = min_value + ran
     suma -= ran
-    e.agility = suma + 10
-    e.maxhealth = get_maxhealth(gamer)
-    e.maxmana = 50
+    e.agility = min_value + suma
+    e.maxhealth = randint(round(float(gamer.maxhealth)*0.8, 0), round(float(gamer.maxhealth) * 0.9, 0))
+    e.maxmana = 50 + 5 * gamer.level
     e.mana = e.maxmana
     e.armor = e.level * 5
     e.health = e.maxhealth
@@ -48,14 +37,16 @@ def mediumEnemy(p):
     e = Enemy.objects.get(name='Medium Enemy')
     e.classname = get_class()
     gamer = Player.objects.get(pk=p)
-    suma = gamer.strength + gamer.agility - 20
+    suma = gamer.strength + gamer.agility - 10
+    min_value = float(suma) * 0.2
+    suma = round(float(suma) * 0.4, 0)
     e.level = gamer.level
     ran = randint(1, suma-1)
-    e.strength = 10 + ran
+    e.strength = min_value + ran
     suma -= ran
-    e.agility = suma + 10
-    e.maxhealth = get_maxhealth(gamer)
-    e.maxmana = 50
+    e.agility = min_value + suma
+    e.maxhealth = randint(round(float(gamer.maxhealth)*0.9, 0), float(gamer.maxhealth))
+    e.maxmana = 50 + 5 * gamer.level
     e.mana = e.maxmana
     e.health = e.maxhealth
     e.armor = e.level * 10
@@ -67,14 +58,16 @@ def hardEnemy(p):
     e = Enemy.objects.get(name='Hard Enemy')
     e.lassname = get_class()
     gamer = Player.objects.get(pk=p)
-    suma = gamer.strength + gamer.agility - 10
+    suma = gamer.strength + gamer.agility
+    min_value = float(suma) * 0.2
+    suma = round(float(suma) * 0.4, 0)
     e.level = gamer.level
     ran = randint(1, suma-1)
-    e.strength = 10 + ran
+    e.strength = min_value + ran
     suma -= ran
-    e.agility = suma + 10
-    e.maxhealth = get_maxhealth(gamer)
-    e.maxmana = 50
+    e.agility = min_value + suma
+    e.maxhealth = randint(float(gamer.maxhealth), round(float(gamer.maxhealth) * 1.1, 0))
+    e.maxmana = 50 + 5 * gamer.level
     e.mana = e.maxmana
     e.health = e.maxhealth
     e.armor = e.level * 15
