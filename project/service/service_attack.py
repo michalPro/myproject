@@ -68,7 +68,7 @@ def get_attack(special, enemy, not_get=True):
     return attack
 
 
-def e_attack(player, enemy, special, attack_log):
+def e_attack(player, enemy, special, attack_log, armor):
 
     dodge = get_dodge(enemy, player)
     attack = get_attack(special, enemy)
@@ -76,7 +76,8 @@ def e_attack(player, enemy, special, attack_log):
 
     if not dodge:
         if player.health > 0:
-            attack_amount = (float(enemy.attack) * (float(attack.bonusattack))) + float(bonus)
+            attack_amount = (float(enemy.attack) * (float(attack.bonusattack))) *\
+                            (1.0 - ((float(armor) / float(player.level)) / 100.0)) + float(bonus)
             attack_log.enemydamage = int(round(attack_amount, 0))
 
             if player.health < attack_amount:

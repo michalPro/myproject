@@ -63,8 +63,9 @@ def enemy_attack(request):
     special = Attack.objects.all()
     attack_log = AttackLog.objects.all()
     attack_log = attack_log.get(pk=len(attack_log))
+    armor = ArmorItem.objects.get(name=player.armorid).value
 
-    enemy, player = e_attack(player, enemy, special, attack_log)
+    enemy, player = e_attack(player, enemy, special, attack_log, armor)
 
     enemy.save()
     player.save()

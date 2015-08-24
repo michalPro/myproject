@@ -3,10 +3,10 @@ import os
 
 def populate():
     add_armor('Default', 5, 1, 0)
-    add_armor('Leather Armor', 20, 3, 15)
-    add_armor('Plate Armor', 95, 5, 60)
-    add_armor('Chain Armor', 264, 12, 340)
-    add_armor('Scale Armor', 500, 20, 1000)
+    add_armor('Leather Armor', 20, 3, 500)
+    add_armor('Plate Armor', 95, 5, 1000)
+    add_armor('Chain Armor', 264, 12, 5000)
+    add_armor('Scale Armor', 500, 20, 15000)
 
     add_attack('Standard Attack', 1, 1.0, 0)
     add_attack('Boomerang Attack', 3, 1.2, 5)
