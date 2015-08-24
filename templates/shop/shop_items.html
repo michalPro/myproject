@@ -6,7 +6,7 @@
     </div>
     <hr/>
 
-        {% for item in items %}
+        {% for item in armor %}
         <div class="shop">
             <div class="column_left">
                 <div class="armor_img">
@@ -30,8 +30,34 @@
             <div class="clear"></div>
         </div>
         {% endfor %}
+
+        {% for item in weapon %}
+        <div class="shop">
+            <div class="column_left">
+                <div class="armor_img">
+                    {%if item.value  == 20%}
+                        <img src="{% static 'css/content/armor1.jpg' %}" height="100%", width="100%">
+                    {%elif item.value  == 95%}
+                        <img src="{% static 'css/content/armor2.jpg' %}" height="100%", width="100%">
+                    {%elif item.value  == 264%}
+                        <img src="{% static 'css/content/armor3.jpg' %}" height="100%", width="100%">
+                    {%else%}
+                        <img src="{% static 'css/content/armor4.jpg' %}" height="100%", width="100%">
+                    {%endif%}
+                </div>
+            </div>
+            <div class="armor_info">
+                {{ item.name }} (lvl {{item.requiredlv}})<br />
+                atak: {{ item.bonus_attack }}<br />
+                zrecznosc: {{ item.bonus_agility }}<br />
+                cena: {{ item.price}}<br />
+                <a href="buy/{{item}}">Kup</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        {% endfor %}
     <hr/>
-    <a href="/player/{{p}}/">
+    <a href="/player/{{p.id}}/">
         Wroc do statystyk
     </a>
 

@@ -4,6 +4,18 @@ from django.db import models
 class ArmorItem(models.Model):
     name = models.CharField(max_length=30)
     value = models.IntegerField()
+    bonus_health = models.IntegerField()
+    requiredlv = models.IntegerField()
+    price = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+
+class Weapon(models.Model):
+    name = models.CharField(max_length=30)
+    bonus_attack = models.IntegerField()
+    bonus_agility = models.IntegerField()
     requiredlv = models.IntegerField()
     price = models.IntegerField()
 
@@ -32,6 +44,9 @@ class Player(models.Model):
     mana = models.IntegerField()
     classname = models.ForeignKey(ClassName)
     armorid = models.ForeignKey(ArmorItem)
+    bonus_attack = models.IntegerField()
+    bonus_agility = models.IntegerField()
+    bonus_health = models.IntegerField()
     isarmordamaged = models.BooleanField()
     gold = models.IntegerField()
 
