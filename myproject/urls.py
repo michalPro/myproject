@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^player/(?P<p>[0-9]+)/', include('player.urls', namespace='player')),
     url(r'^player/(?P<p>[0-9]+)/shop/$', shop),
     url(r'^player/(?P<p>[0-9]+)/shop/buy/(?P<i>[\sA-Za-z]+)$', buy),
-    url(r'^player/(?P<p>[0-9]+)/shop/regen/$', reg),
+    url(r'^player/(?P<p>[0-9]+)/regen/$', reg),
     url(r'^player/(?P<p>[0-9]+)/arena/', include('fight.urls', namespace='fight')),
 ]
 

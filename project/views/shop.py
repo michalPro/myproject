@@ -4,8 +4,7 @@ from django.shortcuts import render
 
 def shop(request, p):
     gamer = Player.objects.get(pk=p)
-    gold_to_pay = round((float(gamer.maxhealth) - float(gamer.health))/25.0 + (float(gamer.maxmana) - float(gamer.mana))/10.0, 0)
-    return render(request, 'shop/shop_items.html', {'items': ArmorItem.objects.exclude(pk=1), 'p': p, 'pay': int(gold_to_pay)})
+    return render(request, 'shop/shop_items.html', {'items': ArmorItem.objects.exclude(pk=1), 'p': p})
 
 
 def buy(request, p, i):
@@ -32,4 +31,3 @@ def reg(request, p):
     else:
         msg = "Nie masz wystarczajacej ilosci gold"
     return render(request, 'shop/regen.html', {'p': p, 'msg': msg})
-

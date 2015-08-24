@@ -4,7 +4,9 @@ from project.models import Player, ArmorItem
 
 def index(request, p):
     gamer = Player.objects.get(pk=p)
+    gold_to_pay = round((float(gamer.maxhealth) - float(gamer.health))/15.0 + (float(gamer.maxmana) - float(gamer.mana))/5.0, 0)
     return render(request, 'player/index.html', {
         'p': gamer,
         'armor': ArmorItem.objects.get(name=gamer.armorid).value,
+        'pay': int(gold_to_pay),
     })
