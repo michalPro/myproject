@@ -73,3 +73,4 @@ def hardEnemy(p):
     e.armor = e.level * 15
     e.attack = round(e.strength * 0.9, 0)
     e.save()
+
