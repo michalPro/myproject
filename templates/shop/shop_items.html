@@ -1,13 +1,43 @@
 {% extends 'layout.html' %}
+{% load staticfiles %}
 {% block content %}
-Witaj
-<ul>
-    {% for item in items %}
-        <li>
-            {{ item }} <a href="buy/{{item}}">Kup</a>
-        </li>
-    {% endfor %}
-</ul>
-<a href="regen">Regeneruj za {{pay}}</a>
-<a href="/player/{{p}}/">Wroc</a>
+    <div class="add_player_title">
+        Witaj w sklepie
+    </div>
+    <hr/>
+
+        {% for item in items %}
+        <div class="shop">
+            <div class="column_left">
+                <div class="armor_img">
+                    {%if item.value  == 20%}
+                        <img src="{% static 'css/content/armor1.jpg' %}" height="100%", width="100%">
+                    {%elif item.value  == 95%}
+                        <img src="{% static 'css/content/armor2.jpg' %}" height="100%", width="100%">
+                    {%elif item.value  == 264%}
+                        <img src="{% static 'css/content/armor3.jpg' %}" height="100%", width="100%">
+                    {%else%}
+                        <img src="{% static 'css/content/armor4.jpg' %}" height="100%", width="100%">
+                    {%endif%}
+                </div>
+            </div>
+            <div class="armor_info">
+                {{ item.name }}<br />
+                wartość: {{ item.value }}<br />
+                cena: {{ item.price}}<br />
+                <a href="buy/{{item}}">Kup</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        {% endfor %}
+    <hr/>
+    <p>
+        <a href="regen">
+            Regeneruj zycie za {{pay}}
+        </a>
+    </p>
+    <a href="/player/{{p}}/">
+        Wroc do statystyk
+    </a>
+
 {% endblock %}

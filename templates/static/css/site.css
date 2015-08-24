@@ -71,6 +71,24 @@
     color: #4FA9E0;
 }
 
+.shop {
+    margin: 10px;
+}
+
+.armor_img {
+    border: solid 1px #000;
+    height: 100px;
+    width: 100px;
+    -webkit-box-shadow: 0px 0px 22px 12px rgba(0,0,0,0.63);
+    -moz-box-shadow: 0px 0px 22px 12px rgba(0,0,0,0.63);
+    box-shadow: 0px 0px 22px 12px rgba(0,0,0,0.63);
+    margin-right: 7px;
+}
+
+.armor_info {
+    padding: 0px;
+}
+
 .center {
     text-align: center;
     padding-top: 60px;
