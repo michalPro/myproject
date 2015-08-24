@@ -2,29 +2,13 @@
 {% block title %}Arena{% endblock %}
 {% block content %}
 
-
     <div class="col-md-4">
         <div class="bg_player" style="padding: 15px;">
             <div id="ref_player">
                 {% include 'fight/partial_view_player.html'%}
             </div>
-                <div class="player_special_attack" id="special">
-                        <div class="btn-group-vertical" role="group" aria-label="" style="width: 100%;">
-                            {% for item in attack %}
-                                <button type="button" class="btn btn_special_attack"
-                                        onclick="Attack({{item.requiredlv}}, {{item.requiredmana}}, '{{item.name}}')">
-                                    <div class="column_left">
-                                        {{item.name}}:
-                                    </div>
-                                    <div class="column_right">
-                                        Poziom:{{item.requiredlv}} Mana:{{item.requiredmana}}
-                                    </div>
-                                </button>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
         </div>
+    </div>
     <div class="col-md-4" id="ref_consol">
         {% include 'fight/partial_view_console_log.html' with player=p enemy=e%}
     </div>
@@ -33,37 +17,5 @@
             {% include 'fight/partial_view_enemy.html'%}
         </div>
     </div>
-</div>
 
-<script>
-    function Attack(lvl, mana, name) {
-
-    var p = "{{p.name}}";
-    var e = "{{e.name}}";
-    var s = name;
-    var requiredlv = lvl;
-    var requiredmana = mana;
-    var p_level = {{p.level}};
-    var p_mana = {{p.mana}};
-
-
-    if(p_level >= requiredlv && requiredmana <= p_mana) {
-        $.ajax({
-                url: '/attack',
-                type: 'get',
-                data: {'player': p, 'enemy': e, "special": s},
-                success: function(data) {
-                    $('#ref_enemy').html(data);
-                },
-                failure: function(data) {
-                    alert('Got an error dude');
-                }
-        });
-    }
-    else {
-        alert("Za mało many, lub nie masz dosc wysokiego poziomu")
-    }
-}
-
-</script>
 {% endblock %}

@@ -85,6 +85,7 @@ def enemy_attack(request):
         'health': player.health * 100 / player.maxhealth,
         'mana': player.mana * 100 / player.maxmana,
         'armor': ArmorItem.objects.get(name=player.armorid).value,
+        'attack': Attack.objects.all(),
     })
 
 
