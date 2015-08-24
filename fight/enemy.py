@@ -16,9 +16,9 @@ def easyEnemy(p):
     e = Enemy.objects.get(name='Easy Enemy')
     e.classname = get_class()
     gamer = Player.objects.get(pk=p)
-    suma = gamer.strength + gamer.agility - 20
+    suma = gamer.strength + gamer.agility
     min_value = float(suma) * 0.2
-    suma = round(float(suma) * 0.4, 0)
+    suma = round(float(suma) * 0.6, 0)
     e.level = gamer.level
     ran = randint(1, suma-1)
     e.strength = min_value + ran
@@ -37,9 +37,9 @@ def mediumEnemy(p):
     e = Enemy.objects.get(name='Medium Enemy')
     e.classname = get_class()
     gamer = Player.objects.get(pk=p)
-    suma = gamer.strength + gamer.agility - 10
+    suma = gamer.strength + gamer.agility
     min_value = float(suma) * 0.2
-    suma = round(float(suma) * 0.4, 0)
+    suma = round(float(suma) * 0.6, 0)
     e.level = gamer.level
     ran = randint(1, suma-1)
     e.strength = min_value + ran
@@ -60,7 +60,7 @@ def hardEnemy(p):
     gamer = Player.objects.get(pk=p)
     suma = gamer.strength + gamer.agility
     min_value = float(suma) * 0.2
-    suma = round(float(suma) * 0.4, 0)
+    suma = round(float(suma) * 0.6, 0)
     e.level = gamer.level
     ran = randint(1, suma-1)
     e.strength = min_value + ran

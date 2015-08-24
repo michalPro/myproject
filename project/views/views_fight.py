@@ -30,7 +30,7 @@ def player_attack(request):
             player.attack = 0.9 * player.strength
         else:
             player.experience += received_exp
-        player.gold += received_exp/2
+        player.gold += received_exp/2 * player.level
 
         player.save()
 

@@ -4,13 +4,11 @@ from project.models import AttackLog
 
 def get_dodge(attacker, enemy):
 
-    my_rand = randint(0, 100)
-    if enemy.agility > attacker.agility:
-        chance = (enemy.agility - attacker.agility) * 2
-        if chance >= my_rand:
-            return True
-    else:
+    chance = float(float((enemy.agility * 70) / (attacker.agility + enemy.agility)) / 100)
+    if random() > chance:
         return False
+    else:
+        return True
 
 
 def receive_exp(enemy, player):

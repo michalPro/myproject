@@ -12,7 +12,7 @@ def buy(request, p, i):
 
     gamer = Player.objects.get(pk=p)
 
-    if i.__class__.__name__ == 'ArmorItem':
+    if 'Armor' in i:
         item = ArmorItem.objects.get(name=i)
         if item.requiredlv <= gamer.level and item.price <= gamer.gold:
             gamer.armorid = item
