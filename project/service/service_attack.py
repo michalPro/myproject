@@ -54,11 +54,11 @@ def get_attack(special, enemy, not_get=True):
 
         if special_random <= 50:
             attack = special.get(pk=1)
-        elif 50 < special_random < 75:
+        elif 50 < special_random <= 75:
             attack = special.get(pk=2)
-        elif 75 < special_random < 100:
+        elif 75 < special_random <= 100:
             attack = special.get(pk=3)
-        elif 100 < special_random < 125:
+        elif 100 < special_random <= 125:
             attack = special.get(pk=4)
         else:
             attack = special.get(pk=5)

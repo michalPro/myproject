@@ -12,4 +12,14 @@
      <button class="btn btn_attack">Regeneruj za {{pay}} gold.</button>
 </a>
     <p style="margin-top: 20px"><a href="/menu">Wroc do menu</a></p>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+$( document ).ready(function() {
+    var player_exp  = {{p.experience}} * 100 / {{p.requiredexp}}
+    $("#player-exp").attr("aria-valuenow", player_exp  + "%");
+    $("#player-exp").css("width", function(){ return ($(this).attr('aria-valuenow'),player_exp +'%')});
+});
+</script>
+
 {% endblock %}

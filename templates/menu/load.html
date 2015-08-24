@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load staticfiles %}
 {% block content %}
 
     <div class="add_player_title">
@@ -8,7 +9,9 @@
     <hr/>
     <div class="col-md-4">
         <div class="btn-group-vertical" role="group" aria-label="">
-            <p><h4>Wojownik:</h4></p>
+            <div class="player_portrait">
+                <img src="{% static 'css/content/warrior.jpg' %}" height="100%", width="100%">
+            </div>
             {% for p in players %}
                 {% if p.classname|stringformat:"s"  == "Warrior" %}
                 <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p.id}}'">
@@ -22,7 +25,9 @@
 
     <div class="col-md-4">
         <div class="btn-group-vertical" role="group" aria-label="">
-            <p><h4>Lotrzyk:</h4></p>
+            <div class="player_portrait">
+                <img src="{% static 'css/content/thief.jpg' %}" height="100%", width="100%">
+            </div>
             {% for p in players %}
                 {% if p.classname|stringformat:"s"  == "Thief" %}
                 <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p.id}}'">
@@ -35,7 +40,9 @@
 
     <div class="col-md-4">
         <div class="btn-group-vertical" role="group" aria-label="">
-            <p><h4>Tank:</h4></p>
+            <div class="player_portrait">
+                <img src="{% static 'css/content/tank.jpg' %}" height="100%", width="100%">
+            </div>
             {% for p in players %}
                 {% if p.classname|stringformat:"s"  == "Tankozord" %}
                 <button type="button" class="btn btn_attack" onclick="location.href='/player/{{p.id}}'">
@@ -46,5 +53,6 @@
         </div>
     </div>
     <div class="clear"></div>
+    <hr/>
     <p style="margin-top: 20px"><a href="/menu">Wroc do menu</a></p>
 {% endblock %}

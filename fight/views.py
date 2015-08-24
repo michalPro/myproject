@@ -24,10 +24,7 @@ def arenalevel(request, p, e):
     else:
         e = Enemy.objects.get(name='Hard Enemy')
 
-    attack_log = AttackLog.objects.all()
-    attack_log.delete()
-
-
+    AttackLog.objects.all().delete()
 
     return render(request, 'fight/arenalevel.html', {
         'p': gamer,

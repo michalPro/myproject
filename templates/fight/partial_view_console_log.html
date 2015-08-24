@@ -1,6 +1,6 @@
 {% load staticfiles %}
 
-    <div class="console_log">
+    <div id="console-player" class="console_log">
         <div class="console_log_title">
             <div style="text-align: center;">
                 {{player}} atakuje {{enemy}}
@@ -27,7 +27,7 @@
         <img src="{% static 'css/content/sword.png' %}" height="10%", width="30%">
     </div>
 
-    <div class="console_log">
+    <div id=console-enemy" class="console_log">
         <div class="console_log_title">
             <div style="text-align: center;">
                 {{enemy}} atakuje {{player}}
@@ -49,3 +49,11 @@
             <div class="clear"></div>
         </div>
     </div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+$(document).ready(function() {
+    $("#console-player").scrollTop($("#console-player")[0].scrollHeight);
+    $("#console-enemy").scrollTop($("#console-enemy")[0].scrollHeight);
+});
+</script>
