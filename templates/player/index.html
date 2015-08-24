@@ -17,8 +17,17 @@
 <script>
 $( document ).ready(function() {
     var player_exp  = {{p.experience}} * 100 / {{p.requiredexp}}
+    var player_mana  = {{mana}};
+    var player_health  = {{health}};
+
     $("#player-exp").attr("aria-valuenow", player_exp  + "%");
     $("#player-exp").css("width", function(){ return ($(this).attr('aria-valuenow'),player_exp +'%')});
+
+    $("#player-mana").css("width", player_mana + "%");
+    $("#player-mana").attr("aria-valuenow", player_mana + "%");
+
+    $("#player-health").attr("aria-valuenow", player_health + "%");
+    $("#player-health").css("width", function(){ return ($(this).attr('aria-valuenow'),player_health+'%')});
 });
 </script>
 

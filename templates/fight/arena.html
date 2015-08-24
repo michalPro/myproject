@@ -1,17 +1,45 @@
 {% extends 'layout.html' %}
+{% load staticfiles %}
 {% block content %}
+
     <div class="add_player_title">
         Wybierz przeciwnika:
     </div>
     <hr/>
-    <a href="arenalevel/{{ee}}">
-        <button type="button" class="btn btn_attack">{{ee}}</button>
-    </a>
-    <a href="arenalevel/{{me}}">
-        <button type="button" class="btn btn_attack">{{me}}</button>
-    </a>
-    <a href="arenalevel/{{he}}">
-        <button type="button" class="btn btn_attack">{{he}}</button>
-    </a>
+    <div class="col-md-4">
+        <div class="player_portrait">
+            <img src="{% static 'css/content/easy.jpg' %}" height="100%", width="100%">
+        </div>
+        <div style="padding: 8px 0px;">
+            <p>Przeciwnik dobry dla poczatkujacych graczy, latwy do pokonania.</p>
+        </div>
+        <a href="arenalevel/{{ee}}">
+            <button type="button" class="btn btn_attack">{{ee}}</button>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <div class="player_portrait">
+            <img src="{% static 'css/content/medium.jpg' %}" height="100%", width="100%">
+        </div>
+        <div style="padding: 8px 0px;">
+            <p>Przeciwnik wymagajacy, dla graczy posiadajacych jakies doswiadczenie, lub majacych szczescie.</p>
+        </div>
+        <a href="arenalevel/{{me}}">
+            <button type="button" class="btn btn_attack">{{me}}</button>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <div class="player_portrait">
+            <img src="{% static 'css/content/hard.jpg' %}" height="100%", width="100%">
+        </div>
+        <div style="padding: 8px 0px;">
+            <p>Bardzo wymagajacy przeciwnik, dla graczy posiadajacych duze doswiadczenie, lub majacych duze szczescie.</p>
+        </div>
+        <a href="arenalevel/{{he}}">
+            <button type="button" class="btn btn_attack">{{he}}</button>
+        </a>
+    </div>
+    <div class="clear"></div>
+    <hr/>
 <p style="margin-top: 20px"><a href="/player/{{p.id}}">Wroc do statystyk</a></p>
 {% endblock %}

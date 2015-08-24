@@ -25,7 +25,13 @@
                         {{ item.name }} (lvl {{item.requiredlv}})<br />
                         wartość: {{ item.value }}<br />
                         cena: {{ item.price}}<br />
-                        <a href="buy/{{item}}">Kup</a>
+                        {% if p.gold < item.value or p.level < item.requiredlv  %}
+                            <div style="color: red">nie mozesz kupic tego przedmiotu</div>
+                        {% elif p.armorid == item %}
+                            posiadasz ten przedmiot
+                        {% else %}
+                            <a href="buy/{{item}}">Kup</a>
+                        {% endif %}
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -53,7 +59,13 @@
                         atak: {{ item.bonus_attack }}<br />
                         zrecznosc: {{ item.bonus_agility }}<br />
                         cena: {{ item.price}}<br />
-                        <a href="buy/{{item}}">Kup</a>
+                        {% if p.gold < item.value or p.level < item.requiredlv  %}
+                            <div style="color: red">nie mozesz kupic tego przedmiotu</div>
+                        {% elif p.bonus_attack == item.bonus_attack%}
+                             posiadasz ten przedmiot
+                        {% else %}
+                            <a href="buy/{{item}}">Kup</a>
+                        {% endif %}
                     </div>
                     <div class="clear"></div>
                 </div>
