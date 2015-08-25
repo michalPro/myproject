@@ -43,7 +43,9 @@ def p_attack(enemy, player, special, attack_log, is_double):
                     health_left = float(enemy.health) - attack_amount
                     enemy.health = int(round(health_left, 0))
                 player.mana -= special.requiredmana
+
             attack_log.playerdamage = int(round(attack_amount, 0))
+            attack_log.player_attack_name = special.name
     else:
         attack_amount = 0
         if enemy.dot_rounds > 0:
@@ -100,9 +102,14 @@ def e_attack(player, enemy, special, attack_log, armor):
                     health_left = float(enemy.health) - attack_amount
                     player.health = int(round(health_left, 0))
                 player.mana -= special.requiredmana
-            attack_log.enemydamage = int(round(attack_amount, 0))
-    else:
-         attack_log.enemydamage = 0
 
+            attack_log.enemydamage = int(round(attack_amount, 0))
+            attack_log.enemy_attack_name = attack.name
+    else:
+        attack_amount = 0
+        if player.dot_rounds > 0:
+            attack_amount += player.dot_damage
+            player.dot_rounds -= 1
+        attack_log.enemydamage = attack_amount
     attack_log.save()
     return enemy, player
