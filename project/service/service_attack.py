@@ -4,7 +4,7 @@ from project.models import AttackLog
 
 def get_dodge(attacker, enemy):
 
-    chance = float(float((enemy.agility * 70) / (attacker.agility + enemy.agility)) / 100)
+    chance = float(float((enemy.agility * 50) / (attacker.agility + enemy.agility)) / 100)
     if random() > chance:
         return False
     else:

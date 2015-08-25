@@ -46,9 +46,53 @@
             {{p.experience}}/{{p.requiredexp}}
         </div>
     </div>
-
+    {% if attack%}
+    <div class="player_special_attack" id="special">
+        <div class="btn-group-vertical" role="group" aria-label="" style="width: 100%;">
+            {% for item in attack %}
+                <button type="button" class="btn btn_special_attack"
+                        onclick="Attack({{item.requiredlv}}, {{item.requiredmana}}, '{{item.name}}')">
+                    <div class="column_left">
+                        {{item.name}}:
+                    </div>
+                    <div class="column_right">
+                        Poziom:{{item.requiredlv}} Mana:{{item.requiredmana}}
+                    </div>
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
+function Attack(lvl, mana, name) {
+
+    var p = "{{p.name}}";
+    var e = "{{e.name}}";
+    var s = name;
+    var requiredlv = lvl;
+    var requiredmana = mana;
+    var p_level = {{p.level}};
+    var p_mana = {{p.mana}};
+
+    if(p_level >= requiredlv && requiredmana <= p_mana) {
+        $.ajax({
+                url: '/attack',
+                type: 'get',
+                data: {'player': p, 'enemy': e, "special": s},
+                success: function(data) {
+                    $('#ref_enemy').html(data);
+                },
+                failure: function(data) {
+                    alert('Got an error dude');
+                }
+        });
+    }
+    else {
+        alert("Za mało many, lub nie masz dosc wysokiego poziomu")
+    }
+}
+
 $(document).ready(function() {
 
     var player_exp  = {{p.experience}} * 100 / {{p.requiredexp}}
@@ -80,3 +124,4 @@ $(document).ready(function() {
     });
 });
 </script>
+

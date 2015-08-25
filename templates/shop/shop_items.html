@@ -25,10 +25,11 @@
                         {{ item.name }} (lvl {{item.requiredlv}})<br />
                         wartość: {{ item.value }}<br />
                         cena: {{ item.price}}<br />
+                        premia do zycia: {{ item.bonus_health}}<br />
                         {% if p.gold < item.value or p.level < item.requiredlv  %}
-                            <div style="color: red">nie mozesz kupic tego przedmiotu</div>
+                            <div style="color: rgba(255, 80, 80, 1);">nie mozesz kupic tego przedmiotu</div>
                         {% elif p.armorid == item %}
-                            posiadasz ten przedmiot
+                            <div style="color: rgba(132, 209, 132, 1);">posiadasz ten przedmiot</div>
                         {% else %}
                             <a href="buy/{{item}}">Kup</a>
                         {% endif %}
@@ -60,9 +61,9 @@
                         zrecznosc: {{ item.bonus_agility }}<br />
                         cena: {{ item.price}}<br />
                         {% if p.gold < item.value or p.level < item.requiredlv  %}
-                            <div style="color: red">nie mozesz kupic tego przedmiotu</div>
+                            <div style="color: rgba(255, 80, 80, 1);">nie mozesz kupic tego przedmiotu</div>
                         {% elif p.bonus_attack == item.bonus_attack%}
-                             posiadasz ten przedmiot
+                            <div style="color: rgba(132, 209, 132, 1);">posiadasz ten przedmiot</div>
                         {% else %}
                             <a href="buy/{{item}}">Kup</a>
                         {% endif %}
