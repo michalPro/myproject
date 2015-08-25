@@ -76,8 +76,11 @@ def enemy_attack(request):
     player.save()
 
     if player.health <= 0:
+        player.dot_rounds = 0
+        player.dot_damage = 0
         player.health = player.maxhealth
         player.mana = player.maxmana
+        player.experience -= player.requiredexp * 0.05
         player.save()
 
         return render(request, 'fight/victory.html', {

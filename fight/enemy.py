@@ -30,6 +30,8 @@ def easyEnemy(p):
     e.armor = e.level * 5
     e.health = e.maxhealth
     e.attack = round(e.strength * 0.9, 0)
+    e.dot_damage = 0
+    e.dot_rounds = 0
     e.save()
 
 
@@ -51,6 +53,8 @@ def mediumEnemy(p):
     e.health = e.maxhealth
     e.armor = e.level * 10
     e.attack = round(e.strength * 0.9, 0)
+    e.dot_damage = 0
+    e.dot_rounds = 0
     e.save()
 
 
@@ -72,5 +76,7 @@ def hardEnemy(p):
     e.health = e.maxhealth
     e.armor = e.level * 15
     e.attack = round(e.strength * 0.9, 0)
+    e.dot_damage = 0
+    e.dot_rounds = 0
     e.save()
 

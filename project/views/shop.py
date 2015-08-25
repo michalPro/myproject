@@ -4,8 +4,10 @@ from django.shortcuts import render
 
 def shop(request, p):
     gamer = Player.objects.get(pk=p)
-    return render(request, 'shop/shop_items.html', {'armor': ArmorItem.objects.exclude(pk=1),
-                                                    'weapon': Weapon.objects.all(), 'p': gamer})
+    return render(request, 'shop/shop_items.html', {
+        'armor': ArmorItem.objects.exclude(pk=1),
+        'weapon': Weapon.objects.all(), 'p': gamer,
+    })
 
 
 def buy(request, p, i):
@@ -22,7 +24,9 @@ def buy(request, p, i):
             gamer.bonus_health = item.bonus_health
             gamer.maxhealth += gamer.bonus_health
             gamer.save()
-            return render(request, 'shop/buy.html', {'msg': "Gratulacje! masz nowy armor.", 'p': p})
+            return render(request, 'shop/buy.html', {
+                'msg': "Gratulacje! masz nowy armor.", 'p': p
+            })
         else:
             return render(request, 'shop/buy.html', {'msg': "Masz za malo golda badz za maly level.", 'p': p})
     else:

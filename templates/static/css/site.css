@@ -126,6 +126,13 @@
     padding-top: 13px;
 }
 
+.red {
+    color: rgba(255, 80, 80, 1);
+}
+
+.green {
+    color: rgba(132, 209, 132, 1);
+}
 
 .progress_bar_level {
     background-color: rgba(116, 79, 217, 1);

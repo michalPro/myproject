@@ -1,16 +1,17 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-{% include 'fight/partial_view_player.html'%}
-<a href="arena">
-    <button class="btn btn_attack">walcz na arenie</button>
-</a>
-<a href="/player/{{p.id}}/shop">
-    <button class="btn btn_attack">Sklep</button>
-</a>
-<a href="regen/{{pay}}">
-     <button class="btn btn_attack">Regeneruj za {{pay}} gold.</button>
-</a>
+    {% include 'fight/partial_view_player.html'%}
+    <a href="arena">
+        <button class="btn btn_attack">walcz na arenie</button>
+    </a>
+    <a href="/player/{{p.id}}/shop">
+        <button class="btn btn_attack">Sklep</button>
+    </a>
+    <a href="regen/{{pay}}">
+         <button class="btn btn_attack">Regeneruj za {{pay}} gold.</button>
+    </a>
+    <hr/>
     <p style="margin-top: 20px"><a href="/menu">Wroc do menu</a></p>
 
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
