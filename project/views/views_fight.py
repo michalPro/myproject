@@ -21,6 +21,8 @@ def player_attack(request):
 
     if enemy.health <= 0:
         received_exp = receive_exp(enemy, player)
+        enemy.dot_rounds = 0
+        enemy.dot_damage = 0
         if received_exp+player.experience > player.requiredexp:
             player.level += 1
             exp_left = player.requiredexp - player.experience

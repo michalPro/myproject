@@ -59,7 +59,7 @@ def add_enemy(name, level, strength, agility, maxhealth, health, maxmana, mana, 
     classname = ClassName.objects.get(name='Warrior')
     ae = Enemy.objects.get_or_create(name=name, level=level, attack=attack, maxmana=maxmana, maxhealth=maxhealth,
                                      strength=strength, agility=agility, health=health, mana=mana, armor=armor,
-                                     classname=classname)
+                                     classname=classname, dot_damage=0, dot_rounds=0)
     return ae
 
 

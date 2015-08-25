@@ -68,6 +68,8 @@ class Enemy(models.Model):
     mana = models.IntegerField()
     classname = models.ForeignKey(ClassName)
     armor = models.IntegerField()
+    dot_damage = models.IntegerField()
+    dot_rounds = models.IntegerField()
 
     def __unicode__(self):
         return self.name

@@ -7,8 +7,7 @@ def get_dodge(attacker, enemy):
     chance = float(float((enemy.agility * 50) / (attacker.agility + enemy.agility)) / 100)
     if random() > chance:
         return False
-    else:
-        return True
+    return True
 
 
 def receive_exp(enemy, player):
@@ -30,16 +29,27 @@ def p_attack(enemy, player, special, attack_log, is_double):
         if enemy.health > 0:
             attack_amount = ((float(player.attack) * (float(special.bonusattack))) *
                              (1.0 - ((float(enemy.armor) / float(enemy.level)) / 100.0)) + float(bonus)) * is_double
-            attack_log.playerdamage = int(round(attack_amount, 0))
 
             if enemy.health < attack_amount:
                 enemy.health = 0
             else:
-                health_left = float(enemy.health) - attack_amount
-                enemy.health = int(round(health_left, 0))
+                if special.name == 'Bleed':
+                    enemy.dot_damage = int(round(attack_amount, 0))
+                    enemy.dot_rounds += 3
+                else:
+                    if enemy.dot_rounds > 0:
+                        attack_amount += enemy.dot_damage
+                        enemy.dot_rounds -= 1
+                    health_left = float(enemy.health) - attack_amount
+                    enemy.health = int(round(health_left, 0))
                 player.mana -= special.requiredmana
+            attack_log.playerdamage = int(round(attack_amount, 0))
     else:
-        attack_log.playerdamage = 0
+        attack_amount = 0
+        if enemy.dot_rounds > 0:
+            attack_amount += enemy.dot_damage
+            enemy.dot_rounds -= 1
+        attack_log.playerdamage = attack_amount
     attack_log.save()
     return enemy, player
 
@@ -76,14 +86,21 @@ def e_attack(player, enemy, special, attack_log, armor):
         if player.health > 0:
             attack_amount = (float(enemy.attack) * (float(attack.bonusattack))) *\
                             (1.0 - ((float(armor) / float(player.level)) / 100.0)) + float(bonus)
-            attack_log.enemydamage = int(round(attack_amount, 0))
 
             if player.health < attack_amount:
                 player.health = 0
             else:
-                health_left = float(player.health) - attack_amount
-                player.health = int(round(health_left, 0))
-                enemy.mana -= attack.requiredmana
+                if special.name == 'Bleed':
+                    player.dot_damage = int(round(attack_amount, 0))
+                    player.dot_rounds += 3
+                else:
+                    if player.dot_rounds > 0:
+                        attack_amount += enemy.dot_damage
+                        player.dot_rounds -= 1
+                    health_left = float(enemy.health) - attack_amount
+                    player.health = int(round(health_left, 0))
+                player.mana -= special.requiredmana
+            attack_log.enemydamage = int(round(attack_amount, 0))
     else:
          attack_log.enemydamage = 0
 
