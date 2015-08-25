@@ -11,14 +11,16 @@ def get_dodge(attacker, enemy):
 
 
 def receive_exp(enemy, player):
-    attack_no = AttackLog.objects.count()
     if enemy.name == 'Easy Enemy':
         multiplier = 1.0
     elif enemy.name == 'Medium Enemy':
         multiplier = 2.0
     else:
         multiplier = 3.0
-    return round(float(multiplier) * (float(player.maxhealth)/float(player.health)) * float(attack_no), 0)
+    if player.level < 10:
+        level_bonus = 5.0
+    return round(float(multiplier) * ((float(player.maxhealth)-float(player.health))/float(player.maxhealth))
+                 * player.requiredexp * 0.07 * level_bonus, 0)
 
 
 def p_attack(enemy, player, special, attack_log, is_double):

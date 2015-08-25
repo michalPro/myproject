@@ -29,7 +29,7 @@ def player_attack(request):
             player.experience = exp_left
             player.strength += 6
             player.agility += 5
-            player.maxhealth += 50
+            player.maxhealth += 90
             player.maxmana += 7
             player.attack = 0.9 * player.strength
         else:
