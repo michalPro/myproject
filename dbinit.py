@@ -95,7 +95,7 @@ def add_player(name, gold, classname, armorid, level):
     p = Player.objects.get_or_create(name=name, strength=st, agility=ag, maxhealth=maxhp, maxmana=maxma, experience=0,
                         requiredexp=400, level=level, gold=gold, classname=classname, attack=at,
                         armorid=armorid, isarmordamaged=False, health=maxhp, mana=maxma, bonus_attack=0, bonus_agility=0,
-                        bonus_health=0)
+                        bonus_health=0, dot_damage=0, dot_rounds=0)
     return p
 
 # Start execution here!

@@ -49,6 +49,8 @@ class Player(models.Model):
     bonus_health = models.IntegerField()
     isarmordamaged = models.BooleanField()
     gold = models.IntegerField()
+    dot_damage = models.IntegerField()
+    dot_rounds = models.IntegerField()
 
     def __unicode__(self):
         return self.name
@@ -84,4 +86,5 @@ class Attack(models.Model):
 class AttackLog(models.Model):
     enemydamage = models.IntegerField()
     playerdamage = models.IntegerField()
-    attack_name = models.CharField(max_length=40)
+    player_attack_name = models.CharField(max_length=40)
+    enemy_attack_name = models.CharField(max_length=40)
