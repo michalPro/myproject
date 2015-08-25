@@ -11,7 +11,10 @@ def player_attack(request):
     special = Attack.objects.get(name=request.GET['special'])
     attack_log = AttackLog(playerdamage=0, enemydamage=0)
 
-    enemy, player = p_attack(enemy, player, special, attack_log)
+    is_double = 1.0
+    if special.name == 'Double Attack':
+        is_double = 2.0
+    enemy, player = p_attack(enemy, player, special, attack_log, is_double)
 
     enemy.save()
     player.save()

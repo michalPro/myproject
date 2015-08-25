@@ -22,14 +22,14 @@ def receive_exp(enemy, player):
     return round(float(multiplier) * (float(player.maxhealth)/float(player.health)) * float(attack_no), 0)
 
 
-def p_attack(enemy, player, special, attack_log):
+def p_attack(enemy, player, special, attack_log, is_double):
 
     bonus = randint(0, 5)
     dodge = get_dodge(player, enemy)
     if not dodge:
         if enemy.health > 0:
-            attack_amount = (float(player.attack) * (float(special.bonusattack))) * \
-                (1.0 - ((float(enemy.armor) / float(enemy.level)) / 100.0)) + float(bonus)
+            attack_amount = ((float(player.attack) * (float(special.bonusattack))) *
+                             (1.0 - ((float(enemy.armor) / float(enemy.level)) / 100.0)) + float(bonus)) * is_double
             attack_log.playerdamage = int(round(attack_amount, 0))
 
             if enemy.health < attack_amount:

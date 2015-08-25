@@ -84,3 +84,4 @@ class Attack(models.Model):
 class AttackLog(models.Model):
     enemydamage = models.IntegerField()
     playerdamage = models.IntegerField()
+    attack_name = models.CharField(max_length=40)

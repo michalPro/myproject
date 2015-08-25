@@ -11,8 +11,8 @@ def populate():
     add_attack('Standard Attack', 1, 1.0, 0)
     add_attack('Boomerang Attack', 3, 1.2, 5)
     add_attack('Bleed', 5, 0.6, 8)
-    add_attack('Double Attack', 8, 0.9, 15)
-    add_attack('Powerful Attack', 15, 2.0, 40)
+    add_attack('Double Attack', 8, 0.9, 25)
+    add_attack('Powerful Attack', 15, 3.0, 40)
 
     add_class('Warrior')
     add_class('Thief')
