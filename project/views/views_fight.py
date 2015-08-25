@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from project.models import ArmorItem, Player, Attack, Enemy, AttackLog
 from project.service.service_attack import p_attack, e_attack, receive_exp
-from django.shortcuts import redirect
 
 
 def player_attack(request):
@@ -9,7 +8,7 @@ def player_attack(request):
     player = Player.objects.get(name=request.GET['player'])
     enemy = Enemy.objects.get(name=request.GET['enemy'])
     special = Attack.objects.get(name=request.GET['special'])
-    attack_log = AttackLog(playerdamage=0, enemydamage=0)
+    attack_log = AttackLog(playerdamage=0, enemydamage=0, player_bonus_attack=0, enemy_bonus_attack=0)
 
     is_double = 1.0
     if special.name == 'Double Attack':
@@ -23,7 +22,7 @@ def player_attack(request):
         received_exp = receive_exp(enemy, player)
         enemy.dot_rounds = 0
         enemy.dot_damage = 0
-        if received_exp+player.experience > player.requiredexp:
+        if received_exp + player.experience > player.requiredexp:
             player.level += 1
             exp_left = player.requiredexp - player.experience
             player.requiredexp = 400 * player.level
@@ -35,13 +34,16 @@ def player_attack(request):
             player.attack = 0.9 * player.strength
         else:
             player.experience += received_exp
-        player.gold += received_exp/2 * player.level
+        received_gold = received_exp / 2 * player.level
+        player.gold += received_gold
 
         player.save()
 
         return render(request, 'fight/victory.html', {
             'p': player,
             'defeated': enemy,
+            'gold': received_gold,
+            'exp': received_exp,
         })
     else:
         return render(request, 'fight/partial_view_enemy.html', {
@@ -80,12 +82,17 @@ def enemy_attack(request):
         player.dot_damage = 0
         player.health = player.maxhealth
         player.mana = player.maxmana
-        player.experience -= player.requiredexp * 0.05
+        received_exp = player.requiredexp * 0.05
+        player.experience -= received_exp
         player.save()
+        received_gold = 0
+
 
         return render(request, 'fight/victory.html', {
             'p': player,
             'defeated': player,
+            'gold': received_gold,
+            'exp': -received_exp,
         })
     return render(request, 'fight/partial_view_player.html', {
         'e': enemy,
