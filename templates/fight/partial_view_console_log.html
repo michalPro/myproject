@@ -48,12 +48,12 @@
                     {% if item.enemydamage == 0%}
                         <p>Chybił</p>
                     {% else%}
-                         {% if item.player_attack_name != "Standard Attack"%}
+                         {% if item.enemy_attack_name != "Standard Attack"%}
                             <div class="red">
-                                <p>{{item.enemy_attack_name}}: {{item.playerdamage}}</p>
+                                <p>{{item.enemy_attack_name}}: {{item.enemydamage}}</p>
                             </div>
                         {% else %}
-                            <p>{{item.player_attack_name}}: {{item.playerdamage}}</p>
+                            <p>{{item.enemy_attack_name}}: {{item.enemydamage}}</p>
                         {% endif%}
                     {% endif%}
                 {% endfor %}
