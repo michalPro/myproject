@@ -51,6 +51,10 @@ class Player(models.Model):
     gold = models.IntegerField()
     dot_damage = models.IntegerField()
     dot_rounds = models.IntegerField()
+    small_elixir = models.IntegerField()
+    medium_elixir = models.IntegerField()
+    big_elixir = models.IntegerField()
+    ultimate_elixir = models.IntegerField()
 
     def __unicode__(self):
         return self.name
@@ -92,3 +96,13 @@ class AttackLog(models.Model):
     enemy_attack_name = models.CharField(max_length=40)
     player_bonus_attack = models.IntegerField()
     enemy_bonus_attack = models.IntegerField()
+
+
+class Elixir(models.Model):
+    name = models.CharField(max_length=40)
+    health_restore = models.DecimalField(max_digits=4, decimal_places=2)
+    mana_restore = models.DecimalField(max_digits=4, decimal_places=2)
+    price = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name

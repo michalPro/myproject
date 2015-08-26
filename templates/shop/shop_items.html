@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
 {% block content %}
+<div id="this">
     <div class="add_player_title">
         Witaj w sklepie
     </div>
@@ -31,7 +32,7 @@
                         {% elif p.armorid == item %}
                             <div class="green">posiadasz ten przedmiot</div>
                         {% else %}
-                            <a href="buy/{{item}}">Kup</a>
+                            <a onclick="Buy('{{item}}', {{item.price}})">Kup</a>
                         {% endif %}
                     </div>
                     <div class="clear"></div>
@@ -65,7 +66,7 @@
                         {% elif p.bonus_attack == item.bonus_attack%}
                             <div class="green">posiadasz ten przedmiot</div>
                         {% else %}
-                            <a href="buy/{{item}}">Kup</a>
+                            <a onclick="Buy('{{item}}', {{item.price}})">Kup</a>
                         {% endif %}
                     </div>
                     <div class="clear"></div>
@@ -77,5 +78,27 @@
     <a href="/player/{{p.id}}/">
         Wroc do statystyk
     </a>
+</div>
+
+<script>
+function Buy(name, price) {
+
+    var player = "{{p.name}}";
+    var i = name
+    if(price <= {{p.gold}}){
+        $.ajax({
+                url: '/buy',
+                type: 'get',
+                data: {'p': player, 'i': i },
+                success: function(data) {
+                    $('#this').html(data);
+                },
+                failure: function(data) {
+                    alert('Got an error dude');
+                }
+        });
+    }
+}
+</script>
 
 {% endblock %}

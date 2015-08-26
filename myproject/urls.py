@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'^menu/', include('project.urls', namespace='menu')),
     url(r'^player/(?P<p>[0-9]+)/', include('player.urls', namespace='player')),
     url(r'^player/(?P<p>[0-9]+)/shop/$', shop),
-    url(r'^player/(?P<p>[0-9]+)/shop/buy/(?P<i>[\sA-Za-z]+)$', buy),
+    url(r'^buy/', buy),
     url(r'^player/(?P<p>[0-9]+)/regen/$', reg),
     url(r'^reg/$', reg),
     url(r'^player/(?P<p>[0-9]+)/arena/', include('fight.urls', namespace='fight')),

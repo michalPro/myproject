@@ -22,8 +22,7 @@ def player_attack(request):
         received_exp = receive_exp(enemy, player)
         received_gold = int(round(float(received_exp) / player.level, 0))
         player.gold += received_gold
-        enemy.dot_rounds = 0
-        enemy.dot_damage = 0
+        reset_dot(player, enemy)
         if received_exp + player.experience > player.requiredexp:
             player.level += 1
             exp_left = player.requiredexp - player.experience
@@ -80,8 +79,7 @@ def enemy_attack(request):
     player.save()
 
     if player.health <= 0:
-        player.dot_rounds = 0
-        player.dot_damage = 0
+        reset_dot(player, enemy)
         player.health = player.maxhealth
         player.mana = player.maxmana
         received_exp = player.requiredexp * 0.05
@@ -120,3 +118,10 @@ def partial_view_enemy(request):
 
 def partial_view_console_log(request):
     return render(request, 'fight/partial_view_console_log.html',)
+
+
+def reset_dot(player, enemy):
+    player.dot_rounds = 0
+    player.dot_damage = 0
+    enemy.dot_damage = 0
+    enemy.dot_rounds =0

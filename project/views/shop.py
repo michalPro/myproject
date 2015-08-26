@@ -1,4 +1,4 @@
-from project.models import ArmorItem, Player, Weapon
+from project.models import ArmorItem, Player, Weapon, Elixir
 from django.shortcuts import render
 
 
@@ -10,11 +10,12 @@ def shop(request, p):
     })
 
 
-def buy(request, p, i):
+def buy(request):
 
-    gamer = Player.objects.get(pk=p)
+    gamer = Player.objects.get(name=request.GET['p'])
+    i = Player.objects.get(name=request.GET['i'])
 
-    if 'Armor' in i:
+    if 'Armor' in i.name:
         item = ArmorItem.objects.get(name=i)
         if item.requiredlv <= gamer.level and item.price <= gamer.gold:
             gamer.armorid = item
@@ -24,14 +25,7 @@ def buy(request, p, i):
             gamer.bonus_health = item.bonus_health
             gamer.maxhealth += gamer.bonus_health
             gamer.save()
-            return render(request, 'shop/buy.html', {
-                'msg': "Gratulacje! masz nowy armor.", 'p': p
-            })
-        else:
-            return render(request, 'shop/buy.html', {
-                'p': p
-            })
-    else:
+    elif 'Sword' in i.name:
         item = Weapon.objects.get(name=i)
         if item.requiredlv <= gamer.level and item.price <= gamer.gold:
             gamer.weapon_id = item
@@ -44,12 +38,26 @@ def buy(request, p, i):
             gamer.agility += gamer.bonus_agility
             gamer.attack += gamer.bonus_attack
             gamer.save()
-            return render(request, 'shop/buy.html', {
-                'msg': "Gratulacje! masz nowa bron.",
-                'p': p
-            })
-        else:
-            return render(request, 'shop/buy.html', {'msg': "Masz za malo golda badz za maly level.", 'p': p})
+    else:
+        item = Elixir.objects.get(name=i)
+        if item.price <= gamer.gold:
+            if item.name == 'Small Elixir':
+                gamer.small_elixir += 1
+                gamer.gold -= item.price
+            elif item.name == 'Medium Elixir':
+                gamer.medium_elixir += 1
+                gamer.gold -= item.price
+            elif item.name == 'Big Elixir':
+                gamer.big_elixir += 1
+                gamer.gold -= item.price
+            else:
+                gamer.ultimate_elixir += 1
+                gamer.gold -= item.price
+            gamer.save()
+
+    return render(request, '/player/{{p.id}}/shop', {
+        'p': gamer
+    })
 
 
 def reg(request):

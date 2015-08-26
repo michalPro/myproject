@@ -5,8 +5,8 @@ def populate():
     add_armor('Default', 5, 10, 1, 0)
     add_armor('Leather Armor', 20, 30, 3, 500)
     add_armor('Plate Armor', 95, 80, 5, 1000)
-    add_armor('Chain Armor', 264, 160, 12, 5000)
-    add_armor('Scale Armor', 500, 300, 20, 15000)
+    add_armor('Chain Armor', 264, 160, 12, 7000)
+    add_armor('Scale Armor', 500, 300, 20, 25000)
 
     add_attack('Standard Attack', 1, 1.0, 0)
     add_attack('Boomerang Attack', 3, 1.2, 5)
@@ -24,8 +24,8 @@ def populate():
 
     add_weapon("Short Sword", 5, 3, 2, 150)
     add_weapon("Long Sword", 15, 7, 7, 1600)
-    add_weapon("Two Handed Sword", 25, 12, 14, 7000)
-    add_weapon("DragonSlayer Sword", 40, 20, 22, 20000)
+    add_weapon("Two Handed Sword", 25, 12, 14, 8500)
+    add_weapon("DragonSlayer Sword", 40, 20, 22, 30000)
 
     clasname = ClassName.objects.get(name='Tankozord')
     arm = ArmorItem.objects.get(pk=1)
@@ -38,6 +38,11 @@ def populate():
     add_player("Lv15", 35000, clasname, arm, 15)
     add_player("Lv20", 40000, clasname, arm, 20)
     add_player("Lv22", 55000, clasname, arm, 22)
+
+    add_elixir("Small Elixir", 0.25, 0.25, 10)
+    add_elixir("Medium Elixir", 0.4, 0.4, 20)
+    add_elixir("Big Elixir", 0.65, 0.65, 40)
+    add_elixir("Ultimate Elixir", 1, 1, 80)
 
 
     # Print out what we have added to the user.
@@ -53,6 +58,8 @@ def populate():
         print w
     for p in Player.objects.all():
         print p
+    for e in Elixir.objects.all():
+        print e
 
 
 def add_enemy(name, level, strength, agility, maxhealth, health, maxmana, mana, armor, attack):
@@ -60,6 +67,12 @@ def add_enemy(name, level, strength, agility, maxhealth, health, maxmana, mana, 
     ae = Enemy.objects.get_or_create(name=name, level=level, attack=attack, maxmana=maxmana, maxhealth=maxhealth,
                                      strength=strength, agility=agility, health=health, mana=mana, armor=armor,
                                      classname=classname, dot_damage=0, dot_rounds=0)
+    return ae
+
+
+def add_elixir(name, health_restore, mana_restore, price):
+    ae = Elixir.objects.get_or_create(name=name, health_restore=health_restore, mana_restore=mana_restore,
+                                      price=price)
     return ae
 
 
@@ -91,16 +104,20 @@ def add_player(name, gold, classname, armorid, level):
     maxma = 45+5*level
     ag = 20+5*level
     st = 29+6*level
+    exp = 400
     at = int(round(float(st) * 0.9, 0))
+    for x in range(0, level):
+        exp *= 2
     p = Player.objects.get_or_create(name=name, strength=st, agility=ag, maxhealth=maxhp, maxmana=maxma, experience=0,
-                        requiredexp=400, level=level, gold=gold, classname=classname, attack=at,
+                        requiredexp=exp, level=level, gold=gold, classname=classname, attack=at,
                         armorid=armorid, isarmordamaged=False, health=maxhp, mana=maxma, bonus_attack=0, bonus_agility=0,
-                        bonus_health=0, dot_damage=0, dot_rounds=0)
+                        bonus_health=0, dot_damage=0, dot_rounds=0, small_elixir=0, medium_elixir=0, big_elixir=0,
+                                     ultimate_elixir=0)
     return p
 
 # Start execution here!
 if __name__ == '__main__':
     print "Adding records to database.."
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
-    from project.models import ArmorItem, Attack, ClassName, Enemy, Player, Weapon
+    from project.models import ArmorItem, Attack, ClassName, Enemy, Player, Weapon, Elixir
     populate()
