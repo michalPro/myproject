@@ -52,14 +52,22 @@ def buy(request, p, i):
             return render(request, 'shop/buy.html', {'msg': "Masz za malo golda badz za maly level.", 'p': p})
 
 
-def reg(request, p, pay):
-    gamer = Player.objects.get(pk=p)
-    if int(pay) <= gamer.gold:
+def reg(request):
+
+    gamer = Player.objects.get(name=request.GET['p'])
+    gold_to_pay = int(round(((float(gamer.maxhealth) - float(gamer.health))/10.0
+                             + (float(gamer.maxmana) - float(gamer.mana))/5.0) * (float(gamer.level)), 0))
+    if int(gold_to_pay) <= gamer.gold:
         gamer.health = gamer.maxhealth
         gamer.mana = gamer.maxmana
-        gamer.gold -= int(pay)
+        gamer.gold -= int(gold_to_pay)
         gamer.save()
-        msg = "Zregenerowales sie !"
-    else:
-        msg = "Nie masz wystarczajacej ilosci gold"
-    return render(request, 'shop/regen.html', {'p': p, 'msg': msg})
+        gold_to_pay = 0
+
+    return render(request, 'player/index.html', {
+        'p': gamer,
+        'armor': ArmorItem.objects.get(name=gamer.armorid).value,
+        'pay': int(gold_to_pay),
+        'health': gamer.health * 100 / gamer.maxhealth,
+        'mana': gamer.mana * 100 / gamer.maxmana,
+    })

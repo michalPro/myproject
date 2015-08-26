@@ -50,15 +50,17 @@
     <div class="player_special_attack" id="special">
         <div class="btn-group-vertical" role="group" aria-label="" style="width: 100%;">
             {% for item in attack %}
-                <button type="button" class="btn btn_special_attack"
-                        onclick="Attack({{item.requiredlv}}, {{item.requiredmana}}, '{{item.name}}')">
-                    <div class="column_left">
-                        {{item.name}}:
-                    </div>
-                    <div class="column_right">
-                        Poziom:{{item.requiredlv}} Mana:{{item.requiredmana}}
-                    </div>
-                </button>
+                {% if item.requiredlv <= p.level %}
+                    <button type="button" class="btn btn_special_attack"
+                            onclick="Attack({{item.requiredlv}}, {{item.requiredmana}}, '{{item.name}}')">
+                        <div class="column_left">
+                            {{item.name}}:
+                        </div>
+                        <div class="column_right">
+                            Koszt: {{item.requiredmana}} mana
+                        </div>
+                    </button>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
