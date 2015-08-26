@@ -20,22 +20,24 @@ def player_attack(request):
 
     if enemy.health <= 0:
         received_exp = receive_exp(enemy, player)
+        received_gold = int(round(float(received_exp) / player.level, 0))
+        player.gold += received_gold
         enemy.dot_rounds = 0
         enemy.dot_damage = 0
         if received_exp + player.experience > player.requiredexp:
             player.level += 1
             exp_left = player.requiredexp - player.experience
-            player.requiredexp = 400 * player.level
+            player.requiredexp *= 2
             player.experience = exp_left
             player.strength += 6
             player.agility += 5
             player.maxhealth += 90
             player.maxmana += 7
+            player.health = player.maxhealth
+            player.mana = player.maxmana
             player.attack = 0.9 * player.strength
         else:
             player.experience += received_exp
-        received_gold = received_exp / 2 * player.level
-        player.gold += received_gold
 
         player.save()
 

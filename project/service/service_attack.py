@@ -10,15 +10,27 @@ def get_dodge(attacker, enemy):
     return True
 
 
+def my_range(start, end, step):
+    while start >= end:
+        yield start
+        start -= step
+
+
 def receive_exp(enemy, player):
     if enemy.name == 'Easy Enemy':
         multiplier = 1.0
     elif enemy.name == 'Medium Enemy':
-        multiplier = 2.0
+        multiplier = 1.5
     else:
-        multiplier = 3.0
+        multiplier = 2.0
+    level_bonus = 1.0
     if player.level < 10:
-        level_bonus = 5.0
+        y = 1
+        for x in my_range(5.5, 1, 0.5):
+            if y == player.level:
+                level_bonus = x
+            y += 1
+
     return round(float(multiplier) * ((float(player.maxhealth)-float(player.health))/float(player.maxhealth))
                  * player.requiredexp * 0.07 * level_bonus, 0)
 
