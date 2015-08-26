@@ -64,7 +64,7 @@ def reg(request):
         gamer.save()
         gold_to_pay = 0
 
-    return render(request, 'player/index.html', {
+    return render(request, 'shop/regen.html', {
         'p': gamer,
         'armor': ArmorItem.objects.get(name=gamer.armorid).value,
         'pay': int(gold_to_pay),

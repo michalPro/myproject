@@ -1,4 +1,12 @@
 
+a {
+    color: #fff;
+}
+
+a:hover, a:focus a:active {
+    text-decoration: none;
+    outline: none;
+}
 
 .bg {
     width: 100%;
@@ -140,6 +148,7 @@
 
 .btn_attack {
     background-color:rgba(0,0,0,0.6);
+    color: #fff;
 }
 
 .btn_special_attack {
@@ -147,10 +156,10 @@
     background-color:rgba(0,0,0,0.6);
 }
 
-
 .btn:hover,
 .btn:focus,
 .btn.focus {
+  outline: none;
   color: #4FA9E0;
   text-decoration: none;
 }

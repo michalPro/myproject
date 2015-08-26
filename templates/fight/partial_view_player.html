@@ -52,7 +52,7 @@
             {% for item in attack %}
                 {% if item.requiredlv <= p.level %}
                     <button type="button" class="btn btn_special_attack"
-                            onclick="Attack({{item.requiredlv}}, {{item.requiredmana}}, '{{item.name}}')">
+                            onclick="Attack({{item.requiredmana}}, '{{item.name}}')">
                         <div class="column_left">
                             {{item.name}}:
                         </div>
@@ -67,17 +67,15 @@
     {% endif %}
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
-function Attack(lvl, mana, name) {
+function Attack(mana, name) {
 
     var p = "{{p.name}}";
     var e = "{{e.name}}";
     var s = name;
-    var requiredlv = lvl;
     var requiredmana = mana;
-    var p_level = {{p.level}};
     var p_mana = {{p.mana}};
 
-    if(p_level >= requiredlv && requiredmana <= p_mana) {
+    if(requiredmana <= p_mana) {
         $.ajax({
                 url: '/attack',
                 type: 'get',
@@ -91,7 +89,7 @@ function Attack(lvl, mana, name) {
         });
     }
     else {
-        alert("Za mało many, lub nie masz dosc wysokiego poziomu")
+        alert("Za mało many")
     }
 }
 

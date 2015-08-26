@@ -1,5 +1,18 @@
-{% extends 'layout.html' %}
-{% block content %}
-{{msg}}
-<a href="/player/{{p}}/">Wroc</a>
-{% endblock %}
+{% include 'fight/partial_view_player.html'%}
+<a href="arena">
+    <button class="btn btn_attack">
+        Walcz na arenie
+    </button>
+</a>
+<a href="/player/{{p.id}}/shop">
+    <button class="btn btn_attack">
+        Sklep
+    </button>
+</a>
+<button class="btn btn_attack" onclick="Regen()">Regeneruj za {{pay}} gold.</button>
+<hr/>
+<p style="margin-top: 20px">
+    <a href="/menu">
+        Wroc do menu
+    </a>
+</p>
