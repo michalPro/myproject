@@ -10,6 +10,36 @@ def shop(request, p):
     })
 
 
+def alchemist(request, p):
+    gamer = Player.objects.get(pk=p)
+    return render(request, 'shop/alchemist.html', {
+        'elixirs': Elixir.objects.all(),
+        'p': gamer,
+    })
+
+
+def buy_elixir(request):
+    gamer = Player.objects.get(name=request.GET['p'])
+    i = Elixir.objects.get(name=request.GET['i'])
+    if i.price <= gamer.gold:
+        if i.name == 'Small Elixir':
+            gamer.small_elixir += 1
+            gamer.gold -= i.price
+        elif i.name == 'Medium Elixir':
+            gamer.medium_elixir += 1
+            gamer.gold -= i.price
+        elif i.name == 'Big Elixir':
+            gamer.big_elixir += 1
+            gamer.gold -= i.price
+        else:
+            gamer.ultimate_elixir += 1
+            gamer.gold -= i.price
+        gamer.save()
+    return render(request, '/player/{{p.id}}/alchemist.html', {
+        'p': gamer
+    })
+
+
 def buy(request):
 
     gamer = Player.objects.get(name=request.GET['p'])
@@ -25,7 +55,7 @@ def buy(request):
             gamer.bonus_health = item.bonus_health
             gamer.maxhealth += gamer.bonus_health
             gamer.save()
-    elif 'Sword' in i.name:
+    else:
         item = Weapon.objects.get(name=i)
         if item.requiredlv <= gamer.level and item.price <= gamer.gold:
             gamer.weapon_id = item
@@ -38,24 +68,8 @@ def buy(request):
             gamer.agility += gamer.bonus_agility
             gamer.attack += gamer.bonus_attack
             gamer.save()
-    else:
-        item = Elixir.objects.get(name=i)
-        if item.price <= gamer.gold:
-            if item.name == 'Small Elixir':
-                gamer.small_elixir += 1
-                gamer.gold -= item.price
-            elif item.name == 'Medium Elixir':
-                gamer.medium_elixir += 1
-                gamer.gold -= item.price
-            elif item.name == 'Big Elixir':
-                gamer.big_elixir += 1
-                gamer.gold -= item.price
-            else:
-                gamer.ultimate_elixir += 1
-                gamer.gold -= item.price
-            gamer.save()
 
-    return render(request, '/player/{{p.id}}/shop', {
+    return render(request, '/player/{{p.id}}/shop.html', {
         'p': gamer
     })
 

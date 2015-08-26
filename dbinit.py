@@ -39,10 +39,10 @@ def populate():
     add_player("Lv20", 40000, clasname, arm, 20)
     add_player("Lv22", 55000, clasname, arm, 22)
 
-    add_elixir("Small Elixir", 0.25, 0.25, 10)
-    add_elixir("Medium Elixir", 0.4, 0.4, 20)
-    add_elixir("Big Elixir", 0.65, 0.65, 40)
-    add_elixir("Ultimate Elixir", 1, 1, 80)
+    add_elixir("Small Elixir", 25, 25, 10)
+    add_elixir("Medium Elixir", 40, 40, 20)
+    add_elixir("Big Elixir", 65, 65, 40)
+    add_elixir("Ultimate Elixir", 100, 100, 80)
 
 
     # Print out what we have added to the user.

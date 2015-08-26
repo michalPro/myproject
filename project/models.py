@@ -100,8 +100,8 @@ class AttackLog(models.Model):
 
 class Elixir(models.Model):
     name = models.CharField(max_length=40)
-    health_restore = models.DecimalField(max_digits=4, decimal_places=2)
-    mana_restore = models.DecimalField(max_digits=4, decimal_places=2)
+    health_restore = models.IntegerField()
+    mana_restore = models.IntegerField()
     price = models.IntegerField()
 
     def __unicode__(self):
