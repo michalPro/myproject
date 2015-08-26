@@ -28,7 +28,9 @@ def buy(request, p, i):
                 'msg': "Gratulacje! masz nowy armor.", 'p': p
             })
         else:
-            return render(request, 'shop/buy.html', {'msg': "Masz za malo golda badz za maly level.", 'p': p})
+            return render(request, 'shop/buy.html', {
+                'p': p
+            })
     else:
         item = Weapon.objects.get(name=i)
         if item.requiredlv <= gamer.level and item.price <= gamer.gold:
@@ -42,7 +44,10 @@ def buy(request, p, i):
             gamer.agility += gamer.bonus_agility
             gamer.attack += gamer.bonus_attack
             gamer.save()
-            return render(request, 'shop/buy.html', {'msg': "Gratulacje! masz nowa bron.", 'p': p})
+            return render(request, 'shop/buy.html', {
+                'msg': "Gratulacje! masz nowa bron.",
+                'p': p
+            })
         else:
             return render(request, 'shop/buy.html', {'msg': "Masz za malo golda badz za maly level.", 'p': p})
 

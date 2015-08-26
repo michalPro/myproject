@@ -8,7 +8,7 @@
         </div>
         <div class="console_log_info">
             <div class="column_left">
-                <p>Zadane obrażenia:</p>
+                <p>Obrażenia:</p>
             </div>
             <div class="column_right">
                 {% for item in log %}
@@ -16,11 +16,32 @@
                         <p>Chybił</p>
                     {% else%}
                         {% if item.player_attack_name != "Standard Attack"%}
+                            {% if item.player_bonus_attack != 0%}
                             <div class="red">
-                                <p>{{item.player_attack_name}}: {{item.playerdamage}}</p>
+                                <p>
+                                    {{item.player_attack_name}}: {{item.playerdamage}} + {{item.player_bonus_attack}}
+                                </p>
                             </div>
+                            {% else%}
+                            <div class="red">
+                                <p>
+                                    {{item.player_attack_name}}: {{item.playerdamage}}
+                                </p>
+                            </div>
+                            {% endif %}
                         {% else %}
-                            <p>{{item.player_attack_name}}: {{item.playerdamage}}</p>
+                            {% if item.player_bonus_attack != 0%}
+                            <p>
+                                {{item.player_attack_name}}: {{item.playerdamage}} +
+                                <span class="red">
+                                    {{item.player_bonus_attack}}
+                                </span>
+                            </p>
+                            {% else%}
+                                <p>
+                                    {{item.player_attack_name}}: {{item.playerdamage}}
+                                </p>
+                            {% endif %}
                         {% endif%}
                     {% endif%}
                 {% endfor %}
@@ -41,7 +62,7 @@
         </div>
         <div class="console_log_info">
             <div class="column_left">
-                <p>Zadane obrażenia:</p>
+                <p>Obrażenia:</p>
             </div>
             <div class="column_right">
                 {% for item in log %}
@@ -49,11 +70,32 @@
                         <p>Chybił</p>
                     {% else%}
                          {% if item.enemy_attack_name != "Standard Attack"%}
+                            {% if item.enemy_bonus_attack != 0%}
                             <div class="red">
-                                <p>{{item.enemy_attack_name}}: {{item.enemydamage}}</p>
+                                <p>
+                                    {{item.enemy_attack_name}}: {{item.enemydamage}} + {{item.enemy_bonus_attack}}
+                                </p>
                             </div>
+                            {% else %}
+                            <div class="red">
+                                <p>
+                                    {{item.enemy_attack_name}}: {{item.enemydamage}}
+                                </p>
+                            </div>
+                            {% endif %}
                         {% else %}
-                            <p>{{item.enemy_attack_name}}: {{item.enemydamage}}</p>
+                            {% if item.enemy_bonus_attack != 0%}
+                            <p>
+                                {{item.enemy_attack_name}}: {{item.enemydamage}} +
+                                 <span class="red">
+                                    {{item.enemy_bonus_attack}}
+                                </span>
+                            </p>
+                            {% else %}
+                            <p>
+                                {{item.enemy_attack_name}}: {{item.enemydamage}}
+                            </p>
+                            {% endif%}
                         {% endif%}
                     {% endif%}
                 {% endfor %}

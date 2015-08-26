@@ -52,7 +52,7 @@ def p_attack(enemy, player, special, attack_log, is_double):
                     enemy.dot_rounds += 3
                 else:
                     if enemy.dot_rounds > 0:
-                        attack_amount += enemy.dot_damage
+                        attack_log.player_bonus_attack = enemy.dot_damage
                         enemy.dot_rounds -= 1
                     health_left = float(enemy.health) - attack_amount
                     enemy.health = int(round(health_left, 0))
@@ -112,7 +112,7 @@ def e_attack(player, enemy, special, attack_log, armor):
                     player.dot_rounds += 3
                 else:
                     if player.dot_rounds > 0:
-                        attack_amount += player.dot_damage
+                        attack_log.enemy_bonus_attack = player.dot_damage
                         player.dot_rounds -= 1
                     health_left = float(player.health) - attack_amount
                     player.health = int(round(health_left, 0))
