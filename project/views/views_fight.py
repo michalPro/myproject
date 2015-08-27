@@ -122,6 +122,10 @@ def use_elixir(request):
 
     player.health += player.maxhealth * elixir.health_restore / 100
     player.mana += player.maxmana * elixir.mana_restore / 100
+    if player.health > player.maxhealth:
+        player.health = player.maxhealth
+    if player.mana > player.maxmana:
+        player.mana = player.maxmana
     player.save()
     return render(request, 'fight/partial_view_enemy.html', {
         'e': enemy,
