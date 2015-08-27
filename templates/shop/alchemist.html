@@ -7,31 +7,31 @@
     </div>
     <hr/>
         <div class="col-md-6">
-            {% for elixir in elixirs %}
+            {% for item in elixirs %}
                 <div class="shop">
                     <div class="column_left">
                         <div class="armor_img">
-                            {%if item.value  == 20%}
-                                <img src="{% static 'css/content/armor1.jpg' %}" height="100%", width="100%">
-                            {%elif item.value  == 95%}
-                                <img src="{% static 'css/content/armor2.jpg' %}" height="100%", width="100%">
-                            {%elif item.value  == 264%}
-                                <img src="{% static 'css/content/armor3.jpg' %}" height="100%", width="100%">
+                            {%if item.name  == 'Small Elixir' %}
+                                <img src="{% static 'css/content/potion1.png' %}" height="100%", width="100%">
+                            {%elif item.name  == 'Medium Elixir' %}
+                                <img src="{% static 'css/content/potion2.png' %}" height="100%", width="100%">
+                            {%elif item.name  == 'Big Elixir' %}
+                                <img src="{% static 'css/content/potion3.png' %}" height="100%", width="100%">
                             {%else%}
-                                <img src="{% static 'css/content/armor4.jpg' %}" height="100%", width="100%">
+                                <img src="{% static 'css/content/potion4.png' %}" height="100%", width="100%">
                             {%endif%}
                         </div>
                     </div>
                     <div class="armor_info">
-                        {{ item.name }} <br />
-                        Przywraca: {{ item.health_restore }} zdrowia i many<br />
+                        {{ item.name }}<br />
+                        Przywraca: {{ item.health_restore }}% zdrowia i many<br />
                         cena: {{ item.price}}<br />
                         {% if p.gold < item.price or p.level < item.requiredlv  %}
                             <div class="red">nie mozesz kupic tego przedmiotu</div>
                         {% elif p.armorid == item %}
                             <div class="green">posiadasz ten przedmiot</div>
                         {% else %}
-                            <a onclick="Buy('{{item}}', {{item.price}})">Kup</a>
+                            <button class="btn btn_attack" onclick="Buy('{{item}}', {{item.price}})">Kup</button>
                         {% endif %}
                     </div>
                     <div class="clear"></div>
@@ -39,10 +39,14 @@
             {% endfor %}
         </div>
     <div class="clear"></div>
+    <p>
+        {{p.name}} posiada {{p.gold}} golda
+    </p>
     <hr/>
     <a href="/player/{{p.id}}/">
         Wroc do statystyk
     </a>
+
 </div>
 
 <script>
