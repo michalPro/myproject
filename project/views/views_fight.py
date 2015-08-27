@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from project.models import ArmorItem, Player, Attack, Enemy, AttackLog
+from project.models import ArmorItem, Player, Attack, Enemy, AttackLog, Elixir
 from project.service.service_attack import p_attack, e_attack, receive_exp
 
 
@@ -84,9 +84,10 @@ def enemy_attack(request):
         player.mana = player.maxmana
         received_exp = player.requiredexp * 0.05
         player.experience -= received_exp
+        if player.experience < 0:
+            player.experience = 0
         player.save()
         received_gold = 0
-
 
         return render(request, 'fight/victory.html', {
             'p': player,
@@ -101,6 +102,31 @@ def enemy_attack(request):
         'mana': player.mana * 100 / player.maxmana,
         'armor': ArmorItem.objects.get(name=player.armorid).value,
         'attack': Attack.objects.all(),
+    })
+
+
+def use_elixir(request):
+    player = Player.objects.get(name=request.GET['player'])
+    enemy = Enemy.objects.get(name=request.GET['enemy'])
+    elixir = Elixir.objects.get(name=request.GET['elixir'])
+
+    if 'Small' in elixir.name:
+        player.small_elixir -= 1
+    elif 'Medium' in elixir.name:
+        player.medium_elixir -= 1
+    elif 'Big' in elixir.name:
+        player.big_elixir -= 1
+    else:
+        player.ultimate_elixir -= 1
+
+    player.health += player.maxhealth * elixir.health_restore / 100
+    player.mana += player.maxmana * elixir.mana_restore / 100
+    player.save()
+    return render(request, 'fight/partial_view_enemy.html', {
+        'e': enemy,
+        'p': player,
+        'health': enemy.health * 100 / enemy.maxhealth,
+        'mana': enemy.mana * 100 / enemy.maxmana,
     })
 
 
@@ -124,4 +150,4 @@ def reset_dot(player, enemy):
     player.dot_rounds = 0
     player.dot_damage = 0
     enemy.dot_damage = 0
-    enemy.dot_rounds =0
+    enemy.dot_rounds = 0

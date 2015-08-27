@@ -93,6 +93,25 @@ function Attack(mana, name) {
     }
 }
 
+function Use_Elixir(name) {
+
+    var p = "{{p.name}}";
+    var e = "{{e.name}}";
+    var e = name;
+
+    $.ajax({
+            url: '/use_elixir',
+            type: 'get',
+            data: {'player': p, 'enemy': e, "elixir": e},
+            success: function(data) {
+                $('#ref_enemy').html(data);
+            },
+            failure: function(data) {
+                alert('Got an error dude');
+            }
+    });
+}
+
 $(document).ready(function() {
 
     var player_exp  = {{p.experience}} * 100 / {{p.requiredexp}}
