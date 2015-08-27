@@ -66,6 +66,7 @@ def p_attack(enemy, player, special, attack_log, is_double):
             attack_amount += enemy.dot_damage
             enemy.dot_rounds -= 1
             attack_log.player_attack_name = "Bleed"
+            enemy.health -= attack_amount
         attack_log.playerdamage = attack_amount
     attack_log.save()
     return enemy, player
@@ -126,6 +127,7 @@ def e_attack(player, enemy, special, attack_log, armor):
             attack_amount += player.dot_damage
             player.dot_rounds -= 1
             attack_log.enemy_attack_name = "Bleed"
+            player.health -= attack_amount
         attack_log.enemydamage = attack_amount
     attack_log.save()
     return enemy, player
