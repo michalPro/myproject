@@ -19,19 +19,13 @@ def index(request, p):
 
 
 def arenalevel(request, p, e):
+
     gamer = Player.objects.get(pk=p)
-    if e == "Easy Enemy":
-        e = Enemy.objects.get(name=e.name)
-    elif e == "Medium Enemy":
-        e = Enemy.objects.get(name='Medium Enemy')
-    elif e == "Hard Enemy":
-        e = Enemy.objects.get(name='Hard Enemy')
-    elif e == "Easy Boss":
-        e = Enemy.objects.get(name='Easy Boss')
-    elif e == "Medium Boss":
-        e = Enemy.objects.get(name='Medium Boss')
-    else:
-        e = Enemy.objects.get(name='Hard Boss')
+    e = Enemy.objects.get(name=e)
+    e.health = e.maxhealth
+    e.mana = e.maxmana
+    e.save()
+
     AttackLog.objects.all().delete()
 
     return render(request, 'fight/arenalevel.html', {
