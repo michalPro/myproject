@@ -1,12 +1,18 @@
 {% load staticfiles %}
 
     <div class="player_portrait">
-        {%if e.classname|stringformat:"s"  == "Warrior"%}
-            <img src="{% static 'css/content/warrior.jpg' %}" height="100%", width="100%">
-        {%elif e.classname|stringformat:"s"  == "Thief"%}
-            <img src="{% static 'css/content/thief.jpg' %}" height="100%", width="100%">
-        {%elif e.classname|stringformat:"s"  == "Tankozord"%}
-            <img src="{% static 'css/content/tank.jpg' %}" height="100%", width="100%">
+        {%if e.name   == "Easy Enemy"%}
+            <img src="{% static 'css/content/easy.jpg' %}" height="100%", width="100%">
+        {%elif e.name  == "Medium Enemy"%}
+            <img src="{% static 'css/content/medium.jpg' %}" height="100%", width="100%">
+        {%elif e.name  == "Hard Enemy"%}
+            <img src="{% static 'css/content/hard.jpg' %}" height="100%", width="100%">
+        {%elif e.name  == "Easy Boss"%}
+            <img src="{% static 'css/content/boss-easy.jpg' %}" height="100%", width="100%">
+        {%elif e.name  == "Medium Boss"%}
+            <img src="{% static 'css/content/boss-medium.jpg' %}" height="100%", width="100%">
+        {%elif e.name  == "Hard Boss"%}
+            <img src="{% static 'css/content/boss-hard.jpg' %}" height="100%", width="100%">
         {% endif %}
     </div>
     <div class="player_name">

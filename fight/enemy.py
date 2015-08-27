@@ -60,7 +60,7 @@ def mediumEnemy(p):
 
 def hardEnemy(p):
     e = Enemy.objects.get(name='Hard Enemy')
-    e.lassname = get_class()
+    e.classname = get_class()
     gamer = Player.objects.get(pk=p)
     suma = gamer.strength + gamer.agility
     min_value = float(suma) * 0.2
