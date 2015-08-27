@@ -2,11 +2,11 @@ import os
 
 
 def populate():
-    add_armor('Default', 5, 10, 1, 0)
-    add_armor('Leather Armor', 20, 30, 3, 500)
-    add_armor('Plate Armor', 95, 80, 5, 1000)
-    add_armor('Chain Armor', 264, 160, 12, 7000)
-    add_armor('Scale Armor', 500, 300, 20, 25000)
+    add_armor('Default', 10, 30, 1, 0)
+    add_armor('Leather Armor', 35, 150, 3, 500)
+    add_armor('Plate Armor', 100, 400, 6, 1000)
+    add_armor('Chain Armor', 400, 850, 12, 120000)
+    add_armor('Scale Armor', 1000, 2000, 20, 20000000)
 
     add_attack('Standard Attack', 1, 1.0, 0)
     add_attack('Boomerang Attack', 3, 1.2, 5)
@@ -23,9 +23,9 @@ def populate():
     add_enemy('Hard Enemy', 1, 1, 1, 1, 1, 1, 1, 1, 1)
 
     add_weapon("Short Sword", 5, 3, 2, 150)
-    add_weapon("Long Sword", 15, 7, 7, 1600)
-    add_weapon("Two Handed Sword", 25, 12, 14, 8500)
-    add_weapon("DragonSlayer Sword", 40, 20, 22, 30000)
+    add_weapon("Long Sword", 25, 15, 7, 5500)
+    add_weapon("Two Handed Sword", 55, 40, 14, 320000)
+    add_weapon("DragonSlayer Sword", 110, 80, 22, 60000000)
 
     clasname = ClassName.objects.get(name='Tankozord')
     arm = ArmorItem.objects.get(pk=1)
@@ -39,10 +39,10 @@ def populate():
     add_player("Lv20", 40000, clasname, arm, 20)
     add_player("Lv22", 55000, clasname, arm, 22)
 
-    add_elixir("Small Elixir", 25, 25, 10)
-    add_elixir("Medium Elixir", 40, 40, 20)
-    add_elixir("Big Elixir", 65, 65, 40)
-    add_elixir("Ultimate Elixir", 100, 100, 80)
+    add_elixir("Small Elixir", 25, 25, 1, 0.01)
+    add_elixir("Medium Elixir", 40, 40, 2, 0.02)
+    add_elixir("Big Elixir", 65, 65, 4, 0.04)
+    add_elixir("Ultimate Elixir", 100, 100, 8, 0.08)
 
 
     # Print out what we have added to the user.
@@ -70,9 +70,9 @@ def add_enemy(name, level, strength, agility, maxhealth, health, maxmana, mana, 
     return ae
 
 
-def add_elixir(name, health_restore, mana_restore, price):
+def add_elixir(name, health_restore, mana_restore, price, multiplier):
     ae = Elixir.objects.get_or_create(name=name, health_restore=health_restore, mana_restore=mana_restore,
-                                      price=price)
+                                      price=price, multiplier=multiplier)
     return ae
 
 

@@ -27,7 +27,7 @@ def easyEnemy(p):
     e.maxhealth = randint(round(float(gamer.maxhealth)*0.8, 0), round(float(gamer.maxhealth) * 0.9, 0))
     e.maxmana = 50 + 5 * gamer.level
     e.mana = e.maxmana
-    e.armor = e.level * 5
+    e.armor = e.level * 10
     e.health = e.maxhealth
     e.attack = round(e.strength * 0.9, 0)
     e.dot_damage = 0
@@ -51,7 +51,7 @@ def mediumEnemy(p):
     e.maxmana = 50 + 5 * gamer.level
     e.mana = e.maxmana
     e.health = e.maxhealth
-    e.armor = e.level * 10
+    e.armor = e.level * 20
     e.attack = round(e.strength * 0.9, 0)
     e.dot_damage = 0
     e.dot_rounds = 0
@@ -74,7 +74,7 @@ def hardEnemy(p):
     e.maxmana = 50 + 5 * gamer.level
     e.mana = e.maxmana
     e.health = e.maxhealth
-    e.armor = e.level * 15
+    e.armor = e.level * 30
     e.attack = round(e.strength * 0.9, 0)
     e.dot_damage = 0
     e.dot_rounds = 0

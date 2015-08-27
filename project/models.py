@@ -103,6 +103,7 @@ class Elixir(models.Model):
     health_restore = models.IntegerField()
     mana_restore = models.IntegerField()
     price = models.IntegerField()
+    multiplier = models.DecimalField(max_digits=4, decimal_places=2)
 
     def __unicode__(self):
         return self.name
