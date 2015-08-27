@@ -82,7 +82,7 @@ def enemy_attack(request):
         reset_dot(player, enemy)
         player.health = player.maxhealth
         player.mana = player.maxmana
-        received_exp = player.requiredexp * 0.05
+        received_exp = player.requiredexp * 0.1
         player.experience -= received_exp
         if player.experience < 0:
             player.experience = 0
