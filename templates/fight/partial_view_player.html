@@ -70,15 +70,22 @@
             <div class="btn-group-vertical" role="group" aria-label="" style="width: 35%">
                 {% for item in elixir %}
                 <button type="button" class="btn btn_special_attack" onclick="Use_Elixir('{{item.name}}')">
-                    {{item.name}}
                     {% if item.name == 'Small Elixir' %}
-                        {{p.small_elixir}}
+                        {% if p.small_elixir > 0 %}
+                            {{item.name}}: {{p.small_elixir}}
+                        {% endif %}
                     {% elif item.name == 'Medium Elixir' %}
-                        {{p.medium_elixir}}
+                        {% if p.medium_elixir > 0 %}
+                            {{item.name}}: {{p.medium_elixir}}
+                        {% endif %}
                     {% elif item.name  == 'Big Elixir' %}
-                        {{p.big_elixir}}
+                        {% if p.big_elixir > 0 %}
+                            {{item.name}}: {{p.big_elixir}}
+                        {% endif %}
                     {% else %}
-                        {{p.ultimate_elixir}}
+                        {% if p.ultimate_elixir > 0 %}
+                            {{item.name}}: {{p.ultimate_elixir}}
+                        {% endif %}
                     {% endif %}
                 </button>
                 {% endfor %}
