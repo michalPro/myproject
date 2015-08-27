@@ -145,8 +145,8 @@ function Use_Elixir(name) {
 $(document).ready(function() {
 
     var player_exp  = {{p.experience}} * 100 / {{p.requiredexp}}
-    var player_mana  = {{mana}};
-    var player_health  = {{health}};
+    var player_mana  = {{p.mana}} * 100 / {{p.maxmana}};
+    var player_health  = {{p.health}} * 100 / {{p.maxhealth}};
 
     $("#player-exp").attr("aria-valuenow", player_exp  + "%");
     $("#player-exp").css("width", function(){ return ($(this).attr('aria-valuenow'),player_exp +'%')});

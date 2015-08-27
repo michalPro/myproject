@@ -38,6 +38,9 @@ def player_attack(request):
         else:
             player.experience += received_exp
 
+        enemy.health = enemy.maxhealth
+        enemy.mana = enemy.maxmana
+        enemy.save()
         player.save()
 
         return render(request, 'fight/victory.html', {
@@ -88,6 +91,9 @@ def enemy_attack(request):
             player.experience = 0
         player.save()
         received_gold = 0
+        enemy.health = enemy.maxhealth
+        enemy.mana = enemy.maxmana
+        enemy.save()
 
         return render(request, 'fight/victory.html', {
             'p': player,

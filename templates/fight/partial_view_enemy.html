@@ -42,8 +42,8 @@
 
 <script>
 $(document).ready(function() {
-    var enemy_mana  = {{mana}};
-    var enemy_health  = {{health}};
+    var enemy_mana  = {{e.mana}} * 100 / {{e.maxmana}};
+    var enemy_health  = {{e.health}} * 100 / {{e.maxhealth}};
 
     $("#enemy-mana").css("width", enemy_mana + "%");
     $("#enemy-mana").attr("aria-valuenow", enemy_mana + "%");
