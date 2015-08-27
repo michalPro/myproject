@@ -1,5 +1,89 @@
-{% extends 'layout.html' %}
-{% block content %}
-{{msg}}
-<a href="/player/{{p}}/shop">Wroc</a>
-{% endblock %}
+{% load staticfiles %}
+  <div class="col-md-6">
+        {% for item in armor %}
+            <div class="shop">
+                <div class="column_left">
+                    <div class="armor_img">
+                        {%if item.value  == 20%}
+                            <img src="{% static 'css/content/armor1.jpg' %}" height="100%", width="100%">
+                        {%elif item.value  == 95%}
+                            <img src="{% static 'css/content/armor2.jpg' %}" height="100%", width="100%">
+                        {%elif item.value  == 264%}
+                            <img src="{% static 'css/content/armor3.jpg' %}" height="100%", width="100%">
+                        {%else%}
+                            <img src="{% static 'css/content/armor4.jpg' %}" height="100%", width="100%">
+                        {%endif%}
+                    </div>
+                </div>
+                <div class="armor_info">
+                    {{ item.name }} (lvl {{item.requiredlv}})<br />
+                    wartość: {{ item.value }}<br />
+                    cena: {{ item.price}}<br />
+                    premia do zycia: {{ item.bonus_health}}<br />
+                    {% if p.armorid == item  %}
+                        <div class="green">posiadasz ten przedmiot</div>
+                    {% elif p.gold < item.price or p.level < item.requiredlv %}
+                        <div class="red">nie mozesz kupic tego przedmiotu</div>
+                    {% else %}
+                        <button class ="btn btn_attack" onclick="Buy('{{item}}', {{item.price}})">Kup</button>
+                    {% endif %}
+                </div>
+                <div class="clear"></div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-6">
+        {% for item in weapon %}
+            <div class="shop">
+                <div class="column_left">
+                    <div class="armor_img">
+                        {%if item.bonus_attack  == 5%}
+                            <img src="{% static 'css/content/sword1.jpg' %}" height="100%", width="100%">
+                        {%elif item.bonus_attack  == 15%}
+                            <img src="{% static 'css/content/sword2.jpg' %}" height="100%", width="100%">
+                        {%elif item.bonus_attack  == 25%}
+                            <img src="{% static 'css/content/sword3.jpg' %}" height="100%", width="100%">
+                        {%else%}
+                            <img src="{% static 'css/content/sword4.jpg' %}" height="100%", width="100%">
+                        {%endif%}
+                    </div>
+                </div>
+                <div class="armor_info">
+                    {{ item.name }} (lvl {{item.requiredlv}})<br />
+                    atak: {{ item.bonus_attack }}<br />
+                    zrecznosc: {{ item.bonus_agility }}<br />
+                    cena: {{ item.price}}<br />
+                    {% if p.bonus_attack == item.bonus_attack  %}
+                        <div class="green">posiadasz ten przedmiot</div>
+                    {% elif p.gold < item.price or p.level < item.requiredlv %}
+                        <div class="red">nie mozesz kupic tego przedmiotu</div>
+                    {% else %}
+                        <button class ="btn btn_attack" onclick="Buy('{{item}}', {{item.price}})">Kup</button>
+                    {% endif %}
+                </div>
+                <div class="clear"></div>
+            </div>
+        {% endfor %}
+    </div>
+
+<script>
+function Buy(name, price) {
+    var player = "{{p.name}}";
+    var i = name
+    if(price <= {{p.gold}})
+    {
+        $.ajax({
+                url: '/buy',
+                type: 'get',
+                data: {'p': player, 'i': i },
+                success: function(data) {
+                    $('#this').html(data);
+                },
+                failure: function(data) {
+                    alert('Got an error dude');
+                }
+        });
+    }
+}
+</script>

@@ -41,5 +41,40 @@
     </div>
     <div class="clear"></div>
     <hr/>
+   <div class="col-md-4">
+        <div class="player_portrait">
+            <img src="{% static 'css/content/boss-easy.jpg' %}" height="100%", width="100%">
+        </div>
+        <div style="padding: 8px 0px;">
+            <p>Przegiegly przeciwnik, madrze korzysta ze swoich wrodzonych zdolnosci.</p>
+        </div>
+        <a href="arenalevel/{{ee}}">
+            <button type="button" class="btn btn_attack">{{ee}}</button>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <div class="player_portrait">
+            <img src="{% static 'css/content/boss-medium.jpg' %}" height="100%", width="100%">
+        </div>
+        <div style="padding: 8px 0px;">
+            <p>Bedzie walczyl do ostatniej kropli krwi, wykorzysta swoje umiejetnosci rosadnie i chytrze </p>
+        </div>
+        <a href="arenalevel/{{me}}">
+            <button type="button" class="btn btn_attack">{{me}}</button>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <div class="player_portrait">
+            <img src="{% static 'css/content/boss-hard.jpg' %}" height="100%", width="100%">
+        </div>
+        <div style="padding: 8px 0px;">
+            <p>Nigdy nie pzegral zadnje walki, jest nieustraszony i nieugiety i zmiazdzy kazdego kto stanie mu na drodze.</p>
+        </div>
+        <a href="arenalevel/{{he}}">
+            <button type="button" class="btn btn_attack">{{he}}</button>
+        </a>
+    </div>
+    <div class="clear"></div>
+    <hr/>
 <p style="margin-top: 20px"><a href="/player/{{p.id}}">Wroc do statystyk</a></p>
 {% endblock %}

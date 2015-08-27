@@ -1,12 +1,13 @@
 from project.models import ArmorItem, Player, Weapon, Elixir
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 
 
 def shop(request, p):
     gamer = Player.objects.get(pk=p)
     return render(request, 'shop/shop_items.html', {
         'armor': ArmorItem.objects.exclude(pk=1),
-        'weapon': Weapon.objects.all(), 'p': gamer,
+        'weapon': Weapon.objects.all(),
+        'p': gamer,
     })
 
 
@@ -43,9 +44,9 @@ def buy_elixir(request):
 def buy(request):
 
     gamer = Player.objects.get(name=request.GET['p'])
-    i = Player.objects.get(name=request.GET['i'])
+    i = request.GET['i']
 
-    if 'Armor' in i.name:
+    if 'Armor' in i:
         item = ArmorItem.objects.get(name=i)
         if item.requiredlv <= gamer.level and item.price <= gamer.gold:
             gamer.armorid = item
@@ -69,8 +70,10 @@ def buy(request):
             gamer.attack += gamer.bonus_attack
             gamer.save()
 
-    return render(request, '/player/{{p.id}}/shop.html', {
-        'p': gamer
+    return render(request, 'shop/buy.html', {
+        'p': gamer,
+        'armor': ArmorItem.objects.exclude(pk=1),
+        'weapon': Weapon.objects.all(),
     })
 
 

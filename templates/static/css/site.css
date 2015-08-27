@@ -3,6 +3,10 @@ a {
     color: #fff;
 }
 
+hr {
+    margin: 10px 0px;
+}
+
 a:hover, a:focus a:active {
     text-decoration: none;
     outline: none;
@@ -53,8 +57,7 @@ a:hover, a:focus a:active {
 }
 
 .add_player_title {
-    margin: 20px 0px;
-    font-size: 35px;
+    font-size: 30px;
     color: #4FA9E0;
 }
 
