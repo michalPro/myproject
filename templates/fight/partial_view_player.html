@@ -48,22 +48,45 @@
     </div>
     {% if attack%}
     <div class="player_special_attack" id="special">
-        <div class="btn-group-vertical" role="group" aria-label="" style="width: 100%;">
-            {% for item in attack %}
-                {% if item.requiredlv <= p.level %}
-                    <button type="button" class="btn btn_special_attack"
-                            onclick="Attack({{item.requiredmana}}, '{{item.name}}')">
-                        <div class="column_left">
-                            {{item.name}}:
-                        </div>
-                        <div class="column_right">
-                            Koszt: {{item.requiredmana}} mana
-                        </div>
-                    </button>
-                {% endif %}
-            {% endfor %}
+        <div style="width: 65%; float: left;">
+            <div class="btn-group-vertical" role="group" aria-label="" style="width: 95%">
+                {% for item in attack %}
+                    {% if item.requiredlv <= p.level %}
+                        <button type="button" class="btn btn_special_attack"
+                                onclick="Attack({{item.requiredmana}}, '{{item.name}}')">
+                            <div class="column_left">
+                                {{item.name}}:
+                            </div>
+                            <div class="column_right">
+                                {{item.requiredmana}} many
+                            </div>
+                        </button>
+                    {% endif %}
+                {% endfor %}
+                <div class="clear"></div>
+            </div>
         </div>
+        <div style="width: 20% float: right;">
+            <div class="btn-group-vertical" role="group" aria-label="" style="width: 35%">
+                {% for item in elixir %}
+                <button type="button" class="btn btn_special_attack" onclick="Use_Elixir('{{item.name}}')">
+                    {{item.name}}
+                    {% if item.name == 'Small Elixir' %}
+                        {{p.small_elixir}}
+                    {% elif item.name == 'Medium Elixir' %}
+                        {{p.medium_elixir}}
+                    {% elif item.name  == 'Big Elixir' %}
+                        {{p.big_elixir}}
+                    {% else %}
+                        {{p.ultimate_elixir}}
+                    {% endif %}
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clear"></div>
     </div>
+
     {% endif %}
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
@@ -97,12 +120,12 @@ function Use_Elixir(name) {
 
     var p = "{{p.name}}";
     var e = "{{e.name}}";
-    var e = name;
+    var elixir = name;
 
     $.ajax({
             url: '/use_elixir',
             type: 'get',
-            data: {'player': p, 'enemy': e, "elixir": e},
+            data: {'player': p, 'enemy': e, "elixir": elixir},
             success: function(data) {
                 $('#ref_enemy').html(data);
             },

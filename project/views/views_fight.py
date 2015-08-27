@@ -102,6 +102,7 @@ def enemy_attack(request):
         'mana': player.mana * 100 / player.maxmana,
         'armor': ArmorItem.objects.get(name=player.armorid).value,
         'attack': Attack.objects.all(),
+        'elixir': Elixir.objects.all(),
     })
 
 

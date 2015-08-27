@@ -1,0 +1,68 @@
+{% load staticfiles %}
+    <div class="col-md-6">
+        {% for item in elixirs %}
+            <div class="shop">
+                <div class="column_left">
+                    <div class="armor_img">
+                        {%if item.name  == 'Small Elixir' %}
+                            <img src="{% static 'css/content/potion1.png' %}" height="100%", width="100%">
+                        {%elif item.name  == 'Medium Elixir' %}
+                            <img src="{% static 'css/content/potion2.png' %}" height="100%", width="100%">
+                        {%elif item.name  == 'Big Elixir' %}
+                            <img src="{% static 'css/content/potion3.png' %}" height="100%", width="100%">
+                        {%else%}
+                            <img src="{% static 'css/content/potion4.png' %}" height="100%", width="100%">
+                        {%endif%}
+                    </div>
+                </div>
+                <div class="armor_info">
+                    {{ item.name }} (Posiadasz
+                    {% if item.name == 'Small Elixir' %}
+                        {{p.small_elixir}}
+                    {% elif item.name == 'Medium Elixir' %}
+                        {{p.medium_elixir}}
+                    {% elif item.name  == 'Big Elixir' %}
+                        {{p.big_elixir}}
+                    {% else %}
+                        {{p.ultimate_elixir}}
+                    {% endif %}
+                    )
+                    <br />
+                    Przywraca {{ item.health_restore }}% zdrowia i many<br />
+                    cena: {{ item.price}}<br />
+                    {% if p.gold < item.price %}
+                        <div class="red">nie mozesz kupic tego przedmiotu</div>
+                    {% else %}
+                        <button class="btn btn_attack" onclick="Buy('{{item}}', {{item.price}})">Kup</button>
+                    {% endif %}
+                </div>
+                <div class="clear"></div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="clear"></div>
+    <p>
+        {{p.name}} posiada {{p.gold}} golda
+    </p>
+
+<script>
+function Buy(name, price) {
+
+    var player = "{{p.name}}";
+    var i = name
+    if(price <= {{p.gold}})
+    {
+        $.ajax({
+                url: '/buy_elixir',
+                type: 'get',
+                data: {'p': player, 'i': i },
+                success: function(data) {
+                    $('#this').html(data);
+                },
+                failure: function(data) {
+                    alert('Got an error dude');
+                }
+        });
+    }
+}
+</script>

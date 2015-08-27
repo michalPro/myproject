@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from fight.enemy import easyEnemy, hardEnemy, mediumEnemy
-from project.models import Player, ArmorItem, Attack, Enemy, AttackLog
+from project.models import Player, ArmorItem, Attack, Enemy, AttackLog, Elixir
 
 
 def index(request, p):
@@ -34,4 +34,5 @@ def arenalevel(request, p, e):
         'armor': ArmorItem.objects.get(name=gamer.armorid).value,
         'attack': Attack.objects.all(),
         'log': AttackLog.objects.all(),
+        'elixir': Elixir.objects.all(),
     })

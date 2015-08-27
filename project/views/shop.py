@@ -36,8 +36,9 @@ def buy_elixir(request):
             gamer.ultimate_elixir += 1
             gamer.gold -= i.price
         gamer.save()
-    return render(request, '/player/{{p.id}}/alchemist.html', {
-        'p': gamer
+    return render(request, 'shop/elixir.html', {
+        'p': gamer,
+        'elixirs': Elixir.objects.all(),
     })
 
 
