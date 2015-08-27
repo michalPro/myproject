@@ -1,12 +1,9 @@
 from django.shortcuts import render
-from project.models import Player, ArmorItem, Elixir
+from project.models import Player, ArmorItem
 
 
 def index(request, p):
     gamer = Player.objects.get(pk=p)
-    for elixir in Elixir.objects.all():
-        elixir.price = (gamer.requiredexp / gamer.level) * elixir.multiplier
-        elixir.save()
     gold_to_pay = int(round(((float(gamer.maxhealth) - float(gamer.health))/15.0
                         + (float(gamer.maxmana) - float(gamer.mana))/7.0) * (float(gamer.level)), 0))
 

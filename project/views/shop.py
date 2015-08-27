@@ -13,6 +13,9 @@ def shop(request, p):
 
 def alchemist(request, p):
     gamer = Player.objects.get(pk=p)
+    for elixir in Elixir.objects.all():
+        elixir.price = (gamer.requiredexp / gamer.level) * elixir.multiplier
+        elixir.save()
     return render(request, 'shop/alchemist.html', {
         'elixirs': Elixir.objects.all(),
         'p': gamer,
