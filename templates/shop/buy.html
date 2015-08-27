@@ -4,11 +4,11 @@
             <div class="shop">
                 <div class="column_left">
                     <div class="armor_img">
-                        {%if item.value  == 20%}
+                        {%if item.name  == "Leather Armor" %}
                             <img src="{% static 'css/content/armor1.jpg' %}" height="100%", width="100%">
-                        {%elif item.value  == 95%}
+                        {%elif item.name  == "Plate Armor"%}
                             <img src="{% static 'css/content/armor2.jpg' %}" height="100%", width="100%">
-                        {%elif item.value  == 264%}
+                        {%elif item.name  == "Chain Armor"%}
                             <img src="{% static 'css/content/armor3.jpg' %}" height="100%", width="100%">
                         {%else%}
                             <img src="{% static 'css/content/armor4.jpg' %}" height="100%", width="100%">
@@ -38,11 +38,11 @@
             <div class="shop">
                 <div class="column_left">
                     <div class="armor_img">
-                        {%if item.bonus_attack  == 5%}
+                        {%if item.name  == "Short Sword" %}
                             <img src="{% static 'css/content/sword1.jpg' %}" height="100%", width="100%">
-                        {%elif item.bonus_attack  == 15%}
+                        {%elif item.name  == "Long Sword" %}
                             <img src="{% static 'css/content/sword2.jpg' %}" height="100%", width="100%">
-                        {%elif item.bonus_attack  == 25%}
+                        {%elif item.name  == "Two Handed Sword" %}
                             <img src="{% static 'css/content/sword3.jpg' %}" height="100%", width="100%">
                         {%else%}
                             <img src="{% static 'css/content/sword4.jpg' %}" height="100%", width="100%">
