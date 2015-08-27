@@ -21,9 +21,9 @@ def populate():
     add_enemy('Easy Enemy', 1, 1, 1, 1, 1, 1, 1, 1, 1)
     add_enemy('Medium Enemy', 1, 1, 1, 1, 1, 1, 1, 1, 1)
     add_enemy('Hard Enemy', 1, 1, 1, 1, 1, 1, 1, 1, 1)
-    add_enemy('Easy Boss', 1, 1, 1, 1, 1, 1, 1, 1, 1)
-    add_enemy('Medium Boss', 1, 1, 1, 1, 1, 1, 1, 1, 1)
-    add_enemy('Hard Boss', 1, 1, 1, 1, 1, 1, 1, 1, 1)
+    add_enemy('Easy Boss', 10, 100, 60, 1000, 1000, 200, 200, 80, 100)
+    add_enemy('Medium Boss', 15, 150, 120, 2000, 2000, 400, 400, 120, 150)
+    add_enemy('Hard Boss', 20, 200, 180, 3000, 3000, 800, 800, 160, 200)
 
 
     add_weapon("Short Sword", 5, 3, 2, 150)
