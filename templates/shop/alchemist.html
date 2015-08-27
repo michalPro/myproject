@@ -23,8 +23,19 @@
                         </div>
                     </div>
                     <div class="armor_info">
-                        {{ item.name }}<br />
-                        Przywraca: {{ item.health_restore }}% zdrowia i many<br />
+                        {{ item.name }} (Posiadasz
+                        {% if item.name == 'Small Elixir' %}
+                            {{p.small_elixir}}
+                        {% elif item.name == 'Medium Elixir' %}
+                            {{p.medium_elixir}}
+                        {% elif item.name  == 'Big Elixir' %}
+                            {{p.big_elixir}}
+                        {% else %}
+                            {{p.ultimate_elixir}}
+                        {% endif %}
+                        )
+                        <br />
+                        Przywraca {{ item.health_restore }}% zdrowia i many<br />
                         cena: {{ item.price}}<br />
                         {% if p.gold < item.price or p.level < item.requiredlv  %}
                             <div class="red">nie mozesz kupic tego przedmiotu</div>
@@ -56,7 +67,7 @@ function Buy(name, price) {
     var i = name
     if(price <= {{p.gold}}){
         $.ajax({
-                url: '/buy',
+                url: '/buy_elixir',
                 type: 'get',
                 data: {'p': player, 'i': i },
                 success: function(data) {
