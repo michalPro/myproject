@@ -2,19 +2,8 @@ from project.models import Player, ClassName, Enemy
 from random import randint, random
 
 
-def get_class():
-    whichclass = random()
-    if whichclass < 0.33:
-        return ClassName.objects.get(name='Warrior')
-    elif 0.33 <= whichclass < 0.66:
-        return ClassName.objects.get(name='Thief')
-    else:
-        return ClassName.objects.get(name='Tankozord')
-
-
 def easyEnemy(p):
     e = Enemy.objects.get(name='Easy Enemy')
-    e.classname = get_class()
     gamer = Player.objects.get(pk=p)
     suma = gamer.strength + gamer.agility
     min_value = float(suma) * 0.2
@@ -37,7 +26,6 @@ def easyEnemy(p):
 
 def mediumEnemy(p):
     e = Enemy.objects.get(name='Medium Enemy')
-    e.classname = get_class()
     gamer = Player.objects.get(pk=p)
     suma = gamer.strength + gamer.agility
     min_value = float(suma) * 0.2
@@ -60,7 +48,6 @@ def mediumEnemy(p):
 
 def hardEnemy(p):
     e = Enemy.objects.get(name='Hard Enemy')
-    e.classname = get_class()
     gamer = Player.objects.get(pk=p)
     suma = gamer.strength + gamer.agility
     min_value = float(suma) * 0.2

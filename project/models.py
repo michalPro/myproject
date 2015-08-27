@@ -70,7 +70,6 @@ class Enemy(models.Model):
     attack = models.IntegerField()
     maxmana = models.IntegerField()
     mana = models.IntegerField()
-    classname = models.ForeignKey(ClassName)
     armor = models.IntegerField()
     dot_damage = models.IntegerField()
     dot_rounds = models.IntegerField()

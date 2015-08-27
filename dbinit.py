@@ -21,9 +21,9 @@ def populate():
     add_enemy('Easy Enemy', 1, 1, 1, 1, 1, 1, 1, 1, 1)
     add_enemy('Medium Enemy', 1, 1, 1, 1, 1, 1, 1, 1, 1)
     add_enemy('Hard Enemy', 1, 1, 1, 1, 1, 1, 1, 1, 1)
-    add_enemy('Easy Boss', 10, 100, 60, 1000, 1000, 200, 200, 80, 100)
-    add_enemy('Medium Boss', 15, 150, 120, 2000, 2000, 400, 400, 120, 150)
-    add_enemy('Hard Boss', 20, 200, 180, 3000, 3000, 800, 800, 160, 200)
+    add_enemy('Easy Boss', 10, 100, 60, 1000, 1000, 200, 200, 200, 100)
+    add_enemy('Medium Boss', 15, 150, 120, 3500, 3500, 400, 400, 500, 200)
+    add_enemy('Hard Boss', 20, 200, 180, 10000, 10000, 800, 800, 1000, 300)
 
 
     add_weapon("Short Sword", 5, 3, 2, 150)
@@ -36,12 +36,12 @@ def populate():
 
     add_player("Lv1", 300, clasname, arm, 1)
     add_player("Lv3", 5000, clasname, arm, 3)
-    add_player("Lv5", 15000, clasname, arm, 5)
-    add_player("Lv8", 25000, clasname, arm, 8)
-    add_player("Lv13", 30000, clasname, arm, 13)
-    add_player("Lv15", 35000, clasname, arm, 15)
-    add_player("Lv20", 40000, clasname, arm, 20)
-    add_player("Lv22", 55000, clasname, arm, 22)
+    add_player("Lv5", 150000, clasname, arm, 5)
+    add_player("Lv8", 250000, clasname, arm, 8)
+    add_player("Lv13", 30000000, clasname, arm, 13)
+    add_player("Lv15", 350000000, clasname, arm, 15)
+    add_player("Lv20", 400000000, clasname, arm, 20)
+    add_player("Lv22", 550000000, clasname, arm, 22)
 
     add_elixir("Small Elixir", 25, 25, 1, 0.01)
     add_elixir("Medium Elixir", 40, 40, 2, 0.02)
@@ -67,10 +67,9 @@ def populate():
 
 
 def add_enemy(name, level, strength, agility, maxhealth, health, maxmana, mana, armor, attack):
-    classname = ClassName.objects.get(name='Warrior')
     ae = Enemy.objects.get_or_create(name=name, level=level, attack=attack, maxmana=maxmana, maxhealth=maxhealth,
                                      strength=strength, agility=agility, health=health, mana=mana, armor=armor,
-                                     classname=classname, dot_damage=0, dot_rounds=0)
+                                     dot_damage=0, dot_rounds=0)
     return ae
 
 
