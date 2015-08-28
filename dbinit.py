@@ -9,9 +9,9 @@ def populate():
     add_armor('Scale Armor', 1000, 2000, 20, 20000000)
 
     add_attack('Standard Attack', 1, 1.0, 0)
-    add_attack('Boomerang Attack', 3, 1.2, 5)
-    add_attack('Bleed', 5, 0.6, 8)
-    add_attack('Double Attack', 8, 0.9, 25)
+    add_attack('Boomerang Attack', 3, 1.5, 5)
+    add_attack('Bleed', 5, 0.5, 8)
+    add_attack('Double Attack', 8, 1.2, 25)
     add_attack('Powerful Attack', 15, 3.0, 40)
 
     add_class('Warrior')

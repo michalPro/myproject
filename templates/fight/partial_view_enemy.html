@@ -17,6 +17,10 @@
     </div>
     <div class="player_name">
         {{e.name}}
+        {% if e.dot_rounds > 0 %}
+            <img src="{% static 'css/content/Blood-drop.png' %}"
+                 style="max-height: 27px;, text-align: right;" title=" Bleed trwa {{e.dot_rounds}} rund.">
+        {% endif %}
     </div>
     <div class="player_stats">
         <div class="column_left">

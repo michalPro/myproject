@@ -73,7 +73,7 @@ def p_attack(enemy, player, special, attack_log, is_double):
             else:
                 if special.name == 'Bleed':
                     enemy.dot_damage = int(round(attack_amount, 0))
-                    enemy.dot_rounds += 2
+                    enemy.dot_rounds += 3
                     enemy.health -= enemy.dot_damage
                 else:
                     if enemy.dot_rounds > 0:
@@ -136,7 +136,7 @@ def e_attack(player, enemy, special, attack_log, armor):
                 else:
                     if attack.name == 'Bleed':
                         player.dot_damage = int(round(attack_amount, 0))
-                        player.dot_rounds += 2
+                        player.dot_rounds += 3
                         player.health -= player.dot_damage
                     else:
                         if player.dot_rounds > 0:
