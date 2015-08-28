@@ -7,6 +7,18 @@ def index(request, p):
     easyEnemy(p)
     mediumEnemy(p)
     hardEnemy(p)
+    e = Enemy.objects.get(name='Easy Boss')
+    e.health = e.maxhealth
+    e.mana = e.maxmana
+    e.save()
+    e = Enemy.objects.get(name='Medium Boss')
+    e.health = e.maxhealth
+    e.mana = e.maxmana
+    e.save()
+    e = Enemy.objects.get(name='Hard Boss')
+    e.health = e.maxhealth
+    e.mana = e.maxmana
+    e.save()
     return render(request, 'fight/arena.html', {
         'p': Player.objects.get(pk=p),
         'ee': Enemy.objects.get(name='Easy Enemy'),

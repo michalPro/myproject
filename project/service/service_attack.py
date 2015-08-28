@@ -1,5 +1,11 @@
 from random import random, randint
-from project.models import AttackLog
+from project.models import AttackLog, Elixir
+
+
+def is_attack():
+    if random() > 0.04:
+        return True
+    return False
 
 
 def get_dodge(attacker, enemy):
@@ -16,13 +22,29 @@ def my_range(start, end, step):
         start -= step
 
 
+def get_boss_multiplier(blvl, p, m):
+    s = int(m * 10)
+    for x in range(1, s-10):
+        if p == x + blvl:
+            m -= x * 0.2
+    if m < 1.0:
+        m = 1.0
+    return m
+
+
 def receive_exp(enemy, player):
     if enemy.name == 'Easy Enemy':
         multiplier = 1.0
     elif enemy.name == 'Medium Enemy':
         multiplier = 1.5
-    else:
+    elif enemy.name == 'Hard Enemy':
         multiplier = 2.0
+    elif enemy.name == 'Easy Boss':
+        multiplier = get_boss_multiplier(enemy.level, player.level, 3.0)
+    elif enemy.name == 'Medium Boss':
+        multiplier = get_boss_multiplier(enemy.level, player.level, 4.0)
+    else:
+        multiplier = get_boss_multiplier(enemy.level, player.level, 5.0)
     level_bonus = 1.0
     if player.level < 10:
         y = 1
@@ -30,14 +52,16 @@ def receive_exp(enemy, player):
             if y == player.level:
                 level_bonus = x
             y += 1
+    if player.health == player.maxhealth:
+        player.health -= 1
 
     return round(float(multiplier) * ((float(player.maxhealth)-float(player.health))/float(player.maxhealth))
-                 * player.requiredexp * 0.07 * level_bonus, 0)
+                 * player.requiredexp * 0.1 * level_bonus, 0)
 
 
 def p_attack(enemy, player, special, attack_log, is_double):
 
-    bonus = randint(0, 5)
+    bonus = randint(0, int(player.attack * 0.1))
     dodge = get_dodge(player, enemy)
     if not dodge:
         if enemy.health > 0:
@@ -69,6 +93,7 @@ def p_attack(enemy, player, special, attack_log, is_double):
             attack_log.player_attack_name = "Bleed"
             enemy.health -= attack_amount
         attack_log.playerdamage = attack_amount
+
     attack_log.save()
     return enemy, player
 
@@ -99,37 +124,54 @@ def e_attack(player, enemy, special, attack_log, armor):
 
     dodge = get_dodge(enemy, player)
     attack = get_attack(special, enemy)
-    bonus = randint(0, 5)
+    bonus = randint(0, int(enemy.attack * 0.1))
+    if is_attack():
+        if not dodge:
+            if player.health > 0:
+                attack_amount = (float(enemy.attack) * (float(attack.bonusattack))) *\
+                                (1.0 - ((float(armor) / float(player.level)) / 100.0)) + float(bonus)
 
-    if not dodge:
-        if player.health > 0:
-            attack_amount = (float(enemy.attack) * (float(attack.bonusattack))) *\
-                            (1.0 - ((float(armor) / float(player.level)) / 100.0)) + float(bonus)
-
-            if player.health < attack_amount:
-                player.health = 0
-            else:
-                if attack.name == 'Bleed':
-                    player.dot_damage = int(round(attack_amount, 0))
-                    player.dot_rounds += 2
-                    player.health -= player.dot_damage
+                if player.health < attack_amount:
+                    player.health = 0
                 else:
-                    if player.dot_rounds > 0:
-                        attack_log.enemy_bonus_attack = player.dot_damage
-                        player.dot_rounds -= 1
-                    health_left = float(player.health) - attack_amount
-                    player.health = int(round(health_left, 0))
-                enemy.mana -= attack.requiredmana
+                    if attack.name == 'Bleed':
+                        player.dot_damage = int(round(attack_amount, 0))
+                        player.dot_rounds += 2
+                        player.health -= player.dot_damage
+                    else:
+                        if player.dot_rounds > 0:
+                            attack_log.enemy_bonus_attack = player.dot_damage
+                            player.dot_rounds -= 1
+                        health_left = float(player.health) - attack_amount
+                        player.health = int(round(health_left, 0))
+                    enemy.mana -= attack.requiredmana
 
-            attack_log.enemydamage = int(round(attack_amount, 0))
-            attack_log.enemy_attack_name = attack.name
+                attack_log.enemydamage = int(round(attack_amount, 0))
+                attack_log.enemy_attack_name = attack.name
+        else:
+            attack_amount = 0
+            if player.dot_rounds > 0:
+                attack_amount += player.dot_damage
+                player.dot_rounds -= 1
+                attack_log.enemy_attack_name = "Bleed"
+                player.health -= attack_amount
+            attack_log.enemydamage = attack_amount
     else:
-        attack_amount = 0
-        if player.dot_rounds > 0:
-            attack_amount += player.dot_damage
-            player.dot_rounds -= 1
-            attack_log.enemy_attack_name = "Bleed"
-            player.health -= attack_amount
-        attack_log.enemydamage = attack_amount
+        chance = random()
+        if chance < 0.5:
+            e = Elixir.objects.get(name='Small Elixir')
+            enemy.health += enemy.maxhealth * e.health_restore
+        elif 0.5 <= chance < 0.75:
+            e = Elixir.objects.get(name='Medium Elixir')
+            enemy.health += enemy.maxhealth * e.health_restore
+        elif 0.75 <= chance < 0.95:
+            e = Elixir.objects.get(name='Big Elixir')
+            enemy.health += enemy.maxhealth * e.health_restore
+        else:
+            e = Elixir.objects.get(name='Ultimate Elixir')
+            enemy.health += enemy.maxhealth * e.health_restore
+        if enemy.health > enemy.maxhealth:
+            enemy.health = enemy.maxhealth
+
     attack_log.save()
     return enemy, player

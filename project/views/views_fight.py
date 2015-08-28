@@ -31,7 +31,7 @@ def player_attack(request):
             player.strength += 6
             player.agility += 5
             player.maxhealth += 90
-            player.maxmana += 7
+            player.maxmana += 12
             player.health = player.maxhealth
             player.mana = player.maxmana
             player.attack = 0.9 * player.strength
