@@ -172,6 +172,7 @@ def e_attack(player, enemy, special, attack_log, armor):
             enemy.health += enemy.maxhealth * e.health_restore
         if enemy.health > enemy.maxhealth:
             enemy.health = enemy.maxhealth
+        attack_log.enemy_attack_name = str(e.health_restore) + "%"
 
     attack_log.save()
     return enemy, player

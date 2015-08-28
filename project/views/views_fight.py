@@ -53,8 +53,6 @@ def player_attack(request):
         return render(request, 'fight/partial_view_enemy.html', {
             'e': enemy,
             'p': player,
-            'health': enemy.health * 100 / enemy.maxhealth,
-            'mana': enemy.mana * 100 / enemy.maxmana,
         })
 
 
@@ -104,8 +102,6 @@ def enemy_attack(request):
     return render(request, 'fight/partial_view_player.html', {
         'e': enemy,
         'p': player,
-        'health': player.health * 100 / player.maxhealth,
-        'mana': player.mana * 100 / player.maxmana,
         'armor': ArmorItem.objects.get(name=player.armorid).value,
         'attack': Attack.objects.all(),
         'elixir': Elixir.objects.all(),
@@ -116,6 +112,7 @@ def use_elixir(request):
     player = Player.objects.get(name=request.GET['player'])
     enemy = Enemy.objects.get(name=request.GET['enemy'])
     elixir = Elixir.objects.get(name=request.GET['elixir'])
+    attack_log = AttackLog(playerdamage=0, enemydamage=0, player_bonus_attack=0, enemy_bonus_attack=0)
 
     if 'Small' in elixir.name:
         player.small_elixir -= 1
@@ -133,11 +130,13 @@ def use_elixir(request):
     if player.mana > player.maxmana:
         player.mana = player.maxmana
     player.save()
+
+    attack_log.player_attack_name = str(elixir.health_restore) + "%"
+    attack_log.save()
+
     return render(request, 'fight/partial_view_enemy.html', {
         'e': enemy,
         'p': player,
-        'health': enemy.health * 100 / enemy.maxhealth,
-        'mana': enemy.mana * 100 / enemy.maxmana,
     })
 
 

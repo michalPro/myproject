@@ -12,7 +12,11 @@
             </div>
             <div class="column_right">
                 {% for item in log %}
-                    {% if item.playerdamage == 0%}
+                    {% if "%" in item.player_attack_name %}
+                        <p class="green">
+                            przywrocono {{item.player_attack_name}}
+                        </p>
+                    {% elif item.playerdamage == 0%}
                         <p>Chybił</p>
                     {% else%}
                         {% if item.player_attack_name != "Standard Attack"%}
@@ -66,7 +70,11 @@
             </div>
             <div class="column_right">
                 {% for item in log %}
-                    {% if item.enemydamage == 0%}
+                    {% if "%" in item.enemy_attack_name %}
+                        <p class="green">
+                            przywrocono {{item.enemy_attack_name}}
+                        </p>
+                    {% elif item.enemydamage == 0%}
                         <p>Chybił</p>
                     {% else%}
                          {% if item.enemy_attack_name != "Standard Attack"%}
