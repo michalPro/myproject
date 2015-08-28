@@ -84,8 +84,9 @@ def buy(request):
 def reg(request):
 
     gamer = Player.objects.get(name=request.GET['p'])
-    gold_to_pay = int(float(gamer.health)/float(gamer.maxhealth) *
-                      (float(gamer.requiredexp) / float(gamer.level)) * 0.01)
+    gold_to_pay = int((float(gamer.maxhealth) - float(gamer.health)) / 10.0 +
+                      (float(gamer.maxmana) - float(gamer.mana)) / 5.0 *
+                      (float(gamer.requiredexp) / float(gamer.level)) * 0.0004)
     if int(gold_to_pay) <= gamer.gold:
         gamer.health = gamer.maxhealth
         gamer.mana = gamer.maxmana

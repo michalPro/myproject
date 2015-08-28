@@ -3,7 +3,7 @@ from project.models import AttackLog, Elixir
 
 
 def is_attack():
-    if random() > 0.04:
+    if random() > 0.03:
         return True
     return False
 
